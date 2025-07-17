@@ -57,17 +57,17 @@ export default function Hero({ locale, CTALocale }) {
 
 						<div className='flex flex-col md:flex-row gap-2'>
 							<a
-								title='get source code'
+								title='get started with VibeToLive'
 								className='btn btn-sm md:btn-md btn-base border-none hover:ring-1 ring-base-content text-base-100 hover:text-base-content bg-base-content hover:bg-base-100 rounded-full'
-								href='https://github.com/huglemon/inwind-landing-page'
+								href='#pricing'
 							>
 								<SiGithub />
 								{CTALocale.btn1}
 							</a>
 							<a
-								title='get source code'
+								title='schedule consultation'
 								className='btn btn-sm md:btn-md btn-base rounded-full'
-								href='https://huglemon.com/blog/i-open-sourced-a-saas-landing-page'
+								href='#faq'
 							>
 								<IoDocumentText /> {CTALocale.btn2}
 							</a>

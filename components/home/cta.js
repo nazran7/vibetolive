@@ -23,9 +23,9 @@ export default function Cta({ locale, CTALocale }) {
 					<h3 className='w-full md:w-10/12 mx-auto text-xl md:text-2xl text-base-content/80 md:text-center'>{locale.h3}</h3>
 
 					<a
-						title='get source code'
+						title='get started with VibeToLive'
 						className='mt-10 btn btn-sm md:btn-md btn-base border-none hover:ring-1 ring-base-content text-base-100 hover:text-base-content bg-base-content hover:bg-base-100 rounded-full'
-						href='#'
+						href='#pricing'
 					>
 						<SiGithub /> {CTALocale.btn1}
 					</a>
