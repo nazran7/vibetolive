@@ -42,7 +42,7 @@ export default function Feature({ locale, langName = 'en' }) {
 					duration: 0.5,
 				}}
 			>
-				<div className='relative z-10 w-full md:w-10/12 mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 md:mt-20'>
+				<div className='relative z-10 w-full md:w-10/12 mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:mt-20'>
 					{list.map((item, index) => {
 						return (
 							<PricingCard

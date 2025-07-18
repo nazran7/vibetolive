@@ -2,7 +2,6 @@
 import HeroIcons from './icons';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { SiGithub } from 'react-icons/si';
 import { IoDocumentText } from 'react-icons/io5';
 
 import { useEffect, useState } from 'react';
@@ -61,7 +60,6 @@ export default function Hero({ locale, CTALocale }) {
 								className='btn btn-sm md:btn-md btn-base border-none hover:ring-1 ring-base-content text-base-100 hover:text-base-content bg-base-content hover:bg-base-100 rounded-full'
 								href='#pricing'
 							>
-								<SiGithub />
 								{CTALocale.btn1}
 							</a>
 							<a
