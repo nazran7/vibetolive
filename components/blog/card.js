@@ -30,7 +30,7 @@ export default function BlogCard({ lang = 'en', item = {} }) {
 							{item.name}
 						</h2>
 						<div className='flex items-center justify-between text-sm md:text-base text-zinc-200/40 group-hover:text-zinc-200/90 transition'>
-							<div className='w-1/3'>{pubfn.timeFormat(item.create_time,'yyyy-MM-dd')}</div>
+							<div className='w-1/3'>{pubfn.timeFormat(item.create_time, 'yyyy-MM-dd')}</div>
 						</div>
 					</div>
 				</div>
