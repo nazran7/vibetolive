@@ -5,13 +5,12 @@ export const getProduct = async (id: string | null): Promise<any[]> => {
         const response = await fetch(`${url}/api/post?id=${id}`, {
             method: 'GET',
             cache: 'no-store',
-            next: { revalidate: 60 },
         });
 
         const jsonData = await response.json();
 
         if (response.status === 200) {
-            return jsonData.data.data;
+            return jsonData.data;
         } else {
             console.error("API error:", jsonData);
             return [];
@@ -21,3 +20,23 @@ export const getProduct = async (id: string | null): Promise<any[]> => {
         return [];
     }
 };
+
+
+export const createBlogPost = async (body: any, handleSuccess: (data?: any) => void, handleError: (err?: any) => void) => {
+    try {
+        const response = await fetch(`${url}/api/post`, {
+            method: 'POST',
+            headers: {
+                // 'Authorization': `Bearer ${localStorage.getItem('access-token')}`,
+            },
+            body,
+        })
+
+        const jsonData = await response.json();
+
+        if (response.status === 201) handleSuccess(jsonData);
+        else handleError(jsonData);
+    } catch (err) {
+        handleError(err);
+    }
+}

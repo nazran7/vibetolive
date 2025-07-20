@@ -1,6 +1,8 @@
 'use client';
 
+import { createBlogPost } from '@/api-gateways/post';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 export default function NewPostPage() {
     const [postData, setPostData] = useState({
@@ -51,34 +53,16 @@ export default function NewPostPage() {
             formData.append('featuredImage', postData.featuredImage);
         }
 
-        try {
-            const res = await fetch('/api/posts', {
-                method: 'POST',
-                body: formData,
-            });
 
-            if (res.ok) {
-                alert('Post created!');
-                setPostData({
-                    title: '',
-                    slug: '',
-                    excerpt: '',
-                    content: '',
-                    metaTitle: '',
-                    metaDescription: '',
-                    focusKeyword: '',
-                    categories: '',
-                    tags: '',
-                    featuredImage: null,
-                    featuredImagePreview: null,
-                });
-            } else {
-                alert('Failed to create post.');
+        createBlogPost(formData,
+            (data) => {
+                toast.success(data?.message);
+            },
+            (res) => {
+                toast.error(res?.message);
             }
-        } catch (error) {
-            console.error(error);
-            alert('Error submitting post.');
-        }
+        );
+
     };
 
     return (

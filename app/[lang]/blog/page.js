@@ -26,7 +26,8 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
 	const langName = params.lang || defaultLocale;
 	const dict = await getDictionary(langName);
-	const list = await getProduct(null);
+	const list = await getProduct('');
+
 
 	return (
 		<main className="container mx-auto md:px-5">
