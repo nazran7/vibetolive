@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 
 const links = [
   { href: '/admin', label: 'Dashboard' },
-  { href: '/admin/users', label: 'Users' },
+  { href: '/admin/blogpost', label: 'Create Blog' },
   { href: '/admin/settings', label: 'Settings' },
 ];
 
@@ -15,7 +15,6 @@ export default function AdminLayout({ children }) {
 
   return (
     <div className="flex min-h-screen bg-gray-100 text-gray-800">
-      {/* Sidebar */}
       <aside className="w-64 bg-white shadow-lg p-6 space-y-6">
         <h2 className="text-2xl font-bold text-blue-600">Admin Panel</h2>
         <nav className="space-y-2">
@@ -23,7 +22,8 @@ export default function AdminLayout({ children }) {
             <Link
               key={href}
               href={`/${lang}${href}`}
-              className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-100 hover:text-blue-700 transition"
+              className="block px-3 py-2 rounded-lg transition text-gray-700 hover:bg-blue-100 hover:text-blue-700"
+              
             >
               {label}
             </Link>

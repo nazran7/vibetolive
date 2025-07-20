@@ -1,4 +1,4 @@
 export default function AdminPage() {
-    return <h1>Admin Panel</h1>;
+    return <h1>This is Dashboard</h1>;
 }
 
