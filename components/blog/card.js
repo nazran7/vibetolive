@@ -15,7 +15,7 @@ export default function BlogCard({ lang = 'en', item }) {
 		>
 			<a
 				title={item.title}
-				href={`/${lang || 'en'}/blog/${item._id}`}
+				href={`/${lang || 'en'}/blog/${item?.slug}`}
 			>
 				<div className="group relative rounded-2xl ring-2 ring-base-content/10 w-full min-h-72 overflow-hidden">
 					<Image
