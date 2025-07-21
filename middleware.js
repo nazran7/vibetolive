@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const rewritePaths = [
     { pattern: /^\/$/, destination: '/en/' },
+	{ pattern: /^\/auth(\/)?$/, destination: '/auth' },
 	{ pattern: /^\/admin(\/)?$/, destination: '/en/admin' },
 	{ pattern: /^\/admin\/(.*)$/, destination: '/en/admin/$1' },
 	{ pattern: /^\/about(\/)?$/, destination: '/en/about' },

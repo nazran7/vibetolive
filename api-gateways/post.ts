@@ -27,7 +27,7 @@ export const createBlogPost = async (body: any, handleSuccess: (data?: any) => v
         const response = await fetch(`${url}/api/post`, {
             method: 'POST',
             headers: {
-                // 'Authorization': `Bearer ${localStorage.getItem('access-token')}`,
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
             },
             body,
         })
