@@ -58,6 +58,15 @@ export default function AdminLayout({ children }) {
                   {label}
                 </Link>
               ))}
+              <button
+                onClick={() => {
+                  localStorage.removeItem('accessToken');
+                  router.push(`/auth`);
+                }}
+                className="block w-full text-left px-3 py-2 rounded-lg text-red-600 hover:bg-red-100 hover:text-red-700 transition"
+              >
+                Logout
+              </button>
             </nav>
           </aside>
 
