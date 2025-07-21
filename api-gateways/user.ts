@@ -46,3 +46,29 @@ export const getUser = async (handleSuccess: (data?: any) => void, handleError: 
             handleError(error.message);
         });
 }
+
+
+export const createAdminUser = async (
+    body: Object,
+    handleSuccess: (data?: any) => void,
+    handleError: (err?: any) => void
+) => {
+    try {
+        const response = await fetch(`${url}/api/user/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+            },
+            body: JSON.stringify(body)
+        });
+
+        const jsonData = await response.json();
+
+        if (response.status === 201) handleSuccess(jsonData);
+        else handleError(jsonData);
+
+    } catch (err) {
+        handleError(err);
+    }
+}

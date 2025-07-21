@@ -13,7 +13,7 @@ import LoadingUI from '@/components/common/LoadingUi';
 const links = [
   { href: '/admin', label: 'Dashboard' },
   { href: '/admin/blogpost', label: 'Create Blog' },
-  { href: '/admin/settings', label: 'Settings' },
+  { href: '/admin/admincreate', label: 'Create Admin' },
 ];
 
 export default function AdminLayout({ children }) {
