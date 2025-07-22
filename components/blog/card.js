@@ -4,7 +4,7 @@ import Image from 'next/image';
 import pubfn from '@/lib/function';
 
 export default function BlogCard({ lang = 'en', item }) {
-	const imageUrl = `http://localhost:5000/uploads/${item.featuredImage}`;
+	const imageUrl = `${item.featuredImage}`;
 
 	return (
 		<motion.div

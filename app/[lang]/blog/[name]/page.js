@@ -84,8 +84,8 @@ export default async function Page({ params }) {
 
 					{item.featuredImage && (
 						<img
-							src={`${url}/uploads/${item.featuredImage}`}
-							alt={item.title}
+							src={`${item?.featuredImage}`}
+							alt={item?.title}
 							className="rounded-xl mb-5"
 						/>
 					)}
