@@ -1,3 +1,5 @@
+import path from 'path';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
@@ -7,6 +9,12 @@ const nextConfig = {
 				hostname: 'landingpage.huglemon.com',
 			},
 		],
+	},
+	webpack: (config) => {
+		config.resolve = config.resolve || {};
+		config.resolve.alias = config.resolve.alias || {};
+		config.resolve.alias['@'] = path.resolve(process.cwd());
+		return config;
 	},
 };
 
