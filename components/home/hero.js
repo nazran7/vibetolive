@@ -65,7 +65,8 @@ export default function Hero({ locale, CTALocale }) {
 							<a
 								title='schedule consultation'
 								className='btn btn-sm md:btn-md btn-base rounded-full'
-								href='#faq'
+								target='_blank'
+								href='https://tally.so/r/mVry2j'
 							>
 								<IoDocumentText /> {CTALocale.btn2}
 							</a>
@@ -85,7 +86,7 @@ export default function Hero({ locale, CTALocale }) {
 						width={1024}
 						height={600}
 						src={'/og.png'}
-						className='hidden md:flex w-full -mt-10'
+						className='hidden md:flex w-full mt-5'
 						alt='app demo'
 					/>
 				</motion.div>

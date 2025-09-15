@@ -1,18 +1,17 @@
-import { IoMdHome } from 'react-icons/io';
-import BlogCard from '@/components/blog/card';
-import { defaultLocale, getDictionary } from '@/lib/i18n';
-import { SiteConfig } from '@/lib/config/site';
-import { getProduct } from '@/api-gateways/post';
-
-
+import { IoMdHome } from "react-icons/io";
+import BlogCard from "@/components/blog/card";
+import { defaultLocale, getDictionary } from "@/lib/i18n";
+import { SiteConfig } from "@/lib/config/site";
+import { getPaginatedPosts } from "@/api-gateways/post";
+import Link from "next/link";
 
 export async function generateMetadata() {
 	const langName = defaultLocale;
 	const dict = await getDictionary(langName);
 
 	return {
-		title: dict['Blog']['title'] + ' - ' + SiteConfig[langName].name,
-		description: dict['Blog']['description'],
+		title: dict["Blog"]["title"] + " - " + SiteConfig[langName].name,
+		description: dict["Blog"]["description"],
 		keywords: SiteConfig[langName].keywords,
 		authors: SiteConfig[langName].authors,
 		creator: SiteConfig[langName].creator,
@@ -23,11 +22,17 @@ export async function generateMetadata() {
 	};
 }
 
-export default async function Page() {
+// ✅ Server component with pagination support
+export default async function Page({ searchParams }) {
 	const langName = defaultLocale;
 	const dict = await getDictionary(langName);
-	const list = await getProduct('');
 
+	const page = Number(searchParams?.page) || 1;
+	const limit = 6; // how many posts per page
+	const paginated = await getPaginatedPosts(page, limit);
+
+	const posts = paginated?.posts ?? [];
+	const totalPages = paginated?.pages ?? 1;
 
 	return (
 		<main className="container mx-auto md:px-5">
@@ -43,28 +48,31 @@ export default async function Page() {
 						</a>
 					</li>
 					<li>
-						<a href="/blog">{dict['Blog']['title']}</a>
+						<a href="/blog">{dict["Blog"]["title"]}</a>
 					</li>
 				</ul>
 			</div>
 
 			<div className="flex items-start gap-10 py-5">
 				<div className="w-full">
+					{/* Blog Grid */}
 					<section className="grid grid-cols-1 md:grid-cols-3 gap-10">
-						{list?.map((item) => (
-							<BlogCard
-								key={item._id}
-								lang={langName}
-								item={item}
-							/>
+						{posts.map((item) => (
+							<BlogCard key={item._id} lang={langName} item={item} />
 						))}
 					</section>
 
-					<div className="join my-10">
-						<button className="join-item btn">1</button>
-						<button className="join-item btn btn-active">2</button>
-						<button className="join-item btn">3</button>
-						<button className="join-item btn">4</button>
+					{/* Pagination */}
+					<div className="join my-10 flex justify-center">
+						{Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+							<Link
+								key={p}
+								href={`/blog?page=${p}`}
+								className={`join-item btn ${p === page ? "btn-active" : ""}`}
+							>
+								{p}
+							</Link>
+						))}
 					</div>
 				</div>
 			</div>

@@ -24,7 +24,8 @@ export default function Cta({ locale, CTALocale }) {
 					<a
 						title='get started with VibeToLive'
 						className='mt-10 btn btn-sm md:btn-md btn-base border-none hover:ring-1 ring-base-content text-base-100 hover:text-base-content bg-base-content hover:bg-base-100 rounded-full'
-						href='#pricing'
+						target='_blank'
+						href='https://tally.so/r/mVry2j'
 					>
 						{CTALocale.btn1}
 					</a>
