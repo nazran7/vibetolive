@@ -8,8 +8,9 @@ const rewritePaths = [
 	{ pattern: /^\/admin(\/)?$/, destination: '/en/admin' },
 	{ pattern: /^\/admin\/(.*)$/, destination: '/en/admin/$1' },
 	{ pattern: /^\/about(\/)?$/, destination: '/en/about' },
-    { pattern: /^\/blog(\/)?$/, destination: '/en/blog' },
-    { pattern: /^\/blog\/([^\/]+)(\/)?$/, destination: '/en/blog/$1' },
+    // Blog routes are now handled directly at /blog, no rewriting needed
+    // { pattern: /^\/blog(\/)?$/, destination: '/en/blog' },
+    // { pattern: /^\/blog\/([^\/]+)(\/)?$/, destination: '/en/blog/$1' },
     // 可以根据需要添加更多的重写规则
 ];
 
@@ -36,6 +37,12 @@ export function middleware(request) {
 
 
 	if (isExit) return NextResponse.next();
+
+	// Allow direct routes to pass through without redirection
+	if (pathname.startsWith('/blog') || pathname.startsWith('/auth')) {
+		console.log(`允许直接路径通过: ${pathname}`);  // 添加日志
+		return NextResponse.next();
+	}
 
 	// 如果没有匹配的重写规则，重定向到根路径
 	console.log(`重定向到根路径: ${pathname} -> /`);  // 添加日志

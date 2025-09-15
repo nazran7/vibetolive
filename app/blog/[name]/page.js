@@ -9,7 +9,7 @@ import { SiteConfig } from '@/lib/config/site';
 import { url } from '@/config';
 
 export async function generateMetadata({ params }) {
-	const langName = params.lang || defaultLocale;
+	const langName = defaultLocale;
 	const item = await getProduct(params?.name);
 
 	if (!item) notFound();
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-	const langName = params.lang || defaultLocale;
+	const langName = defaultLocale;
 	const dict = await getDictionary(langName);
 	const item = await getProduct(params?.name);
 
@@ -47,12 +47,12 @@ export default async function Page({ params }) {
 			<div className="breadcrumbs text-sm relative z-10">
 				<ul>
 					<li>
-						<a href={`/${langName}`}>
+						<a href="/">
 							<IoMdHome />
 						</a>
 					</li>
 					<li>
-						<a href={`/${langName}/blog`}>{dict['Blog']['title']}</a>
+						<a href="/blog">{dict['Blog']['title']}</a>
 					</li>
 					<li>
 						<span>{item.title}</span>

@@ -18,6 +18,9 @@ export default function Navbar() {
 		const fetchLinksList = async () => {
 			if (pathname === '/') {
 				setLangName(defaultLocale);
+			} else if (pathname.startsWith('/blog')) {
+				// For blog routes, use default locale
+				setLangName(defaultLocale);
 			} else {
 				setLangName(pathname.split('/')[1]);
 			}
@@ -25,6 +28,7 @@ export default function Navbar() {
 		};
 		fetchLinksList();
 	}, [pathname, langName]);
+	
 
 	return (
 		<header className='w-full relative z-50 bg-base-100 p-5 pb-0 container mx-auto md:mb-5 flex justify-between items-center'>
@@ -55,7 +59,7 @@ export default function Navbar() {
 								aria-label={link.name}
 								className='group relative'
 								title={link.name}
-								href={`/${langName}${link.url}`}
+								href={link.url === '/blog' ? '/blog' : `/${langName}${link.url}`}
 							>
 								{link.name}
 								<div className='absolute left-[50%] group-hover:left-0 w-0 group-hover:w-full h-[3px] transition-all duration-300 bg-base-content/90'></div>
@@ -79,7 +83,7 @@ export default function Navbar() {
 									<a
 										aria-label={link.name}
 										title={link.name}
-										href={`/${langName}${link.url}`}
+										href={link.url === '/blog' ? '/blog' : `/${langName}${link.url}`}
 									>
 										{link.name}
 									</a>

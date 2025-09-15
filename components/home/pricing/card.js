@@ -3,7 +3,7 @@ import { FaCheck } from 'react-icons/fa';
 
 export default function PricingCard({ pricingItem = {} }) {
 	return (
-		<div className={`w-full min-h-96 px-5 py-10 border-2 border-base-content rounded-xl flex flex-col items-center gap-2 transition-all duration-100 shadow-none hover:shadow-2xl bg-base-100 ${pricingItem.recommend && 'md:scale-125'}`}>
+		<div className={`w-full min-h-96 px-5 py-10 border-2 border-base-content rounded-xl flex flex-col items-center gap-2 transition-all duration-100 shadow-none hover:shadow-2xl bg-base-100 ${pricingItem.recommend && 'lg:scale-125'}`}>
 			<h2 className='text-xl font-bold text-center'>{pricingItem.title}</h2>
 			<p className='text-center'>{pricingItem.description}</p>
 			<div className='text-4xl font-bold text-center py-5 bg-gradient-to-r from-base-content from-0% to-[#9c9c9c] md:text-center bg-clip-text text-transparent'>
