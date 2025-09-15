@@ -27,7 +27,8 @@ export default function PricingCard({ pricingItem = {} }) {
 			<a
 				aria-label='choose plan'
 				title='choose plan'
-				href='#'
+				target='_blank'
+				href='https://tally.so/r/mVry2j'
 				className='btn btn-wide bg-base-content text-base-100 hover:bg-base-100 hover:text-base-content rounded-full'
 			>
 				Choose Plan

@@ -8,6 +8,18 @@ import { useEffect, useState } from 'react';
 export default function Hero({ locale, CTALocale }) {
 	const [tilt, setTilt] = useState(45);
 	const [duration, setDuration] = useState(0.8);
+	const [theme, setTheme] = useState(localStorage.getItem("theme") || "corporate");
+
+
+	useEffect(() => {
+		const handleThemeChange = (e) => {
+			setTheme(e.detail);
+		};
+
+		window.addEventListener("themeChange", handleThemeChange);
+		return () => window.removeEventListener("themeChange", handleThemeChange);
+	}, []);
+
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -65,7 +77,8 @@ export default function Hero({ locale, CTALocale }) {
 							<a
 								title='schedule consultation'
 								className='btn btn-sm md:btn-md btn-base rounded-full'
-								href='#faq'
+								target='_blank'
+								href='https://tally.so/r/mVry2j'
 							>
 								<IoDocumentText /> {CTALocale.btn2}
 							</a>
@@ -84,8 +97,8 @@ export default function Hero({ locale, CTALocale }) {
 					<Image
 						width={1024}
 						height={600}
-						src={'/og.png'}
-						className='hidden md:flex w-full -mt-10'
+						src={theme === 'corporate' ? '/img3.png' : '/img2.png'}
+						className='hidden md:flex w-full mt-5'
 						alt='app demo'
 					/>
 				</motion.div>

@@ -1,23 +1,48 @@
-'use client';
+"use client";
 
-import { createBlogPost } from '@/api-gateways/post';
-import { useState } from 'react';
-import { toast } from 'react-toastify';
+import { createBlogPost, getProduct, updateBlogPost } from "@/api-gateways/post";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function NewPostPage() {
+    const searchParams = useSearchParams();
+    const editId = searchParams.get("id"); // slug used for editing
+
     const [postData, setPostData] = useState({
-        title: '',
-        slug: '',
-        excerpt: '',
-        content: '',
-        metaTitle: '',
-        metaDescription: '',
-        focusKeyword: '',
-        categories: '',
-        tags: '',
+        title: "",
+        slug: "",
+        excerpt: "",
+        content: "",
+        metaTitle: "",
+        metaDescription: "",
+        focusKeyword: "",
+        categories: "",
+        tags: "",
         featuredImage: null,
         featuredImagePreview: null,
     });
+
+    // ✅ Prefill form in edit mode
+    useEffect(() => {
+        if (editId) {
+            getProduct(editId).then((post) => {
+                setPostData({
+                    title: post.title || "",
+                    slug: post.slug || "",
+                    excerpt: post.excerpt || "",
+                    content: post.content || "",
+                    metaTitle: post.metaTitle || "",
+                    metaDescription: post.metaDescription || "",
+                    focusKeyword: post.focusKeyword || "",
+                    categories: post.categories?.join(", ") || "",
+                    tags: post.tags?.join(", ") || "",
+                    featuredImage: null,
+                    featuredImagePreview: post.featuredImage || null,
+                });
+            });
+        }
+    }, [editId]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -39,35 +64,66 @@ export default function NewPostPage() {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append('title', postData.title);
-        formData.append('slug', postData.slug);
-        formData.append('excerpt', postData.excerpt);
-        formData.append('content', postData.content);
-        formData.append('metaTitle', postData.metaTitle);
-        formData.append('metaDescription', postData.metaDescription);
-        formData.append('focusKeyword', postData.focusKeyword);
-        formData.append('categories', postData.categories);
-        formData.append('tags', postData.tags);
-
-        if (postData.featuredImage) {
-            formData.append('featuredImage', postData.featuredImage);
-        }
-
-
-        createBlogPost(formData,
-            (data) => {
-                toast.success(data?.message);
-            },
-            (res) => {
-                toast.error(res?.message);
+        Object.entries(postData).forEach(([key, value]) => {
+            if (value && key !== "featuredImagePreview") {
+                formData.append(key, value);
             }
-        );
+        });
 
+        if (editId) {
+            // 🔹 Update
+            await updateBlogPost(
+                editId,
+                formData,
+                (data) => {
+                    toast.success(data?.message || "Post updated");
+                    setPostData({
+                        title: "",
+                        slug: "",
+                        excerpt: "",
+                        content: "",
+                        metaTitle: "",
+                        metaDescription: "",
+                        focusKeyword: "",
+                        categories: "",
+                        tags: "",
+                        featuredImage: null,
+                        featuredImagePreview: null,
+                    })
+
+                },
+                (err) => toast.error(err?.message || "Update failed")
+            );
+        } else {
+            // 🔹 Create
+            await createBlogPost(
+                formData,
+                (data) => {
+                    toast.success(data?.message || "Post created")
+                    setPostData({
+                        title: "",
+                        slug: "",
+                        excerpt: "",
+                        content: "",
+                        metaTitle: "",
+                        metaDescription: "",
+                        focusKeyword: "",
+                        categories: "",
+                        tags: "",
+                        featuredImage: null,
+                        featuredImagePreview: null,
+                    })
+                },
+                (err) => toast.error(err?.message || "Create failed")
+            );
+        }
     };
 
     return (
         <div className="max-w-5xl mx-auto py-10 px-4 space-y-8">
-            <h1 className="text-3xl font-bold">Create New Post</h1>
+            <h1 className="text-3xl font-bold">
+                {editId ? "Edit Post" : "Create New Post"}
+            </h1>
 
             <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Core Fields */}
@@ -79,7 +135,6 @@ export default function NewPostPage() {
                         placeholder="Post Title"
                         className="w-full p-2 border rounded bg-white"
                     />
-
                     <input
                         name="slug"
                         value={postData.slug}
@@ -87,15 +142,13 @@ export default function NewPostPage() {
                         placeholder="Slug (e.g. 'my-post')"
                         className="w-full p-2 border rounded bg-white"
                     />
-
                     <textarea
                         name="excerpt"
                         value={postData.excerpt}
                         onChange={handleChange}
-                        placeholder="Short excerpt (used as meta description fallback)"
+                        placeholder="Short excerpt"
                         className="w-full p-2 border rounded bg-white"
                     />
-
                     <textarea
                         name="content"
                         value={postData.content}
@@ -109,7 +162,6 @@ export default function NewPostPage() {
                 {/* SEO */}
                 <section className="space-y-2 border-t pt-6">
                     <h2 className="text-xl font-semibold">SEO</h2>
-
                     <input
                         name="metaTitle"
                         value={postData.metaTitle}
@@ -117,7 +169,6 @@ export default function NewPostPage() {
                         placeholder="Meta Title"
                         className="w-full p-2 border rounded bg-white"
                     />
-
                     <textarea
                         name="metaDescription"
                         value={postData.metaDescription}
@@ -125,7 +176,6 @@ export default function NewPostPage() {
                         placeholder="Meta Description"
                         className="w-full p-2 border rounded bg-white"
                     />
-
                     <input
                         name="focusKeyword"
                         value={postData.focusKeyword}
@@ -138,7 +188,6 @@ export default function NewPostPage() {
                 {/* Taxonomies */}
                 <section className="space-y-2 border-t pt-6">
                     <h2 className="text-xl font-semibold">Taxonomies</h2>
-
                     <input
                         name="categories"
                         value={postData.categories}
@@ -146,7 +195,6 @@ export default function NewPostPage() {
                         placeholder="Categories (comma-separated)"
                         className="w-full p-2 border rounded bg-white"
                     />
-
                     <input
                         name="tags"
                         value={postData.tags}
@@ -156,17 +204,15 @@ export default function NewPostPage() {
                     />
                 </section>
 
-                {/* Featured Image Upload */}
+                {/* Featured Image */}
                 <section className="space-y-2 border-t pt-6">
                     <h2 className="text-xl font-semibold">Featured Image</h2>
-
                     <input
                         type="file"
                         accept="image/*"
                         onChange={handleImageUpload}
                         className="w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100"
                     />
-
                     {postData.featuredImagePreview && (
                         <img
                             src={postData.featuredImagePreview}
@@ -180,7 +226,7 @@ export default function NewPostPage() {
                     type="submit"
                     className="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
                 >
-                    Publish Post
+                    {editId ? "Update Post" : "Publish Post"}
                 </button>
             </form>
         </div>

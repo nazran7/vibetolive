@@ -25,6 +25,8 @@
     "react-toastify": "^11.0.5"
   },
   "devDependencies": {
+    "@types/node": "24.4.0",
+    "@types/react": "18.3.24",
     "daisyui": "^4.11.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
