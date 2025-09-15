@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 export default function ThemeToggle() {
   const [theme, setTheme] = useState('corporate');
-  
+
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'corporate';
     setTheme(savedTheme);
@@ -14,6 +14,7 @@ export default function ThemeToggle() {
     const newTheme = theme === 'corporate' ? 'business' : 'corporate';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
+    window.dispatchEvent(new CustomEvent("themeChange", { detail: newTheme }));
     document.documentElement.setAttribute('data-theme', newTheme);
   };
 
