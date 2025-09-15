@@ -31,7 +31,7 @@ export default function Feature({ locale, langName = 'en' }) {
 						{locale.h3}
 					</h3>
 
-					<h4 className='w-full md:w-10/12 mx-auto text-xl md:text-2xl text-base-content/80 md:text-center'>{locale.description}</h4>
+					<h4 className='w-full md:w-10/12 mx-auto text-xl md:text-2xl text-base-content/80 md:text-center mb-10'>{locale.description}</h4>
 				</div>
 			</motion.div>
 
@@ -42,15 +42,12 @@ export default function Feature({ locale, langName = 'en' }) {
 					duration: 0.5,
 				}}
 			>
-				<div className='relative z-10 w-full md:w-10/12 mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:mt-20'>
-					{list.map((item, index) => {
-						return (
-							<PricingCard
-								key={index}
-								pricingItem={item}
-							/>
-						);
-					})}
+				<div className="relative z-10 w-full max-w-7xl mx-auto 
+					grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
+					gap-6 sm:gap-8  mt-10 lg:mt-20">
+					{list.map((item, index) => (
+						<PricingCard key={index} pricingItem={item} />
+					))}
 				</div>
 			</motion.div>
 

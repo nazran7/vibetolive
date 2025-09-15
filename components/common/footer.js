@@ -14,6 +14,9 @@ export default function Footer() {
 		const fetchLinksList = async () => {
 			if (pathname === '/') {
 				setLangName(defaultLocale);
+			} else if (pathname.startsWith('/blog')) {
+				// For blog routes, use default locale
+				setLangName(defaultLocale);
 			} else {
 				setLangName(pathname.split('/')[1]);
 			}
@@ -47,7 +50,7 @@ export default function Footer() {
 								<a
 									key={index}
 									title={link.name}
-									href={`/${langName}${link.url}`}
+									href={link.url === '/blog' ? '/blog' : `/${langName}${link.url}`}
 								>
 									{link.name}
 								</a>

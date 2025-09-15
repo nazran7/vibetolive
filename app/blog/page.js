@@ -6,8 +6,8 @@ import { getProduct } from '@/api-gateways/post';
 
 
 
-export async function generateMetadata({ params }) {
-	const langName = params.lang || defaultLocale;
+export async function generateMetadata() {
+	const langName = defaultLocale;
 	const dict = await getDictionary(langName);
 
 	return {
@@ -23,8 +23,8 @@ export async function generateMetadata({ params }) {
 	};
 }
 
-export default async function Page({ params }) {
-	const langName = params.lang || defaultLocale;
+export default async function Page() {
+	const langName = defaultLocale;
 	const dict = await getDictionary(langName);
 	const list = await getProduct('');
 
@@ -38,12 +38,12 @@ export default async function Page({ params }) {
 			<div className="breadcrumbs text-sm relative z-10">
 				<ul>
 					<li>
-						<a href={`/${langName}`}>
+						<a href="/">
 							<IoMdHome />
 						</a>
 					</li>
 					<li>
-						<a href={`/${langName}/blog`}>{dict['Blog']['title']}</a>
+						<a href="/blog">{dict['Blog']['title']}</a>
 					</li>
 				</ul>
 			</div>
