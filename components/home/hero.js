@@ -8,7 +8,13 @@ import { useEffect, useState } from 'react';
 export default function Hero({ locale, CTALocale }) {
 	const [tilt, setTilt] = useState(45);
 	const [duration, setDuration] = useState(0.8);
-	const [theme, setTheme] = useState(localStorage.getItem("theme") || "corporate");
+	const [theme, setTheme] = useState("corporate");
+
+
+	useEffect(() => {
+		const storedTheme = localStorage.getItem("theme");
+		if (storedTheme) setTheme(storedTheme);
+	}, []);
 
 
 	useEffect(() => {
