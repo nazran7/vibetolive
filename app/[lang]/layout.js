@@ -16,6 +16,10 @@ export async function generateMetadata({ params }) {
 		};
 	}
 
+	const baseUrl = 'https://vibetolive.dev';
+
+	const canonicalUrl = `${baseUrl}/${lang === defaultLocale ? '' : lang}`.replace(/\/$/, '')
+
 	return {
 		title: SiteConfig[lang].name,
 		description: SiteConfig[lang].description,
@@ -26,6 +30,12 @@ export async function generateMetadata({ params }) {
 		metadataBase: SiteConfig[lang].metadataBase,
 		openGraph: SiteConfig[lang].openGraph,
 		twitter: SiteConfig[lang].twitter,
+		alternates: {
+			canonical: canonicalUrl,
+			languages: Object.fromEntries(
+				locales.map((l) => [l, `${baseUrl}/${l === defaultLocale ? '' : l}`.replace(/\/$/, '')])
+			),
+		},
 	};
 }
 
