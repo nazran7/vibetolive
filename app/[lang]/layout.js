@@ -39,6 +39,7 @@ export async function generateMetadata({ params }) {
 	};
 }
 
+
 export default function LangLayout({ children, params }) {
 	// 获取当前语言
 	const lang = params?.lang || defaultLocale;
