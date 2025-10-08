@@ -1,8 +1,9 @@
+# *
 User-agent: *
 Allow: /
 
-# Host (optional, most crawlers ignore this)
-Host: https://vibetolive.dev
+# Host
+Host: https://landingpage.huglemon.com
 
 # Sitemaps
-Sitemap: https://vibetolive.dev/sitemap.xml
+Sitemap: https://landingpage.huglemon.com/sitemap.xml
