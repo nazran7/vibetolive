@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://vibetolive.dev
+Host: https://www.vibetolive.dev
 
 # Sitemaps
-Sitemap: https://vibetolive.dev/sitemap.xml
+Sitemap: https://www.vibetolive.dev/sitemap.xml
