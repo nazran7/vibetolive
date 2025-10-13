@@ -16,7 +16,7 @@ export async function generateMetadata({ params }) {
 		};
 	}
 
-	const baseUrl = 'https://vibetolive.dev';
+	const baseUrl = 'https://www.vibetolive.dev';
 
 	const canonicalUrl = `${baseUrl}/${lang === defaultLocale ? '' : lang}`.replace(/\/$/, '')
 
