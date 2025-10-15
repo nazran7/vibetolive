@@ -76,5 +76,62 @@
 		"cta_h2": "Prêt à rendre votre produit vivant ?",
 		"cta_btn1": "Commencer",
 		"cta_btn2": "Consultation gratuite 30 min"
+	},
+	"CaseStudies": {
+		"h1": "Histoires de succès : du prototype IA à la production",
+		"intro": "Chaque prototype IA a du potentiel. Ces histoires réelles montrent comment VibeToLive.dev a aidé les fondateurs et les petites équipes à transformer des idées en produits entièrement déployés et évolutifs. Découvrez comment nous gérons tout : de l’audit et du renforcement au déploiement, à la mise à l’échelle et à la maintenance à long terme.",
+		"ctaHeading": "Voulez-vous être notre prochaine success story ?",
+		"ctaText": "Réservez votre consultation gratuite et mettons votre IA en production.",
+		"ctaButton": "Commencez votre projet →",
+		"cases": [
+			{
+				"title": "ResumeGPT – du MVP Hackathon à la plateforme SaaS",
+				"client": "Développeur solo",
+				"challenge": "Prototype construit sur une API LLM locale avec des problèmes de performance et sans scalabilité.",
+				"solution": [
+					"Migration du backend vers FastAPI + AWS Lambda",
+					"Ajout de cache et authentification utilisateur",
+					"Déploiement avec CI/CD sur Vercel"
+				],
+				"result": [
+					"Temps de réponse 3× plus rapide",
+					"Performance stable avec 10K+ utilisateurs",
+					"Revenu mensuel récurrent atteint"
+				],
+				"quote": "VibeToLive.dev a transformé mon prototype de hackathon en véritable entreprise.",
+				"image": "/image/case_1.png"
+			},
+			{
+				"title": "ChatLegal.ai – Assistant IA sécurisé pour les équipes juridiques",
+				"client": "Startup (B2B SaaS)",
+				"challenge": "Conformité des données sensibles et fiabilité.",
+				"solution": [
+					"Mise en place de pipelines de données sécurisés avec chiffrement",
+					"Renforcement de l’intégration OpenAI avec filtrage des prompts",
+					"Ajout de la surveillance et du suivi du temps de disponibilité"
+				],
+				"result": [
+					"99,9 % de disponibilité",
+					"Audits de sécurité client réussis",
+					"Intégration réussie de 4 cabinets juridiques le premier mois"
+				],
+				"image": "/image/case_2.png"
+			},
+			{
+				"title": "IndieBuild Bot – Mise à l’échelle du copilote IA pour développeurs",
+				"client": "Indie hacker",
+				"challenge": "Le prototype fonctionne mais plante lors des pics de trafic.",
+				"solution": [
+					"Introduction du cache Redis et des files de tâches en arrière-plan",
+					"Refactorisation des endpoints API",
+					"Déploiement sur une infrastructure AWS EC2 évolutive"
+				],
+				"result": [
+					"Amélioration des performances ×5",
+					"Gestion de 20K+ requêtes/jour sans interruption"
+				],
+				"image": "/image/case_3.png"
+			}
+		]
 	}
 }

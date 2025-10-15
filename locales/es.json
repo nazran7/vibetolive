@@ -76,5 +76,62 @@
 		"cta_h2": "¿Listo para poner tu producto en producción?",
 		"cta_btn1": "Comenzar",
 		"cta_btn2": "Consulta gratuita de 30 minutos"
+	},
+	"CaseStudies": {
+		"h1": "Historias de Éxito: De Prototipo de IA a Producción",
+		"intro": "Cada prototipo de IA tiene potencial. Estas historias reales muestran cómo VibeToLive.dev ayudó a fundadores y equipos pequeños a transformar ideas en productos totalmente desplegados y escalables. Descubre cómo gestionamos todo: desde auditorías y refuerzo hasta despliegue, escalado y mantenimiento a largo plazo.",
+		"ctaHeading": "¿Quieres ser nuestra próxima historia de éxito?",
+		"ctaText": "Reserva tu consulta gratuita y llevemos tu IA a producción.",
+		"ctaButton": "Comienza tu proyecto →",
+		"cases": [
+			{
+				"title": "ResumeGPT – De MVP de Hackathon a Plataforma SaaS",
+				"client": "Desarrollador individual",
+				"challenge": "Prototipo construido sobre API LLM local con problemas de rendimiento y sin escalabilidad.",
+				"solution": [
+					"Migración del backend a FastAPI + AWS Lambda",
+					"Se añadió caché y autenticación de usuarios",
+					"Despliegue con CI/CD en Vercel"
+				],
+				"result": [
+					"Tiempo de respuesta 3× más rápido",
+					"Rendimiento estable con 10K+ usuarios",
+					"Ingreso recurrente mensual alcanzado"
+				],
+				"quote": "VibeToLive.dev convirtió mi prototipo de hackathon en un negocio real.",
+				"image": "/image/case_1.png"
+			},
+			{
+				"title": "ChatLegal.ai – Asistente de IA seguro para equipos legales",
+				"client": "Startup (B2B SaaS)",
+				"challenge": "Cumplimiento de datos sensibles y confiabilidad.",
+				"solution": [
+					"Implementación de pipelines de datos seguros con cifrado",
+					"Fortalecimiento de integración OpenAI con filtrado de prompts",
+					"Monitorización y seguimiento de uptime"
+				],
+				"result": [
+					"99.9% de uptime",
+					"Superó auditorías de seguridad de clientes",
+					"Onboard exitoso de 4 bufetes en el primer mes"
+				],
+				"image": "/image/case_2.png"
+			},
+			{
+				"title": "IndieBuild Bot – Escalando un copiloto AI para desarrolladores",
+				"client": "Indie hacker",
+				"challenge": "El prototipo funcionaba bien pero fallaba ante picos de tráfico.",
+				"solution": [
+					"Introducción de caché Redis y colas de tareas en background",
+					"Refactorización de endpoints de API",
+					"Despliegue en entorno escalable AWS EC2"
+				],
+				"result": [
+					"Mejora de rendimiento 5×",
+					"Manejo de 20K+ solicitudes/día sin caídas"
+				],
+				"image": "/image/case_3.png"
+			}
+		]
 	}
 }

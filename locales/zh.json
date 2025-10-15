@@ -76,5 +76,62 @@
 		"cta_h2": "准备将您的想法投入生产？",
 		"cta_btn1": "立即开始",
 		"cta_btn2": "免费30分钟咨询"
+	},
+	"CaseStudies": {
+		"h1": "AI 原型到生产的成功案例",
+		"intro": "每个 AI 原型都潜力无限。这些真实案例展示了 VibeToLive.dev 如何帮助创始人和小团队将原始想法转变为完全部署、可扩展的产品。探索我们如何处理从审计和加固到部署、扩展以及长期维护的全过程。",
+		"ctaHeading": "想成为我们的下一个成功案例吗？",
+		"ctaText": "预约免费咨询，让我们把您的 AI 推向生产环境。",
+		"ctaButton": "开始您的项目 →",
+		"cases": [
+			{
+				"title": "ResumeGPT – 从黑客马拉松 MVP 到 SaaS 平台",
+				"client": "独立开发者",
+				"challenge": "基于本地 LLM API 构建的原型存在性能问题且不可扩展。",
+				"solution": [
+					"将后端迁移到 FastAPI + AWS Lambda",
+					"添加缓存和用户认证",
+					"通过 CI/CD 部署到 Vercel"
+				],
+				"result": [
+					"响应速度提升 3 倍",
+					"在 10K+ 用户下性能稳定",
+					"实现每月经常性收入"
+				],
+				"quote": "VibeToLive.dev 将我的黑客马拉松原型变成了真正的业务。",
+				"image": "/image/case_1.png"
+			},
+			{
+				"title": "ChatLegal.ai – 法律团队的安全 AI 助手",
+				"client": "初创公司 (B2B SaaS)",
+				"challenge": "敏感数据合规性和可靠性问题。",
+				"solution": [
+					"实现加密的数据管道",
+					"加固 OpenAI 集成并进行提示过滤",
+					"添加监控和正常运行时间跟踪"
+				],
+				"result": [
+					"99.9% 正常运行时间",
+					"通过客户安全审核",
+					"首月成功为 4 家律师事务所提供服务"
+				],
+				"image": "/image/case_2.png"
+			},
+			{
+				"title": "IndieBuild Bot – 扩展开发者 AI 助手",
+				"client": "独立开发者",
+				"challenge": "原型在高流量时会崩溃。",
+				"solution": [
+					"引入 Redis 缓存和后台任务队列",
+					"重构 API 端点",
+					"部署在可扩展的 AWS EC2 环境"
+				],
+				"result": [
+					"性能提升 5 倍",
+					"处理 20K+ 请求/天且零宕机"
+				],
+				"image": "/image/case_3.png"
+			}
+		]
 	}
 }
