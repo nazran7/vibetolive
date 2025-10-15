@@ -2,6 +2,7 @@ import { locales, defaultLocale } from '@/lib/i18n';
 import { SiteConfig } from '@/lib/config/site';
 import Navbar from '@/components/common/navbar';
 import Footer from '@/components/common/footer';
+import { headers } from 'next/headers';
 
 export async function generateMetadata({ params }) {
 	const paramLang = params?.lang;
@@ -16,9 +17,12 @@ export async function generateMetadata({ params }) {
 		};
 	}
 
-	const baseUrl = 'https://www.vibetolive.dev';
+	const headersList = headers();
+	const host = headersList.get('host');
+	const protocol = host?.includes('localhost') ? 'http' : 'https';
+	const baseUrl = `${protocol}://${host}`;
 
-	const canonicalUrl = `${baseUrl}/${lang === defaultLocale ? '' : lang}`.replace(/\/$/, '')
+	const canonicalUrl = `${baseUrl}/${lang === defaultLocale ? '' : lang}`.replace(/\/$/, '');
 
 	return {
 		title: SiteConfig[lang].name,

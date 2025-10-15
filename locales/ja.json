@@ -51,5 +51,30 @@
 		"side1": "説明",
 		"side2": "人気のブログ",
 		"side3": "最近更新された"
+	},
+	"Service": {
+		"h1": "AIプロトタイプから本番へのサービス",
+		"intro": "あなたのAIプロトタイプは単なるデモ以上の価値があります。VibeToLive.devでは、AI生成プロトタイプを安全でスケーラブル、本番稼働可能なアプリに変換します。",
+		"core_services_h2": "主要サービス",
+		"service1_title": "プロトタイプ強化と監査",
+		"service1_content": "コードレビュー、データ検証、インフラ最適化、セキュリティパッチなど、完全な技術・セキュリティ監査を実施。",
+		"service2_title": "安全なAIアプリ展開",
+		"service2_content": "Docker/Kubernetes、CI/CD、SSL、トークン管理、データ暗号化による本番環境展開。",
+		"service3_title": "パフォーマンス最適化とスケーリング",
+		"service3_content": "負荷テスト、API最適化、モデル提供、キャッシュ、コスト最適化、自動スケーリング設定。",
+		"service4_title": "運用保守サポート",
+		"service4_content": "24/7監視、バグ修正、モデル再訓練、機能改善サイクル。",
+		"tech_stack_h2": "使用技術",
+		"tech_stack_content": "React、Next.js、Node.js、FastAPI、LangChain、OpenAI、Hugging Face、AWS、Docker、Vercel、Sentry、LogRocket。",
+		"why_choose_h2": "VibeToLive.devを選ぶ理由",
+		"why_choose_content": [
+			"AI & フルスタック展開の深い専門知識",
+			"インディハッカーや小規模スタートアップに特化",
+			"透明な料金と柔軟なスケジュール",
+			"迅速な納期 — プロトタイプから本番まで数週間"
+		],
+		"cta_h2": "あなたのアイデアを本番環境へ",
+		"cta_btn1": "今すぐ開始",
+		"cta_btn2": "30分無料相談"
 	}
 }

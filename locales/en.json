@@ -49,5 +49,31 @@
 		"side1": "Latest Articles",
 		"side2": "Popular Resources",
 		"side3": "Recently Updated"
+	},
+	"Service": {
+		"h1": "AI Prototype to Production Services",
+		"intro": "Your AI prototype deserves more than just a demo. At VibeToLive.dev, we transform AI-generated prototypes into secure, scalable, production-grade applications—ready for real users and revenue.",
+		"core_services_h2": "Our Core Services",
+		"service1_title": "Prototype Hardening & Audit",
+		"service1_content": "Full technical and security audit including code review, data validation, infrastructure optimization, and security patching.",
+		"service2_title": "Secure AI App Deployment",
+		"service2_content": "Production deployment with Docker/Kubernetes, CI/CD, SSL, token management, and data encryption.",
+		"service3_title": "Scaling & Performance Optimization",
+		"service3_content": "Load testing, API optimization, model serving, caching, cost optimization, and auto-scaling setup.",
+		"service4_title": "Maintenance & Production Support",
+		"service4_content": "24/7 monitoring, bug fixes, model retraining, and product enhancement cycles.",
+		"tech_stack_h2": "Our Tech Stack",
+		"tech_stack_content": "React, Next.js, Node.js, FastAPI, LangChain, OpenAI, Hugging Face, AWS, Docker, Vercel, Sentry, LogRocket.",
+		"why_choose_h2": "Why Choose VibeToLive.dev",
+		"why_choose_content": [
+			"Deep expertise in AI & full-stack deployment",
+			"Focused on indie hackers and lean startups",
+			"Transparent pricing and flexible timelines",
+			"Fast turnaround — prototype to production in weeks"
+		],
+		"cta_h2": "Ready to Turn the Vibe Into a Live Product?",
+		"cta_h3": "Let's chat. Share your repo, tech stack, and target launch window. We'll recommend the right track and lock in your start date.",
+		"cta_btn1": "Get Started",
+		"cta_btn2": "Get FREE 30 mins consultation"
 	}
 }

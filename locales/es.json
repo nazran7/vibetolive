@@ -51,5 +51,30 @@
 		"side1": "Descripción",
 		"side2": "Blogs Populares",
 		"side3": "Actualizados Recientemente"
+	},
+	"Service": {
+		"h1": "Servicios de AI de Prototipo a Producción",
+		"intro": "Tu prototipo de IA merece más que una demo. En VibeToLive.dev, transformamos prototipos generados por IA en aplicaciones seguras, escalables y listas para producción.",
+		"core_services_h2": "Nuestros Servicios Principales",
+		"service1_title": "Fortalecimiento y Auditoría del Prototipo",
+		"service1_content": "Revisión completa de seguridad y técnica, incluyendo revisión de código, validación de datos, optimización de infraestructura y corrección de seguridad.",
+		"service2_title": "Despliegue Seguro de Aplicaciones de IA",
+		"service2_content": "Despliegue en producción con Docker/Kubernetes, CI/CD, SSL, gestión de tokens y cifrado de datos.",
+		"service3_title": "Optimización de Rendimiento y Escalabilidad",
+		"service3_content": "Pruebas de carga, optimización de API, servicio de modelos, caching, optimización de costos y escalado automático.",
+		"service4_title": "Mantenimiento y Soporte en Producción",
+		"service4_content": "Monitoreo 24/7, corrección de errores, reentrenamiento de modelos y mejoras continuas del producto.",
+		"tech_stack_h2": "Nuestra Stack Tecnológica",
+		"tech_stack_content": "React, Next.js, Node.js, FastAPI, LangChain, OpenAI, Hugging Face, AWS, Docker, Vercel, Sentry, LogRocket.",
+		"why_choose_h2": "Por Qué Elegir VibeToLive.dev",
+		"why_choose_content": [
+			"Experiencia profunda en IA y despliegue full-stack",
+			"Enfoque en hackers independientes y startups lean",
+			"Precios transparentes y plazos flexibles",
+			"Rápida entrega — de prototipo a producción en semanas"
+		],
+		"cta_h2": "¿Listo para poner tu producto en producción?",
+		"cta_btn1": "Comenzar",
+		"cta_btn2": "Consulta gratuita de 30 minutos"
 	}
 }

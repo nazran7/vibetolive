@@ -1,41 +1,41 @@
 {
 	"Hero": {
-	  "h1": "Créez rapidement votre page de renvoi",
-	  "h2": "Voici un modèle de page de renvoi gratuit, open source et puissant pour les projets SaaS, qui vous aidera à lancer votre startup plus rapidement."
+		"h1": "Créez rapidement votre page de renvoi",
+		"h2": "Voici un modèle de page de renvoi gratuit, open source et puissant pour les projets SaaS, qui vous aidera à lancer votre startup plus rapidement."
 	},
 	"Feature": {
-	  "h2": "Fonctionnalités",
-	  "h3": "Caractéristiques du modèle de page de renvoi Chengfeng",
-	  "description1": "Un excellent modèle de page de renvoi.",
-	  "description2": "Basé sur Next.JS, DaisyUI, TailwindCSS et d'autres bibliothèques puissantes.",
-	  "description3": "Entièrement open source et totalement gratuit."
+		"h2": "Fonctionnalités",
+		"h3": "Caractéristiques du modèle de page de renvoi Chengfeng",
+		"description1": "Un excellent modèle de page de renvoi.",
+		"description2": "Basé sur Next.JS, DaisyUI, TailwindCSS et d'autres bibliothèques puissantes.",
+		"description3": "Entièrement open source et totalement gratuit."
 	},
 	"Pricing": {
-	  "h2": "Tarification",
-	  "h3": "Choisissez votre plan",
-	  "description": "Sélectionnez le plan qui convient le mieux à vos besoins.",
-	  "doYouLike": "Aimez-vous ce modèle de page de renvoi ?",
-	  "follow": "Suivez-moi sur Twitter."
+		"h2": "Tarification",
+		"h3": "Choisissez votre plan",
+		"description": "Sélectionnez le plan qui convient le mieux à vos besoins.",
+		"doYouLike": "Aimez-vous ce modèle de page de renvoi ?",
+		"follow": "Suivez-moi sur Twitter."
 	},
 	"Testimonial": {
-	  "h2": "Témoignages",
-	  "h3": "Mur d'amour",
-	  "description1": "Si vous utilisez ce modèle de page de renvoi et le recommandez sur votre Twitter,",
-	  "description2": "faites-le moi savoir",
-	  "description3": ", je présenterai votre tweet et votre recommandation ici."
+		"h2": "Témoignages",
+		"h3": "Mur d'amour",
+		"description1": "Si vous utilisez ce modèle de page de renvoi et le recommandez sur votre Twitter,",
+		"description2": "faites-le moi savoir",
+		"description3": ", je présenterai votre tweet et votre recommandation ici."
 	},
 	"Faq": {
-	  "h2": "FAQ",
-	  "h3": "Questions fréquemment posées",
-	  "description": "Voici quelques-unes des questions les plus courantes."
+		"h2": "FAQ",
+		"h3": "Questions fréquemment posées",
+		"description": "Voici quelques-unes des questions les plus courantes."
 	},
 	"CTA": {
-	  "h2": "Construisez votre page de renvoi maintenant",
-	  "h3": "Créez votre page de renvoi, présentez votre produit et commencez à gagner de l'argent !"
+		"h2": "Construisez votre page de renvoi maintenant",
+		"h3": "Créez votre page de renvoi, présentez votre produit et commencez à gagner de l'argent !"
 	},
 	"CTAButton": {
-	  "btn1": "Obtenir le code source",
-	  "btn2": "Voir la documentation"
+		"btn1": "Obtenir le code source",
+		"btn2": "Voir la documentation"
 	},
 	"About": {
 		"h1": "À Propos de Nous",
@@ -51,5 +51,30 @@
 		"side1": "Description",
 		"side2": "Blogs Populaires",
 		"side3": "Récemment mis à jour"
+	},
+	"Service": {
+		"h1": "Services de Prototype à Production en IA",
+		"intro": "Votre prototype IA mérite plus qu'une simple démo. Chez VibeToLive.dev, nous transformons les prototypes IA en applications sécurisées, évolutives et prêtes pour la production.",
+		"core_services_h2": "Nos Services Principaux",
+		"service1_title": "Renforcement et Audit du Prototype",
+		"service1_content": "Audit technique et de sécurité complet incluant revue de code, validation des données, optimisation de l'infrastructure et corrections de sécurité.",
+		"service2_title": "Déploiement Sécurisé d'Applications IA",
+		"service2_content": "Déploiement en production avec Docker/Kubernetes, CI/CD, SSL, gestion des tokens et chiffrement des données.",
+		"service3_title": "Optimisation de Performance et Scalabilité",
+		"service3_content": "Tests de charge, optimisation API, mise en service des modèles, caching, optimisation des coûts et configuration auto-scalable.",
+		"service4_title": "Maintenance et Support en Production",
+		"service4_content": "Surveillance 24/7, corrections de bugs, pipelines de réentraînement de modèles et cycles d’amélioration continue.",
+		"tech_stack_h2": "Notre Stack Technologique",
+		"tech_stack_content": "React, Next.js, Node.js, FastAPI, LangChain, OpenAI, Hugging Face, AWS, Docker, Vercel, Sentry, LogRocket.",
+		"why_choose_h2": "Pourquoi Choisir VibeToLive.dev",
+		"why_choose_content": [
+			"Expertise approfondie en IA et déploiement full-stack",
+			"Focalisé sur les indie hackers et startups lean",
+			"Tarification transparente et délais flexibles",
+			"Livraison rapide — prototype à production en quelques semaines"
+		],
+		"cta_h2": "Prêt à rendre votre produit vivant ?",
+		"cta_btn1": "Commencer",
+		"cta_btn2": "Consultation gratuite 30 min"
 	}
 }
