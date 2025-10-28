@@ -1,7 +1,7 @@
 import { IoMdHome } from 'react-icons/io';
 import { defaultLocale, getDictionary } from '@/lib/i18n';
 import pubfn from '@/lib/function';
-import HTMLReactParser from 'html-react-parser';
+import ReadOnlyQuill from '@/components/blog/ReadOnlyQuill';
 import Sidebar from '@/components/blog/sidebar';
 import { getProduct } from '@/api-gateways/post';
 import { notFound } from 'next/navigation';
@@ -66,16 +66,16 @@ export default async function Page({ params }) {
 						{item.title}
 					</h1>
 
-					<div className="flex flex-col md:flex-row justify-between items-end md:items-center text-base-content/60 text-sm">
-						<div>
+					<div className="flex flex-col md:flex-row justify-between gap-3 md:items-center text-base-content/60 text-sm">
+						<div className="flex flex-wrap items-center gap-2">
 							{item.categories?.map((cat, i) => (
-								<span key={i} className="mr-3">{cat}</span>
+								<span key={i} className="mr-3 mb-2">{cat}</span>
 							))}
-							<span>{pubfn.timeFormat(item.createdAt)}</span>
+							<span className="opacity-80">{pubfn.timeFormat(item.createdAt)}</span>
 						</div>
-						<div className="flex gap-x-2">
+						<div className="flex flex-wrap gap-2">
 							{item.tags?.map((tag, i) => (
-								<span key={i} className="badge badge-outline">{tag}</span>
+								<span key={i} className="badge badge-outline normal-case max-w-[12rem] truncate">{tag}</span>
 							))}
 						</div>
 					</div>
@@ -90,7 +90,7 @@ export default async function Page({ params }) {
 						/>
 					)}
 
-					<div className="prose max-w-none">{HTMLReactParser(item.content)}</div>
+					<div className="prose max-w-none"><ReadOnlyQuill value={item.content} /></div>
 				</div>
 
 				<div className="w-full md:w-1/3">

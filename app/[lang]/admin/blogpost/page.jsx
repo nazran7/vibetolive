@@ -2,6 +2,10 @@
 
 import { createBlogPost, getProduct, updateBlogPost } from "@/api-gateways/post";
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css";
+
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import { useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 
@@ -149,14 +153,36 @@ export default function NewPostPage() {
                         placeholder="Short excerpt"
                         className="w-full p-2 border rounded bg-white"
                     />
-                    <textarea
-                        name="content"
-                        value={postData.content}
-                        onChange={handleChange}
-                        placeholder="Post Content"
-                        rows={10}
-                        className="w-full p-2 border rounded bg-white"
-                    />
+                    <div>
+                        <label className="block text-sm font-medium mb-2">Content</label>
+                        <div className="resize-y overflow-auto min-h-[400px] border rounded">
+                            <ReactQuill
+                                theme="snow"
+                                value={postData.content}
+                                onChange={(value) => setPostData((prev) => ({ ...prev, content: value }))}
+                                placeholder="Write your post content here..."
+                                className="h-full"
+                                style={{ height: '100%' }}
+                                formats={[
+                                    'header', 'bold', 'italic', 'underline', 'strike',
+                                    'list', 'bullet', 'blockquote', 'code-block',
+                                    'link', 'image', 'align', 'color', 'background'
+                                ]}
+                                modules={{
+                                    toolbar: [
+                                        [{ header: [1, 2, 3, false] }],
+                                        ["bold", "italic", "underline", "strike"],
+                                        [{ list: "ordered" }, { list: "bullet" }],
+                                        ["blockquote", "code-block"],
+                                        ["link", "image"],
+                                        [{ align: [] }],
+                                        [{ color: [] }, { background: [] }],
+                                        ["clean"],
+                                    ],
+                                }}
+                            />
+                        </div>
+                    </div>
                 </section>
 
                 {/* SEO */}
