@@ -98,7 +98,45 @@ export default function TipTapEditor({ value, onChange, placeholder }) {
                 },
             }),
             Underline,
-            Image.configure({
+            Image.extend({
+                addAttributes() {
+                    return {
+                        ...this.parent?.(),
+                        width: {
+                            default: null,
+                            parseHTML: element => {
+                                const width = element.getAttribute('width') || element.style.width?.replace('px', '');
+                                return width || null;
+                            },
+                            renderHTML: attributes => {
+                                if (!attributes.width) {
+                                    return {};
+                                }
+                                return {
+                                    width: attributes.width,
+                                    style: `width: ${attributes.width}px;`,
+                                };
+                            },
+                        },
+                        height: {
+                            default: null,
+                            parseHTML: element => {
+                                const height = element.getAttribute('height') || element.style.height?.replace('px', '');
+                                return height || null;
+                            },
+                            renderHTML: attributes => {
+                                if (!attributes.height) {
+                                    return {};
+                                }
+                                return {
+                                    height: attributes.height,
+                                    style: `height: ${attributes.height}px;`,
+                                };
+                            },
+                        },
+                    };
+                },
+            }).configure({
                 inline: true,
                 allowBase64: false,
                 HTMLAttributes: {
@@ -542,10 +580,41 @@ export default function TipTapEditor({ value, onChange, placeholder }) {
                             const finalHeight = img.offsetHeight || parseInt(img.style.height) || img.naturalHeight;
 
                             if (img && finalWidth && finalHeight) {
+                                // Update DOM styles
                                 img.style.width = finalWidth + 'px';
                                 img.style.height = finalHeight + 'px';
                                 img.setAttribute('width', finalWidth.toString());
                                 img.setAttribute('height', finalHeight.toString());
+                                
+                                // Update TipTap document model to persist the resize
+                                try {
+                                    // Find the image node in TipTap's document by matching src
+                                    const imgSrc = img.src;
+                                    let imagePos = null;
+                                    let imageNode = null;
+                                    
+                                    editor.state.doc.descendants((node, pos) => {
+                                        if (node.type.name === 'image' && node.attrs.src === imgSrc) {
+                                            imageNode = node;
+                                            imagePos = pos;
+                                            return false; // Stop searching
+                                        }
+                                    });
+                                    
+                                    // Update the image node attributes in TipTap's document
+                                    if (imageNode && imagePos !== null) {
+                                        // Use transaction to update the node
+                                        const { tr } = editor.state;
+                                        tr.setNodeMarkup(imagePos, null, {
+                                            ...imageNode.attrs,
+                                            width: finalWidth.toString(),
+                                            height: finalHeight.toString(),
+                                        });
+                                        editor.view.dispatch(tr);
+                                    }
+                                } catch (error) {
+                                    console.error('Error updating image attributes in TipTap:', error);
+                                }
                             }
 
                             // Force reset isResizing immediately

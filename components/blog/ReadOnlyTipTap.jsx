@@ -74,7 +74,39 @@ export default function ReadOnlyTipTap({ value }) {
                 },
             }),
             Underline,
-            Image.configure({
+            Image.extend({
+                addAttributes() {
+                    return {
+                        ...this.parent?.(),
+                        width: {
+                            default: null,
+                            parseHTML: element => element.getAttribute('width'),
+                            renderHTML: attributes => {
+                                if (!attributes.width) {
+                                    return {};
+                                }
+                                return {
+                                    width: attributes.width,
+                                    style: `width: ${attributes.width}px;`,
+                                };
+                            },
+                        },
+                        height: {
+                            default: null,
+                            parseHTML: element => element.getAttribute('height'),
+                            renderHTML: attributes => {
+                                if (!attributes.height) {
+                                    return {};
+                                }
+                                return {
+                                    height: attributes.height,
+                                    style: `height: ${attributes.height}px;`,
+                                };
+                            },
+                        },
+                    };
+                },
+            }).configure({
                 inline: true,
                 allowBase64: true,
                 HTMLAttributes: {
