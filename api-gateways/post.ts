@@ -131,8 +131,14 @@ export const uploadImage = async (file: File): Promise<string | null> => {
         const jsonData = await response.json();
 
         if (response.status === 200 && jsonData.data?.url) {
-            // Return full URL
-            return `${url}${jsonData.data.url}`;
+            const imageUrl = jsonData.data.url;
+            // If it's already a full URL (Cloudinary or data URL), return as is
+            // Otherwise, prepend the backend URL for local uploads
+            if (imageUrl.startsWith('http') || imageUrl.startsWith('data:')) {
+                return imageUrl;
+            } else {
+                return `${url}${imageUrl}`;
+            }
         } else {
             console.error("Image upload error:", jsonData);
             return null;
