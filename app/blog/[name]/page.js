@@ -1,7 +1,7 @@
 import { IoMdHome } from 'react-icons/io';
 import { defaultLocale, getDictionary } from '@/lib/i18n';
 import pubfn from '@/lib/function';
-import ReadOnlyQuill from '@/components/blog/ReadOnlyQuill';
+import ReadOnlyTipTap from '@/components/blog/ReadOnlyTipTap';
 import Sidebar from '@/components/blog/sidebar';
 import { getProduct } from '@/api-gateways/post';
 import { notFound } from 'next/navigation';
@@ -95,7 +95,7 @@ export default async function Page({ params }) {
 
 				{/* Content */}
 				<div className="prose prose-lg max-w-none">
-					<ReadOnlyQuill value={item.content} />
+					<ReadOnlyTipTap value={item.content} />
 				</div>
 			</article>
 		</main>

@@ -4,7 +4,7 @@ import { createBlogPost, getProduct, updateBlogPost } from "@/api-gateways/post"
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import QuillEditor from "@/components/blog/QuillEditor";
+import TipTapEditor from "@/components/blog/TipTapEditor";
 import { url } from "@/config";
 
 export default function NewPostPage() {
@@ -225,13 +225,11 @@ export default function NewPostPage() {
                             <label className="block text-sm font-semibold mb-2 text-base-content">
                                 Content *
                             </label>
-                            <div className="border-2 border-base-300 rounded-xl overflow-hidden bg-base-100">
-                                <QuillEditor
-                                    value={postData.content}
-                                    onChange={(value) => setPostData((prev) => ({ ...prev, content: value }))}
-                                    placeholder="Write your post content here... (Images can be resized by dragging corners)"
-                                />
-                            </div>
+                            <TipTapEditor
+                                value={postData.content}
+                                onChange={(value) => setPostData((prev) => ({ ...prev, content: value }))}
+                                placeholder="Write your post content here... (Font sizes: 1px-150px available)"
+                            />
                         </div>
                     </div>
 
