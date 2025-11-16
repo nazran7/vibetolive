@@ -6,7 +6,7 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: 'landingpage.huglemon.com',
+				hostname: 'https://www.vibetolive.dev',
 			},
 		],
 	},
