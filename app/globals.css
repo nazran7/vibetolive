@@ -195,3 +195,107 @@ body {
 .prose .ql-editor h6 * {
   color: inherit !important;
 }
+
+/* Dribbble-style Blog Improvements */
+.prose {
+  @apply text-base-content;
+}
+
+.prose img {
+  @apply rounded-xl my-8 shadow-lg;
+  max-width: 100%;
+  height: auto;
+}
+
+.prose h1, .prose h2, .prose h3 {
+  @apply font-bold text-base-content;
+}
+
+.prose h1 {
+  @apply text-3xl md:text-4xl mb-6 mt-8;
+}
+
+.prose h2 {
+  @apply text-2xl md:text-3xl mb-4 mt-6;
+}
+
+.prose h3 {
+  @apply text-xl md:text-2xl mb-3 mt-4;
+}
+
+.prose p {
+  @apply mb-4 leading-relaxed text-base-content/90;
+}
+
+.prose ul, .prose ol {
+  @apply mb-4 space-y-2;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-primary pl-4 italic my-6 text-base-content/80;
+}
+
+.prose code {
+  @apply bg-base-200 px-2 py-1 rounded text-sm;
+}
+
+.prose pre {
+  @apply bg-base-200 p-4 rounded-lg overflow-x-auto my-4;
+}
+
+.prose a {
+  @apply text-primary hover:underline;
+}
+
+/* ReactQuill Image Resize Handle Styles */
+.ql-image-wrapper {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  margin: 10px 0;
+  vertical-align: middle;
+}
+
+.ql-image-resize-handle {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  width: 28px;
+  height: 28px;
+  background: #3b82f6;
+  border: 3px solid white;
+  border-radius: 6px;
+  cursor: nwse-resize;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  user-select: none;
+  pointer-events: auto;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.ql-image-resize-handle:hover {
+  background: #2563eb;
+  transform: scale(1.1);
+}
+
+.ql-editor .ql-image-wrapper:hover .ql-image-resize-handle {
+  display: flex !important;
+}
+
+.ql-editor img {
+  max-width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  pointer-events: auto;
+}

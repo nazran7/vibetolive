@@ -43,60 +43,61 @@ export default async function Page({ params }) {
 	if (!item) notFound();
 
 	return (
-		<main className="container mx-auto md:px-5">
-			<div className="breadcrumbs text-sm relative z-10">
-				<ul>
-					<li>
-						<a href="/">
-							<IoMdHome />
-						</a>
-					</li>
-					<li>
-						<a href="/blog">{dict['Blog']['title']}</a>
-					</li>
-					<li>
-						<span>{item.title}</span>
-					</li>
-				</ul>
-			</div>
-
-			<section className="relative flex flex-col md:flex-row items-start justify-between gap-5 py-5 min-h-[70vh] z-10">
-				<div className="w-full md:w-2/3 ring-2 ring-base-content/10 p-5 md:p-10 rounded-2xl bg-base-100">
-					<h1 className="mb-3 text-xl md:text-2xl font-bold text-center">
-						{item.title}
-					</h1>
-
-					<div className="flex flex-col md:flex-row justify-between gap-3 md:items-center text-base-content/60 text-sm">
-						<div className="flex flex-wrap items-center gap-2">
-							{item.categories?.map((cat, i) => (
-								<span key={i} className="mr-3 mb-2">{cat}</span>
-							))}
-							<span className="opacity-80">{pubfn.timeFormat(item.createdAt)}</span>
-						</div>
-						<div className="flex flex-wrap gap-2">
-							{item.tags?.map((tag, i) => (
-								<span key={i} className="badge badge-outline normal-case max-w-[12rem] truncate">{tag}</span>
-							))}
-						</div>
+		<main className="container mx-auto px-4 md:px-8 py-12 max-w-5xl">
+			{/* Header Section */}
+			<article className="mb-12">
+				{/* Categories */}
+				{item.categories && item.categories.length > 0 && (
+					<div className="flex flex-wrap gap-2 mb-6">
+						{item.categories.map((cat, i) => (
+							<span 
+								key={i} 
+								className="text-sm font-medium px-4 py-2 rounded-full bg-primary/10 text-primary"
+							>
+								{cat}
+							</span>
+						))}
 					</div>
+				)}
 
-					<div className="divider" />
+				{/* Title */}
+				<h1 className="text-4xl md:text-5xl font-bold mb-6 text-base-content leading-tight">
+					{item.title}
+				</h1>
 
-					{item.featuredImage && (
-						<img
-							src={`${item?.featuredImage}`}
-							alt={item?.title}
-							className="rounded-xl mb-5"
-						/>
+				{/* Meta Info - No Author */}
+				<div className="flex flex-wrap items-center gap-4 mb-8 text-sm text-base-content/60">
+					<span>{pubfn.timeFormat(item.createdAt, 'MMMM dd, yyyy')}</span>
+					{item.tags && item.tags.length > 0 && (
+						<div className="flex flex-wrap gap-2">
+							{item.tags.map((tag, i) => (
+								<span 
+									key={i} 
+									className="px-3 py-1 rounded-full bg-base-200 text-base-content/70"
+								>
+									{tag}
+								</span>
+							))}
+						</div>
 					)}
-
-					<div className="prose max-w-none"><ReadOnlyQuill value={item.content} /></div>
 				</div>
 
-				<div className="w-full md:w-1/3">
-					<Sidebar description={item.metaDescription} langName={langName} />
+				{/* Featured Image */}
+				{item.featuredImage && (
+					<div className="mb-12 rounded-2xl overflow-hidden shadow-xl">
+						<img
+							src={item.featuredImage.startsWith('http') ? item.featuredImage : `${url}/uploads/${item.featuredImage}`}
+							alt={item?.title}
+							className="w-full h-auto object-cover"
+						/>
+					</div>
+				)}
+
+				{/* Content */}
+				<div className="prose prose-lg max-w-none">
+					<ReadOnlyQuill value={item.content} />
 				</div>
-			</section>
+			</article>
 		</main>
 	);
 }

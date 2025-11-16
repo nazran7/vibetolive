@@ -1,6 +1,6 @@
 import { url } from "../config";
 
-export const getProduct = async (id: string | null): Promise<any[]> => {
+export const getProduct = async (id: string | null): Promise<any> => {
     try {
         const response = await fetch(`${url}/api/post?id=${id}`, {
             method: 'GET',
@@ -10,14 +10,16 @@ export const getProduct = async (id: string | null): Promise<any[]> => {
         const jsonData = await response.json();
 
         if (response.status === 200) {
+            // When getting a single post, data is the post object
+            // When getting all posts, data is an array
             return jsonData.data;
         } else {
             console.error("API error:", jsonData);
-            return [];
+            return null;
         }
     } catch (err) {
         console.error("Fetch failed:", err);
-        return [];
+        return null;
     }
 };
 
@@ -109,5 +111,34 @@ export const deleteBlogPost = async (
         else handleError(jsonData);
     } catch (err) {
         handleError(err);
+    }
+};
+
+// ---------------- UPLOAD IMAGE ----------------
+export const uploadImage = async (file: File): Promise<string | null> => {
+    try {
+        const formData = new FormData();
+        formData.append('image', file);
+
+        const response = await fetch(`${url}/api/post/upload-image`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+            },
+            body: formData,
+        });
+
+        const jsonData = await response.json();
+
+        if (response.status === 200 && jsonData.data?.url) {
+            // Return full URL
+            return `${url}${jsonData.data.url}`;
+        } else {
+            console.error("Image upload error:", jsonData);
+            return null;
+        }
+    } catch (err) {
+        console.error("Image upload failed:", err);
+        return null;
     }
 };
