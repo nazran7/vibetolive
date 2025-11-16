@@ -31,3 +31,167 @@ body {
     text-wrap: balance;
   }
 }
+
+/* ReactQuill Theme-Aware Styles - Makes ReactQuill respect dark/light mode */
+/* Base editor containers */
+.ql-editor,
+.ql-container,
+.ql-bubble {
+  color: hsl(var(--bc)) !important;
+}
+
+/* Universal selector for ALL elements inside Quill editor - catches everything */
+.ql-editor *,
+.ql-bubble * {
+  color: inherit !important;
+}
+
+/* Make all text elements in Quill respect theme */
+.ql-editor p,
+.ql-editor div,
+.ql-editor span,
+.ql-editor ul,
+.ql-editor ol,
+.ql-editor li,
+.ql-editor h1,
+.ql-editor h2,
+.ql-editor h3,
+.ql-editor h4,
+.ql-editor h5,
+.ql-editor h6,
+.ql-editor blockquote,
+.ql-editor pre,
+.ql-editor code,
+.ql-editor strong,
+.ql-editor b,
+.ql-editor em,
+.ql-editor i,
+.ql-editor u,
+.ql-editor s,
+.ql-editor strike,
+.ql-editor del,
+.ql-editor sup,
+.ql-editor sub,
+.ql-editor mark,
+.ql-editor small {
+  color: inherit !important;
+}
+
+/* Specifically target lists and list markers */
+.ql-editor ul li,
+.ql-editor ol li {
+  color: inherit !important;
+}
+
+.ql-editor ul li::before,
+.ql-editor ol li::marker {
+  color: inherit !important;
+}
+
+/* Override inline styles - target elements with inline color styles */
+.ql-editor [style*="color"],
+.ql-editor [style*="Color"] {
+  color: inherit !important;
+}
+
+/* Links should use primary color but respect theme */
+.ql-editor a {
+  color: hsl(var(--p)) !important;
+}
+
+.ql-editor a:hover {
+  color: hsl(var(--pf)) !important;
+}
+
+/* Code blocks */
+.ql-editor pre.ql-syntax {
+  background-color: hsl(var(--b2)) !important;
+  color: hsl(var(--bc)) !important;
+}
+
+.ql-editor code {
+  background-color: hsl(var(--b2)) !important;
+  color: hsl(var(--bc)) !important;
+}
+
+/* Blockquotes */
+.ql-editor blockquote {
+  border-left-color: hsl(var(--bc)) !important;
+  color: inherit !important;
+}
+
+/* ReadOnlyQuill wrapper - ensure theme inheritance */
+.quill-readonly .ql-editor {
+  color: hsl(var(--bc)) !important;
+}
+
+.quill-readonly .ql-editor * {
+  color: inherit !important;
+}
+
+/* More aggressive override for nested elements */
+.quill-readonly .ql-editor * * {
+  color: inherit !important;
+}
+
+/* Snow theme (used in admin editor) - also needs theme support */
+.ql-snow .ql-editor {
+  color: hsl(var(--bc)) !important;
+}
+
+.ql-snow .ql-editor * {
+  color: inherit !important;
+}
+
+.ql-snow .ql-editor p,
+.ql-snow .ql-editor div,
+.ql-snow .ql-editor span,
+.ql-snow .ql-editor ul,
+.ql-snow .ql-editor ol,
+.ql-snow .ql-editor li,
+.ql-snow .ql-editor h1,
+.ql-snow .ql-editor h2,
+.ql-snow .ql-editor h3,
+.ql-snow .ql-editor h4,
+.ql-snow .ql-editor h5,
+.ql-snow .ql-editor h6,
+.ql-snow .ql-editor strong,
+.ql-snow .ql-editor b,
+.ql-snow .ql-editor em,
+.ql-snow .ql-editor i,
+.ql-snow .ql-editor u,
+.ql-snow .ql-editor s {
+  color: inherit !important;
+}
+
+/* Override any inline color styles in snow theme */
+.ql-snow .ql-editor [style*="color"],
+.ql-snow .ql-editor [style*="Color"] {
+  color: inherit !important;
+}
+
+/* Target prose wrapper for additional specificity */
+.prose .ql-editor,
+.prose .quill-readonly .ql-editor {
+  color: hsl(var(--bc)) !important;
+}
+
+.prose .ql-editor *,
+.prose .quill-readonly .ql-editor * {
+  color: inherit !important;
+}
+
+/* Force override for any remaining black text - most aggressive approach */
+.prose .ql-editor *,
+.prose .ql-editor p *,
+.prose .ql-editor div *,
+.prose .ql-editor span *,
+.prose .ql-editor li *,
+.prose .ql-editor h1 *,
+.prose .ql-editor h2 *,
+.prose .ql-editor h3 *,
+.prose .ql-editor h4 *,
+.prose .ql-editor h5 *,
+.prose .ql-editor h6 * {
+  color: inherit !important;
+}
