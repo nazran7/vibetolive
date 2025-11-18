@@ -35,47 +35,42 @@ export default async function Page({ searchParams }) {
 	const totalPages = paginated?.pages ?? 1;
 
 	return (
-		<main className="container mx-auto md:px-5">
-			<div className="hidden md:block absolute left-[5%] top-[10%] z-0">
-				<div className="absolute bottom-0 left-[-20%] right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,theme(colors.primary/15%),rgba(255,255,255,0))]" />
+		<main className="container mx-auto px-4 md:px-8 py-12">
+			{/* Header */}
+			<div className="mb-12 text-center">
+				<h1 className="text-4xl md:text-5xl font-bold mb-4 text-base-content">
+					{dict["Blog"]["title"]}
+				</h1>
+				<p className="text-lg text-base-content/70 max-w-2xl mx-auto">
+					{dict["Blog"]["description"] || "Discover our latest articles and insights"}
+				</p>
 			</div>
 
-			<div className="breadcrumbs text-sm relative z-10">
-				<ul>
-					<li>
-						<a href="/">
-							<IoMdHome />
-						</a>
-					</li>
-					<li>
-						<a href="/blog">{dict["Blog"]["title"]}</a>
-					</li>
-				</ul>
-			</div>
+			{/* Blog Grid - Dribbble style */}
+			<section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+				{posts.map((item) => (
+					<BlogCard key={item._id} lang={langName} item={item} />
+				))}
+			</section>
 
-			<div className="flex items-start gap-10 py-5">
-				<div className="w-full">
-					{/* Blog Grid */}
-					<section className="grid grid-cols-1 md:grid-cols-3 gap-10">
-						{posts.map((item) => (
-							<BlogCard key={item._id} lang={langName} item={item} />
-						))}
-					</section>
-
-					{/* Pagination */}
-					<div className="join my-10 flex justify-center">
-						{Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-							<Link
-								key={p}
-								href={`/blog?page=${p}`}
-								className={`join-item btn ${p === page ? "btn-active" : ""}`}
-							>
-								{p}
-							</Link>
-						))}
-					</div>
+			{/* Pagination */}
+			{totalPages > 1 && (
+				<div className="flex justify-center gap-2">
+					{Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+						<Link
+							key={p}
+							href={`/blog?page=${p}`}
+							className={`px-4 py-2 rounded-lg transition-colors ${
+								p === page 
+									? "bg-primary text-primary-content font-semibold" 
+									: "bg-base-200 text-base-content hover:bg-base-300"
+							}`}
+						>
+							{p}
+						</Link>
+					))}
 				</div>
-			</div>
+			)}
 		</main>
 	);
 }

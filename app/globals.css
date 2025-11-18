@@ -31,3 +31,594 @@ body {
     text-wrap: balance;
   }
 }
+
+/* ReactQuill Theme-Aware Styles - Makes ReactQuill respect dark/light mode */
+/* Base editor containers */
+.ql-editor,
+.ql-container,
+.ql-bubble {
+  color: hsl(var(--bc)) !important;
+  font-size: 16px; /* Default font size - increased from 14px */
+}
+
+/* Universal selector for ALL elements inside Quill editor - catches everything */
+.ql-editor *,
+.ql-bubble * {
+  color: inherit !important;
+}
+
+/* Make all text elements in Quill respect theme */
+.ql-editor p,
+.ql-editor div,
+.ql-editor span,
+.ql-editor ul,
+.ql-editor ol,
+.ql-editor li,
+.ql-editor h1,
+.ql-editor h2,
+.ql-editor h3,
+.ql-editor h4,
+.ql-editor h5,
+.ql-editor h6,
+.ql-editor blockquote,
+.ql-editor pre,
+.ql-editor code,
+.ql-editor strong,
+.ql-editor b,
+.ql-editor em,
+.ql-editor i,
+.ql-editor u,
+.ql-editor s,
+.ql-editor strike,
+.ql-editor del,
+.ql-editor sup,
+.ql-editor sub,
+.ql-editor mark,
+.ql-editor small {
+  color: inherit !important;
+}
+
+/* Specifically target lists and list markers */
+.ql-editor ul li,
+.ql-editor ol li {
+  color: inherit !important;
+}
+
+.ql-editor ul li::before,
+.ql-editor ol li::marker {
+  color: inherit !important;
+}
+
+/* Override inline styles - target elements with inline color styles */
+.ql-editor [style*="color"],
+.ql-editor [style*="Color"] {
+  color: inherit !important;
+}
+
+/* Links should use primary color but respect theme */
+.ql-editor a {
+  color: hsl(var(--p)) !important;
+}
+
+.ql-editor a:hover {
+  color: hsl(var(--pf)) !important;
+}
+
+/* Code blocks */
+.ql-editor pre.ql-syntax {
+  background-color: hsl(var(--b2)) !important;
+  color: hsl(var(--bc)) !important;
+}
+
+.ql-editor code {
+  background-color: hsl(var(--b2)) !important;
+  color: hsl(var(--bc)) !important;
+}
+
+/* Blockquotes */
+.ql-editor blockquote {
+  border-left-color: hsl(var(--bc)) !important;
+  color: inherit !important;
+}
+
+/* ReadOnlyQuill wrapper - ensure theme inheritance */
+.quill-readonly .ql-editor {
+  color: hsl(var(--bc)) !important;
+}
+
+.quill-readonly .ql-editor * {
+  color: inherit !important;
+}
+
+/* More aggressive override for nested elements */
+.quill-readonly .ql-editor * * {
+  color: inherit !important;
+}
+
+/* Snow theme (used in admin editor) - also needs theme support */
+.ql-snow .ql-editor {
+  color: hsl(var(--bc)) !important;
+  font-size: 16px; /* Default font size - increased from 14px */
+}
+
+.ql-snow .ql-editor * {
+  color: inherit !important;
+}
+
+.ql-snow .ql-editor p,
+.ql-snow .ql-editor div,
+.ql-snow .ql-editor span,
+.ql-snow .ql-editor ul,
+.ql-snow .ql-editor ol,
+.ql-snow .ql-editor li,
+.ql-snow .ql-editor h1,
+.ql-snow .ql-editor h2,
+.ql-snow .ql-editor h3,
+.ql-snow .ql-editor h4,
+.ql-snow .ql-editor h5,
+.ql-snow .ql-editor h6,
+.ql-snow .ql-editor strong,
+.ql-snow .ql-editor b,
+.ql-snow .ql-editor em,
+.ql-snow .ql-editor i,
+.ql-snow .ql-editor u,
+.ql-snow .ql-editor s {
+  color: inherit !important;
+}
+
+/* Override any inline color styles in snow theme */
+.ql-snow .ql-editor [style*="color"],
+.ql-snow .ql-editor [style*="Color"] {
+  color: inherit !important;
+}
+
+/* Target prose wrapper for additional specificity */
+.prose .ql-editor,
+.prose .quill-readonly .ql-editor {
+  color: hsl(var(--bc)) !important;
+}
+
+.prose .ql-editor *,
+.prose .quill-readonly .ql-editor * {
+  color: inherit !important;
+}
+
+/* Force override for any remaining black text - most aggressive approach */
+.prose .ql-editor *,
+.prose .ql-editor p *,
+.prose .ql-editor div *,
+.prose .ql-editor span *,
+.prose .ql-editor li *,
+.prose .ql-editor h1 *,
+.prose .ql-editor h2 *,
+.prose .ql-editor h3 *,
+.prose .ql-editor h4 *,
+.prose .ql-editor h5 *,
+.prose .ql-editor h6 * {
+  color: inherit !important;
+}
+
+/* Dribbble-style Blog Improvements */
+.prose {
+  @apply text-base-content;
+}
+
+.prose img {
+  @apply rounded-xl my-8 shadow-lg;
+  max-width: 100%;
+  height: auto;
+}
+
+.prose h1, .prose h2, .prose h3 {
+  @apply font-bold text-base-content;
+}
+
+.prose h1 {
+  @apply text-3xl md:text-4xl mb-6 mt-8;
+}
+
+.prose h2 {
+  @apply text-2xl md:text-3xl mb-4 mt-6;
+}
+
+.prose h3 {
+  @apply text-xl md:text-2xl mb-3 mt-4;
+}
+
+.prose p {
+  @apply mb-4 leading-relaxed text-base-content/90;
+}
+
+.prose ul, .prose ol {
+  @apply mb-4 space-y-2;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-primary pl-4 italic my-6 text-base-content/80;
+}
+
+.prose code {
+  @apply bg-base-200 px-2 py-1 rounded text-sm;
+}
+
+.prose pre {
+  @apply bg-base-200 p-4 rounded-lg overflow-x-auto my-4;
+}
+
+.prose a {
+  @apply text-primary hover:underline;
+}
+
+/* ReactQuill Image Resize Handle Styles */
+.ql-image-wrapper {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  margin: 10px 0;
+  vertical-align: middle;
+}
+
+.ql-image-resize-handle {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  width: 28px;
+  height: 28px;
+  background: #3b82f6;
+  border: 3px solid white;
+  border-radius: 6px;
+  cursor: nwse-resize;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  user-select: none;
+  pointer-events: auto;
+  transition: transform 0.2s, background 0.2s;
+}
+
+/* TipTap Editor Styles */
+.tiptap-editor {
+  @apply bg-base-100 text-base-content;
+}
+
+.tiptap-editor .ProseMirror {
+  @apply text-base-content;
+  min-height: 400px;
+  outline: none;
+  color: hsl(var(--bc)) !important;
+}
+
+/* Universal selector for ALL elements inside TipTap editor - catches everything */
+.tiptap-editor .ProseMirror *,
+.tiptap-readonly .ProseMirror * {
+  color: inherit !important;
+}
+
+/* Make all text elements in TipTap respect theme */
+.tiptap-editor .ProseMirror p,
+.tiptap-editor .ProseMirror div,
+.tiptap-editor .ProseMirror span,
+.tiptap-editor .ProseMirror ul,
+.tiptap-editor .ProseMirror ol,
+.tiptap-editor .ProseMirror li,
+.tiptap-editor .ProseMirror h1,
+.tiptap-editor .ProseMirror h2,
+.tiptap-editor .ProseMirror h3,
+.tiptap-editor .ProseMirror h4,
+.tiptap-editor .ProseMirror h5,
+.tiptap-editor .ProseMirror h6,
+.tiptap-editor .ProseMirror blockquote,
+.tiptap-editor .ProseMirror pre,
+.tiptap-editor .ProseMirror code,
+.tiptap-editor .ProseMirror strong,
+.tiptap-editor .ProseMirror b,
+.tiptap-editor .ProseMirror em,
+.tiptap-editor .ProseMirror i,
+.tiptap-editor .ProseMirror u,
+.tiptap-editor .ProseMirror s,
+.tiptap-editor .ProseMirror strike,
+.tiptap-editor .ProseMirror del,
+.tiptap-editor .ProseMirror sup,
+.tiptap-editor .ProseMirror sub,
+.tiptap-editor .ProseMirror mark,
+.tiptap-editor .ProseMirror small {
+  color: inherit !important;
+}
+
+/* Specifically target lists and list markers */
+.tiptap-editor .ProseMirror ul li,
+.tiptap-editor .ProseMirror ol li {
+  color: inherit !important;
+}
+
+.tiptap-editor .ProseMirror ul li::before,
+.tiptap-editor .ProseMirror ol li::marker {
+  color: inherit !important;
+}
+
+/* Override inline styles - target elements with inline color styles */
+.tiptap-editor .ProseMirror [style*="color"],
+.tiptap-editor .ProseMirror [style*="Color"] {
+  color: inherit !important;
+}
+
+.tiptap-editor .ProseMirror p {
+  @apply text-base-content;
+  margin: 0.75rem 0;
+}
+
+.tiptap-editor .ProseMirror h1,
+.tiptap-editor .ProseMirror h2,
+.tiptap-editor .ProseMirror h3 {
+  @apply text-base-content font-bold;
+}
+
+.tiptap-editor .ProseMirror h1 {
+  font-size: 2em;
+  margin: 1rem 0;
+}
+
+.tiptap-editor .ProseMirror h2 {
+  font-size: 1.5em;
+  margin: 0.875rem 0;
+}
+
+.tiptap-editor .ProseMirror h3 {
+  font-size: 1.25em;
+  margin: 0.75rem 0;
+}
+
+.tiptap-editor .ProseMirror ul,
+.tiptap-editor .ProseMirror ol {
+  @apply text-base-content;
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+}
+
+.tiptap-editor .ProseMirror ul {
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+.tiptap-editor .ProseMirror ol {
+  list-style-type: decimal;
+  list-style-position: outside;
+}
+
+.tiptap-editor .ProseMirror ul ul {
+  list-style-type: circle;
+}
+
+.tiptap-editor .ProseMirror ol ol {
+  list-style-type: lower-alpha;
+}
+
+.tiptap-editor .ProseMirror li {
+  @apply text-base-content;
+  margin: 0.25rem 0;
+}
+
+.tiptap-editor .ProseMirror a {
+  @apply text-primary hover:underline;
+  color: hsl(var(--p)) !important;
+}
+
+.tiptap-editor .ProseMirror a:hover {
+  color: hsl(var(--pf)) !important;
+}
+
+.tiptap-editor .ProseMirror blockquote {
+  @apply border-l-4 border-primary pl-4 italic my-4 text-base-content/80;
+}
+
+.tiptap-editor .ProseMirror code {
+  @apply bg-base-200 px-2 py-1 rounded text-sm text-base-content;
+}
+
+.tiptap-editor .ProseMirror pre {
+  @apply bg-base-200 p-4 rounded-lg overflow-x-auto my-4 text-base-content;
+}
+
+.tiptap-editor .ProseMirror pre code {
+  @apply bg-transparent p-0;
+}
+
+.tiptap-editor .ProseMirror img {
+  @apply max-w-full h-auto rounded-lg my-4;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+/* TipTap Image Resize Handle */
+.tiptap-resize-handle {
+  position: fixed;
+  width: 28px;
+  height: 28px;
+  background: #3b82f6;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  user-select: none;
+  pointer-events: auto;
+  cursor: nwse-resize;
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.tiptap-resize-handle:hover {
+  background: #2563eb;
+  transform: scale(1.15);
+}
+
+.tiptap-editor .ProseMirror img:hover {
+  outline: 2px dashed rgba(59, 130, 246, 0.5);
+  outline-offset: 2px;
+}
+
+.tiptap-editor .ProseMirror p.is-editor-empty:first-child::before {
+  @apply text-base-content/40;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* TipTap ReadOnly Styles */
+.tiptap-readonly {
+  @apply text-base-content;
+}
+
+.tiptap-readonly .ProseMirror {
+  @apply text-base-content;
+  outline: none;
+}
+
+.tiptap-readonly .ProseMirror p {
+  @apply text-base-content;
+  margin: 0.75rem 0;
+}
+
+.tiptap-readonly .ProseMirror h1,
+.tiptap-readonly .ProseMirror h2,
+.tiptap-readonly .ProseMirror h3 {
+  @apply text-base-content font-bold;
+}
+
+.tiptap-readonly .ProseMirror h1 {
+  font-size: 2em;
+  margin: 1rem 0;
+}
+
+.tiptap-readonly .ProseMirror h2 {
+  font-size: 1.5em;
+  margin: 0.875rem 0;
+}
+
+.tiptap-readonly .ProseMirror h3 {
+  font-size: 1.25em;
+  margin: 0.75rem 0;
+}
+
+.tiptap-readonly .ProseMirror ul,
+.tiptap-readonly .ProseMirror ol {
+  @apply text-base-content;
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+}
+
+.tiptap-readonly .ProseMirror ul {
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+.tiptap-readonly .ProseMirror ol {
+  list-style-type: decimal;
+  list-style-position: outside;
+}
+
+.tiptap-readonly .ProseMirror ul ul {
+  list-style-type: circle;
+}
+
+.tiptap-readonly .ProseMirror ol ol {
+  list-style-type: lower-alpha;
+}
+
+.tiptap-readonly .ProseMirror li {
+  @apply text-base-content;
+  margin: 0.25rem 0;
+}
+
+.tiptap-readonly .ProseMirror a {
+  @apply text-primary hover:underline;
+}
+
+.tiptap-readonly .ProseMirror blockquote {
+  @apply border-l-4 border-primary pl-4 italic my-4 text-base-content/80;
+}
+
+.tiptap-readonly .ProseMirror code {
+  @apply bg-base-200 px-2 py-1 rounded text-sm text-base-content;
+}
+
+.tiptap-readonly .ProseMirror pre {
+  @apply bg-base-200 p-4 rounded-lg overflow-x-auto my-4 text-base-content;
+}
+
+.tiptap-readonly .ProseMirror pre code {
+  @apply bg-transparent p-0;
+}
+
+.tiptap-readonly .ProseMirror img {
+  @apply max-w-full h-auto rounded-lg my-4;
+}
+
+/* TipTap ReadOnly - ensure all text respects theme (comprehensive) */
+.tiptap-readonly .ProseMirror p,
+.tiptap-readonly .ProseMirror div,
+.tiptap-readonly .ProseMirror span,
+.tiptap-readonly .ProseMirror ul,
+.tiptap-readonly .ProseMirror ol,
+.tiptap-readonly .ProseMirror li,
+.tiptap-readonly .ProseMirror h1,
+.tiptap-readonly .ProseMirror h2,
+.tiptap-readonly .ProseMirror h3,
+.tiptap-readonly .ProseMirror h4,
+.tiptap-readonly .ProseMirror h5,
+.tiptap-readonly .ProseMirror h6,
+.tiptap-readonly .ProseMirror blockquote,
+.tiptap-readonly .ProseMirror pre,
+.tiptap-readonly .ProseMirror code,
+.tiptap-readonly .ProseMirror strong,
+.tiptap-readonly .ProseMirror b,
+.tiptap-readonly .ProseMirror em,
+.tiptap-readonly .ProseMirror i,
+.tiptap-readonly .ProseMirror u,
+.tiptap-readonly .ProseMirror s,
+.tiptap-readonly .ProseMirror strike,
+.tiptap-readonly .ProseMirror del {
+  color: inherit !important;
+}
+
+.tiptap-readonly .ProseMirror ul li::before,
+.tiptap-readonly .ProseMirror ol li::marker {
+  color: inherit !important;
+}
+
+.tiptap-readonly .ProseMirror [style*="color"],
+.tiptap-readonly .ProseMirror [style*="Color"] {
+  color: inherit !important;
+}
+
+.ql-image-resize-handle:hover {
+  background: #2563eb;
+  transform: scale(1.1);
+}
+
+.ql-editor .ql-image-wrapper:hover .ql-image-resize-handle {
+  display: flex !important;
+}
+
+.ql-editor img {
+  max-width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  pointer-events: auto;
+}

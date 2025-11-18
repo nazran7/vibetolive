@@ -2,41 +2,87 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import pubfn from '@/lib/function';
+import Link from 'next/link';
+import { url } from '@/config';
 
 export default function BlogCard({ lang = 'en', item }) {
-	const imageUrl = `${item.featuredImage}`;
+	const imageUrl = item.featuredImage 
+		? (item.featuredImage.startsWith('http') ? item.featuredImage : `${url}/uploads/${item.featuredImage}`)
+		: '/placeholder.jpg';
 
 	return (
 		<motion.div
-			initial={{ opacity: 0, y: 50 }}
+			initial={{ opacity: 0, y: 20 }}
 			whileInView={{ opacity: 1, y: 0 }}
 			viewport={{ once: true }}
-			transition={{ duration: 0.5 }}
+			transition={{ duration: 0.4, ease: "easeOut" }}
+			className="group"
 		>
-			<a
-				title={item.title}
+			<Link
 				href={`/blog/${item?.slug}`}
+				className="block"
 			>
-				<div className="group relative rounded-2xl ring-2 ring-base-content/10 w-full min-h-72 overflow-hidden">
-					<Image
-						src={imageUrl}
-						width={500}
-						height={300}
-						className="w-full max-h-60 object-cover group-hover:scale-110 transition"
-						alt={item.title}
-						unoptimized
-					/>
+				<div className="relative rounded-2xl overflow-hidden bg-base-100 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+					{/* Image Container */}
+					<div className="relative w-full aspect-[4/3] overflow-hidden bg-base-200">
+						<Image
+							src={imageUrl}
+							fill
+							className="object-cover group-hover:scale-110 transition-transform duration-500"
+							alt={item.title}
+							unoptimized
+						/>
+					</div>
 
-					<div className="absolute bg-black left-0 bottom-0 w-full h-36 group-hover:h-48 transition-all flex flex-col justify-between p-5 bg-opacity-20 backdrop-filter backdrop-blur-md">
-						<h2 className="text-zinc-200/70 group-hover:text-white transition-all text-base md:text-2xl mb-3 line-clamp-2 group-hover:line-clamp-3">
+					{/* Content Card */}
+					<div className="p-6 space-y-4">
+						{/* Categories */}
+						{item.categories && item.categories.length > 0 && (
+							<div className="flex flex-wrap gap-2">
+								{item.categories.slice(0, 2).map((cat, i) => (
+									<span 
+										key={i} 
+										className="text-xs font-medium px-3 py-1 rounded-full bg-primary/10 text-primary"
+									>
+										{cat}
+									</span>
+								))}
+							</div>
+						)}
+
+						{/* Title */}
+						<h2 className="text-xl font-bold text-base-content group-hover:text-primary transition-colors line-clamp-2">
 							{item.title}
 						</h2>
-						<div className="flex items-center justify-between text-sm md:text-base text-zinc-200/40 group-hover:text-zinc-200/90 transition">
-							<div className="w-1/3">{pubfn.timeFormat(item.createdAt, 'yyyy-MM-dd')}</div>
+
+						{/* Excerpt */}
+						{item.excerpt && (
+							<p className="text-sm text-base-content/70 line-clamp-2">
+								{item.excerpt}
+							</p>
+						)}
+
+						{/* Footer */}
+						<div className="flex items-center justify-between pt-4 border-t border-base-300">
+							<span className="text-xs text-base-content/50">
+								{pubfn.timeFormat(item.createdAt, 'MMM dd, yyyy')}
+							</span>
+							{item.tags && item.tags.length > 0 && (
+								<div className="flex gap-1">
+									{item.tags.slice(0, 2).map((tag, i) => (
+										<span 
+											key={i} 
+											className="text-xs px-2 py-0.5 rounded bg-base-200 text-base-content/60"
+										>
+											{tag}
+										</span>
+									))}
+								</div>
+							)}
 						</div>
 					</div>
 				</div>
-			</a>
+			</Link>
 		</motion.div>
 	);
 }

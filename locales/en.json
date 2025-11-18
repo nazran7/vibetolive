@@ -49,5 +49,88 @@
 		"side1": "Latest Articles",
 		"side2": "Popular Resources",
 		"side3": "Recently Updated"
+	},
+	"Service": {
+		"h1": "AI Prototype to Production Services",
+		"intro": "Your AI prototype deserves more than just a demo. At VibeToLive.dev, we transform AI-generated prototypes into secure, scalable, production-grade applications—ready for real users and revenue.",
+		"core_services_h2": "Our Core Services",
+		"service1_title": "Prototype Hardening & Audit",
+		"service1_content": "Full technical and security audit including code review, data validation, infrastructure optimization, and security patching.",
+		"service2_title": "Secure AI App Deployment",
+		"service2_content": "Production deployment with Docker/Kubernetes, CI/CD, SSL, token management, and data encryption.",
+		"service3_title": "Scaling & Performance Optimization",
+		"service3_content": "Load testing, API optimization, model serving, caching, cost optimization, and auto-scaling setup.",
+		"service4_title": "Maintenance & Production Support",
+		"service4_content": "24/7 monitoring, bug fixes, model retraining, and product enhancement cycles.",
+		"tech_stack_h2": "Our Tech Stack",
+		"tech_stack_content": "React, Next.js, Node.js, FastAPI, LangChain, OpenAI, Hugging Face, AWS, Docker, Vercel, Sentry, LogRocket.",
+		"why_choose_h2": "Why Choose VibeToLive.dev",
+		"why_choose_content": [
+			"Deep expertise in AI & full-stack deployment",
+			"Focused on indie hackers and lean startups",
+			"Transparent pricing and flexible timelines",
+			"Fast turnaround — prototype to production in weeks"
+		],
+		"cta_h2": "Ready to Turn the Vibe Into a Live Product?",
+		"cta_h3": "Let's chat. Share your repo, tech stack, and target launch window. We'll recommend the right track and lock in your start date.",
+		"cta_btn1": "Get Started",
+		"cta_btn2": "Get FREE 30 mins consultation"
+	},
+	"CaseStudies": {
+		"h1": "AI Prototype to Production Success Stories",
+		"intro": "Every AI prototype has potential. These real-world stories show how VibeToLive.dev helped founders and small teams transform raw ideas into fully deployed, scalable products. Explore how we handle everything—from auditing and hardening to deployment, scaling, and long-term maintenance.",
+		"ctaHeading": "Want to be our next success story?",
+		"ctaText": "Book your free consultation and let’s bring your AI to production.",
+		"ctaButton": "Start Your Project →",
+		"cases": [
+			{
+				"title": "ResumeGPT – From Hackathon MVP to SaaS Platform",
+				"client": "Solo developer",
+				"challenge": "Prototype built on local LLM API with performance issues and no scalability.",
+				"solution": [
+					"Migrated backend to FastAPI + AWS Lambda",
+					"Added caching and user auth",
+					"Deployed with CI/CD on Vercel"
+				],
+				"result": [
+					"3× faster response time",
+					"Stable performance at 10K+ users",
+					"Monthly recurring revenue achieved"
+				],
+				"quote": "VibeToLive.dev made my hackathon prototype into a real business.",
+				"image": "/image/case_1.png"
+			},
+			{
+				"title": "ChatLegal.ai – Secure AI Assistant for Legal Teams",
+				"client": "Startup (B2B SaaS)",
+				"challenge": "Sensitive data compliance and reliability.",
+				"solution": [
+					"Implemented secure data pipelines with encryption",
+					"Hardened OpenAI integration with prompt filtering",
+					"Added monitoring and uptime tracking"
+				],
+				"result": [
+					"99.9% uptime",
+					"Passed client security audits",
+					"Successfully onboarded 4 law firms in first month"
+				],
+				"image": "/image/case_2.png"
+			},
+			{
+				"title": "IndieBuild Bot – Scaling a Builder’s AI Co-pilot",
+				"client": "Indie hacker",
+				"challenge": "Prototype fine but crashing on traffic spikes.",
+				"solution": [
+					"Introduced Redis caching & background task queues",
+					"Refactored API endpoints",
+					"Deployed on scalable AWS EC2 setup"
+				],
+				"result": [
+					"5× performance improvement",
+					"Handled 20K+ requests/day with zero downtime"
+				],
+				"image": "/image/case_3.png"
+			}
+		]
 	}
 }

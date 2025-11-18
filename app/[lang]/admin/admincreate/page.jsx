@@ -40,8 +40,8 @@ export default function AdminCreateUser() {
     };
 
     return (
-        <div className="max-w-xl mx-auto mt-10 p-8 bg-white rounded-xl shadow-md">
-            <h2 className="text-2xl font-bold text-center mb-6">Create Admin User</h2>
+        <div className="max-w-xl mx-auto mt-10 p-8 bg-base-100 rounded-xl shadow-md border border-base-300">
+            <h2 className="text-2xl font-bold text-center mb-6 text-base-content">Create Admin User</h2>
 
             <form onSubmit={handleSubmit} className="space-y-4">
                 <input
@@ -51,7 +51,7 @@ export default function AdminCreateUser() {
                     value={form.first_name}
                     onChange={handleChange}
                     required
-                    className="w-full p-2 border rounded bg-white"
+                    className="w-full p-2 border border-base-300 rounded bg-base-100 text-base-content focus:border-primary focus:outline-none"
                 />
                 <input
                     type="text"
@@ -60,7 +60,7 @@ export default function AdminCreateUser() {
                     value={form.last_name}
                     onChange={handleChange}
                     required
-                    className="w-full p-2 border rounded bg-white"
+                    className="w-full p-2 border border-base-300 rounded bg-base-100 text-base-content focus:border-primary focus:outline-none"
                 />
                 <input
                     type="email"
@@ -69,7 +69,7 @@ export default function AdminCreateUser() {
                     value={form.email}
                     onChange={handleChange}
                     required
-                    className="w-full p-2 border rounded bg-white"
+                    className="w-full p-2 border border-base-300 rounded bg-base-100 text-base-content focus:border-primary focus:outline-none"
                 />
 
             
@@ -81,10 +81,10 @@ export default function AdminCreateUser() {
                         value={form.password}
                         onChange={handleChange}
                         required
-                        className="w-full p-2 border rounded bg-white pr-10"
+                        className="w-full p-2 border border-base-300 rounded bg-base-100 text-base-content pr-10 focus:border-primary focus:outline-none"
                     />
                     <span
-                        className="absolute inset-y-0 right-3 flex items-center cursor-pointer text-gray-500"
+                        className="absolute inset-y-0 right-3 flex items-center cursor-pointer text-base-content/60 hover:text-base-content"
                         onClick={() => setShowPassword((prev) => !prev)}
                     >
                         {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
@@ -98,13 +98,13 @@ export default function AdminCreateUser() {
                     value={form.phone_number}
                     onChange={handleChange}
                     required
-                    className="w-full p-2 border rounded bg-white"
+                    className="w-full p-2 border border-base-300 rounded bg-base-100 text-base-content focus:border-primary focus:outline-none"
                 />
 
                 <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition"
+                    className="w-full py-2 bg-primary text-primary-content font-semibold rounded hover:bg-primary/90 transition disabled:opacity-50"
                 >
                     {loading ? 'Creating...' : 'Create Admin'}
                 </button>

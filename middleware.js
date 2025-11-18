@@ -8,6 +8,8 @@ const rewritePaths = [
 	{ pattern: /^\/admin(\/)?$/, destination: '/en/admin' },
 	{ pattern: /^\/admin\/(.*)$/, destination: '/en/admin/$1' },
 	{ pattern: /^\/about(\/)?$/, destination: '/en/about' },
+	{ pattern: /^\/services(\/)?$/, destination: '/en/services' },
+	{ pattern: /^\/case-studies(\/)?$/, destination: '/en/case-studies' },
     // Blog routes are now handled directly at /blog, no rewriting needed
     // { pattern: /^\/blog(\/)?$/, destination: '/en/blog' },
     // { pattern: /^\/blog\/([^\/]+)(\/)?$/, destination: '/en/blog/$1' },

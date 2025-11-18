@@ -51,5 +51,87 @@
 		"side1": "説明",
 		"side2": "人気のブログ",
 		"side3": "最近更新された"
+	},
+	"Service": {
+		"h1": "AIプロトタイプから本番へのサービス",
+		"intro": "あなたのAIプロトタイプは単なるデモ以上の価値があります。VibeToLive.devでは、AI生成プロトタイプを安全でスケーラブル、本番稼働可能なアプリに変換します。",
+		"core_services_h2": "主要サービス",
+		"service1_title": "プロトタイプ強化と監査",
+		"service1_content": "コードレビュー、データ検証、インフラ最適化、セキュリティパッチなど、完全な技術・セキュリティ監査を実施。",
+		"service2_title": "安全なAIアプリ展開",
+		"service2_content": "Docker/Kubernetes、CI/CD、SSL、トークン管理、データ暗号化による本番環境展開。",
+		"service3_title": "パフォーマンス最適化とスケーリング",
+		"service3_content": "負荷テスト、API最適化、モデル提供、キャッシュ、コスト最適化、自動スケーリング設定。",
+		"service4_title": "運用保守サポート",
+		"service4_content": "24/7監視、バグ修正、モデル再訓練、機能改善サイクル。",
+		"tech_stack_h2": "使用技術",
+		"tech_stack_content": "React、Next.js、Node.js、FastAPI、LangChain、OpenAI、Hugging Face、AWS、Docker、Vercel、Sentry、LogRocket。",
+		"why_choose_h2": "VibeToLive.devを選ぶ理由",
+		"why_choose_content": [
+			"AI & フルスタック展開の深い専門知識",
+			"インディハッカーや小規模スタートアップに特化",
+			"透明な料金と柔軟なスケジュール",
+			"迅速な納期 — プロトタイプから本番まで数週間"
+		],
+		"cta_h2": "あなたのアイデアを本番環境へ",
+		"cta_btn1": "今すぐ開始",
+		"cta_btn2": "30分無料相談"
+	},
+	"CaseStudies": {
+		"h1": "AIプロトタイプから本番までの成功事例",
+		"intro": "すべてのAIプロトタイプには可能性があります。これらの実際の事例は、VibeToLive.devが創業者や小規模チームのアイデアを完全にデプロイ可能でスケーラブルな製品に変えるお手伝いをした方法を示しています。監査や強化からデプロイ、スケーリング、長期保守までの全プロセスをご覧ください。",
+		"ctaHeading": "次の成功事例はあなたですか？",
+		"ctaText": "無料相談を予約して、あなたのAIを本番環境に導入しましょう。",
+		"ctaButton": "プロジェクトを始める →",
+		"cases": [
+			{
+				"title": "ResumeGPT – ハッカソンMVPからSaaSプラットフォームへ",
+				"client": "個人開発者",
+				"challenge": "ローカルLLM API上に構築されたプロトタイプは、パフォーマンス問題とスケーラビリティ不足を抱えていました。",
+				"solution": [
+					"バックエンドを FastAPI + AWS Lambda に移行",
+					"キャッシュとユーザー認証を追加",
+					"CI/CDを用いてVercelにデプロイ"
+				],
+				"result": [
+					"応答速度が3倍に向上",
+					"10K+ユーザーでも安定したパフォーマンス",
+					"月間定期収益を達成"
+				],
+				"quote": "VibeToLive.devは私のハッカソンプロトタイプを本当のビジネスに変えてくれました。",
+				"image": "/image/case_1.png"
+			},
+			{
+				"title": "ChatLegal.ai – 法務チーム向けの安全なAIアシスタント",
+				"client": "スタートアップ (B2B SaaS)",
+				"challenge": "機密データのコンプライアンスと信頼性。",
+				"solution": [
+					"暗号化された安全なデータパイプラインを実装",
+					"OpenAI統合を強化し、プロンプトフィルタリングを追加",
+					"監視と稼働時間の追跡を追加"
+				],
+				"result": [
+					"稼働率 99.9%",
+					"顧客のセキュリティ監査を通過",
+					"初月で4つの法律事務所をオンボーディングに成功"
+				],
+				"image": "/image/case_2.png"
+			},
+			{
+				"title": "IndieBuild Bot – 開発者向けAIコパイロットのスケーリング",
+				"client": "インディハッカー",
+				"challenge": "プロトタイプは正常だが、トラフィック急増時にクラッシュ。",
+				"solution": [
+					"Redisキャッシュとバックグラウンドタスクキューを導入",
+					"APIエンドポイントをリファクタリング",
+					"スケーラブルなAWS EC2環境にデプロイ"
+				],
+				"result": [
+					"パフォーマンスが5倍向上",
+					"20K+リクエスト/日をダウンタイムなしで処理"
+				],
+				"image": "/image/case_3.png"
+			}
+		]
 	}
 }
