@@ -93,9 +93,16 @@ export default async function Page({ params }) {
 							)}
 
 							{/* Title */}
-							<h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 text-base-content leading-tight">
+							<h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 text-base-content leading-tight">
 								{item.title}
 							</h1>
+
+							{/* Excerpt */}
+							{item.excerpt && (
+								<p className="text-base-content/80 text-lg leading-relaxed mb-6">
+									{item.excerpt}
+								</p>
+							)}
 
 							{/* Meta Info - No Author */}
 							<div className="flex flex-wrap items-center gap-4 text-sm text-base-content/60">
@@ -120,9 +127,87 @@ export default async function Page({ params }) {
 
 			{/* Content Section */}
 			<article className="container mx-auto px-4 md:px-8 py-8 max-w-5xl">
-				<div className="prose prose-lg max-w-none">
-					<ReadOnlyTipTap value={item.content} />
-				</div>
+				{/* Render sections if available, otherwise fallback to legacy content */}
+				{item.sections && item.sections.length > 0 ? (
+					<div className="space-y-12">
+						{item.sections.map((section, sectionIndex) => (
+							<section key={sectionIndex} className="space-y-6">
+								{/* Sub Section Title */}
+								{section.subsectionTitle && (
+									<h2 className="text-3xl md:text-4xl font-bold text-base-content">
+										{section.subsectionTitle}
+									</h2>
+								)}
+
+								{/* Description/Content */}
+								{section.description && (
+									<div className="prose prose-lg max-w-none">
+										<ReadOnlyTipTap value={section.description} />
+									</div>
+								)}
+
+								{/* Images */}
+								{section.images && section.images.length > 0 && (
+									<div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+										{section.images.map((imageUrl, imageIndex) => (
+											<div key={imageIndex} className="relative rounded-xl overflow-hidden shadow-lg">
+												<img
+													src={imageUrl}
+													alt={section.subsectionTitle || `Section ${sectionIndex + 1} Image ${imageIndex + 1}`}
+													className="w-full h-auto object-cover"
+												/>
+											</div>
+										))}
+									</div>
+								)}
+
+								{/* YouTube Videos */}
+								{section.videos && section.videos.length > 0 && (
+									<div className="space-y-6 my-8">
+										{section.videos.map((videoUrl, videoIndex) => {
+											// Extract iframe src from embed code or use URL directly
+											let iframeSrc = videoUrl;
+											if (videoUrl.includes('<iframe')) {
+												const srcMatch = videoUrl.match(/src=["']([^"']+)["']/);
+												if (srcMatch) {
+													iframeSrc = srcMatch[1];
+												}
+											} else if (videoUrl.includes('youtube.com/watch') || videoUrl.includes('youtu.be/')) {
+												// Convert YouTube URL to embed URL
+												const videoId = videoUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/)?.[1];
+												if (videoId) {
+													iframeSrc = `https://www.youtube.com/embed/${videoId}`;
+												}
+											}
+
+											return (
+												<div key={videoIndex} className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg bg-base-200">
+													<iframe
+														src={iframeSrc}
+														title={`Section ${sectionIndex + 1} Video ${videoIndex + 1}`}
+														className="absolute inset-0 w-full h-full"
+														allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+														allowFullScreen
+													/>
+												</div>
+											);
+										})}
+									</div>
+								)}
+
+								{/* Divider between sections (except last) */}
+								{sectionIndex < item.sections.length - 1 && (
+									<div className="border-t border-base-300 my-8"></div>
+								)}
+							</section>
+						))}
+					</div>
+				) : (
+					/* Fallback to legacy content */
+					<div className="prose prose-lg max-w-none">
+						<ReadOnlyTipTap value={item.content || ''} />
+					</div>
+				)}
 			</article>
 		</main>
 	);

@@ -1,6 +1,6 @@
 "use client";
 
-import { createBlogPost, getProduct, updateBlogPost } from "@/api-gateways/post";
+import { createBlogPost, getProduct, updateBlogPost, uploadImage } from "@/api-gateways/post";
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
@@ -16,7 +16,7 @@ export default function NewPostPage() {
         title: "",
         slug: "",
         excerpt: "",
-        content: "",
+        content: "", // Legacy field, kept for backward compatibility
         metaTitle: "",
         metaDescription: "",
         focusKeyword: "",
@@ -26,8 +26,18 @@ export default function NewPostPage() {
         featuredImagePreview: null,
     });
 
+    const [sections, setSections] = useState([
+        {
+            subsectionTitle: "",
+            description: "",
+            images: [],
+            videos: [],
+        }
+    ]);
+
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [dragActive, setDragActive] = useState(false);
+    const [uploadingImages, setUploadingImages] = useState({});
 
     // ✅ Prefill form in edit mode
     useEffect(() => {
@@ -52,6 +62,19 @@ export default function NewPostPage() {
                                     : `${url}/uploads/${post.featuredImage}`)
                                 : null,
                         });
+                        
+                        // Load sections if they exist, otherwise use legacy content
+                        if (post.sections && post.sections.length > 0) {
+                            setSections(post.sections);
+                        } else if (post.content) {
+                            // Migrate legacy content to first section
+                            setSections([{
+                                subsectionTitle: "",
+                                description: post.content,
+                                images: [],
+                                videos: [],
+                            }]);
+                        }
                     } else {
                         toast.error("Failed to load post data");
                     }
@@ -78,7 +101,83 @@ export default function NewPostPage() {
         setPostData((prev) => ({ ...prev, [name]: value }));
     };
 
-    // Drag and drop handlers
+    // Section management functions
+    const addSection = () => {
+        setSections([...sections, {
+            subsectionTitle: "",
+            description: "",
+            images: [],
+            videos: [],
+        }]);
+    };
+
+    const removeSection = (index) => {
+        if (sections.length > 1) {
+            setSections(sections.filter((_, i) => i !== index));
+        } else {
+            toast.error("At least one section is required");
+        }
+    };
+
+    const updateSection = (index, field, value) => {
+        const updatedSections = [...sections];
+        updatedSections[index] = { ...updatedSections[index], [field]: value };
+        setSections(updatedSections);
+    };
+
+    // Image upload handlers
+    const handleSectionImageUpload = async (sectionIndex, file) => {
+        const uploadKey = `${sectionIndex}-${Date.now()}`;
+        setUploadingImages(prev => ({ ...prev, [uploadKey]: true }));
+        
+        try {
+            const imageUrl = await uploadImage(file);
+            if (imageUrl) {
+                const updatedSections = [...sections];
+                updatedSections[sectionIndex].images = [...updatedSections[sectionIndex].images, imageUrl];
+                setSections(updatedSections);
+                toast.success("Image uploaded successfully");
+            } else {
+                toast.error("Image upload failed");
+            }
+        } catch (error) {
+            console.error("Image upload error:", error);
+            toast.error("Image upload failed");
+        } finally {
+            setUploadingImages(prev => {
+                const newState = { ...prev };
+                delete newState[uploadKey];
+                return newState;
+            });
+        }
+    };
+
+    const removeSectionImage = (sectionIndex, imageIndex) => {
+        const updatedSections = [...sections];
+        updatedSections[sectionIndex].images = updatedSections[sectionIndex].images.filter((_, i) => i !== imageIndex);
+        setSections(updatedSections);
+    };
+
+    // Video URL handlers
+    const addVideoUrl = (sectionIndex) => {
+        const updatedSections = [...sections];
+        updatedSections[sectionIndex].videos = [...updatedSections[sectionIndex].videos, ""];
+        setSections(updatedSections);
+    };
+
+    const updateVideoUrl = (sectionIndex, videoIndex, url) => {
+        const updatedSections = [...sections];
+        updatedSections[sectionIndex].videos[videoIndex] = url;
+        setSections(updatedSections);
+    };
+
+    const removeVideoUrl = (sectionIndex, videoIndex) => {
+        const updatedSections = [...sections];
+        updatedSections[sectionIndex].videos = updatedSections[sectionIndex].videos.filter((_, i) => i !== videoIndex);
+        setSections(updatedSections);
+    };
+
+    // Drag and drop handlers for featured image
     const handleDrag = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -123,11 +222,16 @@ export default function NewPostPage() {
         setIsSubmitting(true);
 
         const formData = new FormData();
+        
+        // Add basic fields
         Object.entries(postData).forEach(([key, value]) => {
             if (value && key !== "featuredImagePreview") {
                 formData.append(key, value);
             }
         });
+
+        // Add sections as JSON
+        formData.append('sections', JSON.stringify(sections));
 
         try {
             if (editId) {
@@ -220,16 +324,149 @@ export default function NewPostPage() {
                             />
                         </div>
 
-                        {/* Content Editor */}
-                        <div>
-                            <label className="block text-sm font-semibold mb-2 text-base-content">
-                                Content *
-                            </label>
-                            <TipTapEditor
-                                value={postData.content}
-                                onChange={(value) => setPostData((prev) => ({ ...prev, content: value }))}
-                                placeholder="Write your post content here... (Font sizes: 1px-150px available)"
-                            />
+                        {/* Sections */}
+                        <div className="space-y-6">
+                            <div className="flex items-center justify-between">
+                                <label className="block text-sm font-semibold text-base-content">
+                                    Content Sections *
+                                </label>
+                                <button
+                                    type="button"
+                                    onClick={addSection}
+                                    className="px-4 py-2 bg-primary text-primary-content rounded-lg hover:bg-primary/90 transition text-sm font-medium"
+                                >
+                                    + Add Section
+                                </button>
+                            </div>
+
+                            {sections.map((section, sectionIndex) => (
+                                <div key={sectionIndex} className="border-2 border-base-300 rounded-xl p-6 space-y-4 bg-base-200/50">
+                                    <div className="flex items-center justify-between">
+                                        <h3 className="text-lg font-semibold text-base-content">
+                                            Section {sectionIndex + 1}
+                                        </h3>
+                                        {sections.length > 1 && (
+                                            <button
+                                                type="button"
+                                                onClick={() => removeSection(sectionIndex)}
+                                                className="px-3 py-1 bg-error text-error-content rounded-lg hover:bg-error/90 transition text-sm"
+                                            >
+                                                Remove
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    {/* Sub Section Title */}
+                                    <div>
+                                        <label className="block text-sm font-medium mb-2 text-base-content">
+                                            Sub Section Title (Optional)
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={section.subsectionTitle}
+                                            onChange={(e) => updateSection(sectionIndex, 'subsectionTitle', e.target.value)}
+                                            placeholder="Enter subsection title..."
+                                            className="w-full p-3 border-2 border-base-300 rounded-lg bg-base-100 text-base-content focus:border-primary focus:outline-none transition"
+                                        />
+                                    </div>
+
+                                    {/* Description/Content Editor */}
+                                    <div>
+                                        <label className="block text-sm font-medium mb-2 text-base-content">
+                                            Description/Details *
+                                        </label>
+                                        <TipTapEditor
+                                            value={section.description}
+                                            onChange={(value) => updateSection(sectionIndex, 'description', value)}
+                                            placeholder="Write section content here..."
+                                        />
+                                    </div>
+
+                                    {/* Images Upload */}
+                                    <div>
+                                        <label className="block text-sm font-medium mb-2 text-base-content">
+                                            Images (Optional)
+                                        </label>
+                                        <div className="space-y-3">
+                                            {/* Image Upload Input */}
+                                            <label className="block cursor-pointer">
+                                                <span className="inline-block px-4 py-2 bg-primary text-primary-content rounded-lg hover:bg-primary/90 transition text-sm font-medium">
+                                                    Upload Image
+                                                </span>
+                                                <input
+                                                    type="file"
+                                                    accept="image/*"
+                                                    onChange={(e) => {
+                                                        if (e.target.files?.[0]) {
+                                                            handleSectionImageUpload(sectionIndex, e.target.files[0]);
+                                                            e.target.value = ''; // Reset input
+                                                        }
+                                                    }}
+                                                    className="hidden"
+                                                />
+                                            </label>
+
+                                            {/* Image Previews */}
+                                            {section.images.length > 0 && (
+                                                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-3">
+                                                    {section.images.map((imageUrl, imageIndex) => (
+                                                        <div key={imageIndex} className="relative group">
+                                                            <img
+                                                                src={imageUrl}
+                                                                alt={`Section ${sectionIndex + 1} Image ${imageIndex + 1}`}
+                                                                className="w-full h-32 object-cover rounded-lg border-2 border-base-300"
+                                                            />
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => removeSectionImage(sectionIndex, imageIndex)}
+                                                                className="absolute top-2 right-2 bg-error text-error-content rounded-full p-1 opacity-0 group-hover:opacity-100 transition"
+                                                            >
+                                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* YouTube Videos */}
+                                    <div>
+                                        <label className="block text-sm font-medium mb-2 text-base-content">
+                                            YouTube Videos (Optional)
+                                        </label>
+                                        <div className="space-y-2">
+                                            {section.videos.map((videoUrl, videoIndex) => (
+                                                <div key={videoIndex} className="flex gap-2">
+                                                    <input
+                                                        type="text"
+                                                        value={videoUrl}
+                                                        onChange={(e) => updateVideoUrl(sectionIndex, videoIndex, e.target.value)}
+                                                        placeholder="Paste YouTube iframe URL or embed code..."
+                                                        className="flex-1 p-3 border-2 border-base-300 rounded-lg bg-base-100 text-base-content focus:border-primary focus:outline-none transition"
+                                                    />
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => removeVideoUrl(sectionIndex, videoIndex)}
+                                                        className="px-3 py-2 bg-error text-error-content rounded-lg hover:bg-error/90 transition"
+                                                    >
+                                                        Remove
+                                                    </button>
+                                                </div>
+                                            ))}
+                                            <button
+                                                type="button"
+                                                onClick={() => addVideoUrl(sectionIndex)}
+                                                className="px-4 py-2 bg-base-300 text-base-content rounded-lg hover:bg-base-300/80 transition text-sm font-medium"
+                                            >
+                                                + Add Video URL
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
