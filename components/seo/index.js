@@ -13,15 +13,6 @@ export default function SEOPageComponent({
 	pricingList,
 	testimonialsList,
 }) {
-	// Debug: Log received data
-	console.log('SEOPageComponent received:', {
-		hasSeoData: !!seoData,
-		seoDataKeys: seoData ? Object.keys(seoData) : null,
-		pageTitle: seoData?.pageTitle,
-		heroTitle: seoData?.heroTitle,
-		heroSubtitle: seoData?.heroSubtitle,
-		dictHeroH1: dict?.Hero?.h1,
-	});
 
 	// If no seoData, show error message
 	if (!seoData) {
@@ -54,17 +45,10 @@ export default function SEOPageComponent({
 		h3: seoData.ctaSubtext || '',
 	};
 	
-	// Debug: Log what we're using
-	console.log('SEO Component - Using data:', {
-		heroH1: heroLocale.h1,
-		heroH2: heroLocale.h2,
-		featureH3: featureLocale.h3,
-		ctaH2: ctaLocale.h2,
-	});
 	
 	const ctaButtonLocale = {
 		btn1: seoData.ctaButton || dict?.CTAButton?.btn1 || 'Get Started',
-		btn2: dict?.CTAButton?.btn2 || 'Schedule Consultation',
+		btn2: seoData.secondaryCtaButton || dict?.CTAButton?.btn2 || 'Schedule Consultation',
 	};
 	
 	const faqLocale = dict?.Faq || {};
