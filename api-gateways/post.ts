@@ -1,4 +1,5 @@
 import { url } from "../config";
+import { getSEOPageBySlug } from '@/lib/seoPagesData';
 
 export const getProduct = async (id: string | null): Promise<any> => {
     try {
@@ -145,6 +146,26 @@ export const uploadImage = async (file: File): Promise<string | null> => {
         }
     } catch (err) {
         console.error("Image upload failed:", err);
+        return null;
+    }
+};
+
+// ---------------- GET SEO PAGE ----------------
+// Note: SEO pages are stored locally in frontend (lib/seoPagesData.js)
+// No API call needed - data is bundled with the frontend
+export const getSEOPage = async (slug: string): Promise<any> => {
+    try {
+        // Get the SEO page data from local storage
+        const seoPage = getSEOPageBySlug(slug);
+        
+        if (seoPage) {
+            return seoPage;
+        } else {
+            console.error(`SEO page not found for slug: ${slug}`);
+            return null;
+        }
+    } catch (err) {
+        console.error("Error fetching SEO page:", err);
         return null;
     }
 };

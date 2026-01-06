@@ -1,6 +1,7 @@
 import { reportLanguage } from './lib/function/lang';
 import { locales } from './lib/i18n';
 import { NextRequest, NextResponse } from 'next/server';
+import { getAllSEOPageSlugs } from './lib/seoPagesData';
 
 const rewritePaths = [
     { pattern: /^\/$/, destination: '/en/' },
@@ -15,6 +16,9 @@ const rewritePaths = [
     // { pattern: /^\/blog\/([^\/]+)(\/)?$/, destination: '/en/blog/$1' },
     // 可以根据需要添加更多的重写规则
 ];
+
+// Get all valid SEO page slugs at module load time
+const seoPageSlugs = getAllSEOPageSlugs();
 
 export function middleware(request) {
 	const { pathname } = request.nextUrl;
@@ -40,9 +44,31 @@ export function middleware(request) {
 
 	if (isExit) return NextResponse.next();
 
-	// Allow direct routes to pass through without redirection
-	if (pathname.startsWith('/blog') || pathname.startsWith('/auth')) {
+	// Reserved routes that should be handled by existing routes
+	const reservedRoutes = ['blog', 'auth', 'admin', 'about', 'services', 'case-studies', 'api'];
+	const isReservedRoute = reservedRoutes.some(route => pathname === `/${route}` || pathname.startsWith(`/${route}/`));
+
+	// Allow reserved routes to pass through without redirection
+	if (isReservedRoute || pathname.startsWith('/blog') || pathname.startsWith('/auth')) {
 		console.log(`允许直接路径通过: ${pathname}`);  // 添加日志
+		return NextResponse.next();
+	}
+
+	// Allow root-level SEO slugs (single segment paths like /ai-prototype-to-production)
+	// Exclude language codes, reserved routes, and API routes
+	const segments = pathname.split('/').filter(Boolean);
+	if (segments.length === 1 && !locales.includes(segments[0]) && !reservedRoutes.includes(segments[0])) {
+		// Check if this is a valid SEO page slug
+		// If it is, rewrite it internally to bypass [lang] route matching
+		// We rewrite to /__seo__/[slug] which the catch-all will handle
+		if (seoPageSlugs.includes(segments[0])) {
+			console.log(`重写SEO路径到catch-all: ${pathname} -> /__seo__/${segments[0]}`);  // 添加日志
+			request.nextUrl.pathname = `/__seo__/${segments[0]}`;
+			// Store original pathname in header for the page to use
+			request.headers.set('x-original-pathname', pathname);
+			return NextResponse.rewrite(request.nextUrl);
+		}
+		console.log(`允许SEO路径通过: ${pathname}`);  // 添加日志
 		return NextResponse.next();
 	}
 
