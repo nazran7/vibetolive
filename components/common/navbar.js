@@ -6,7 +6,7 @@ import ThemeToggle from './themeToggle';
 import LangSwitch from './langSwitch';
 
 import { usePathname } from 'next/navigation';
-import { defaultLocale } from '@/lib/i18n';
+import { defaultLocale, locales } from '@/lib/i18n';
 import { NavLinksList } from '@/lib/navLinksList';
 
 export default function Navbar() {
@@ -16,17 +16,44 @@ export default function Navbar() {
 
 	useEffect(() => {
 		const fetchLinksList = async () => {
-			if (pathname === '/') {
-				setLangName(defaultLocale);
-			} else if (pathname.startsWith('/blog')) {
-				// For blog routes, use default locale
-				setLangName(defaultLocale);
-			} else {
-				setLangName(pathname.split('/')[1]);
+			// Get language from cookie instead of URL
+			let detectedLang = defaultLocale;
+			
+			// Try to read from cookie
+			if (typeof document !== 'undefined') {
+				const cookies = document.cookie.split(';');
+				for (let cookie of cookies) {
+					const [name, value] = cookie.trim().split('=');
+					if (name === 'NEXT_LOCALE' && value) {
+						detectedLang = value;
+						break;
+					}
+				}
 			}
-			setLinkList(NavLinksList[`LINK_${langName.toUpperCase()}`] || []);
+			
+			setLangName(detectedLang);
+			setLinkList(NavLinksList[`LINK_${detectedLang.toUpperCase()}`] || []);
 		};
 		fetchLinksList();
+		
+		// Also listen for cookie changes (when language is switched)
+		const checkCookieInterval = setInterval(() => {
+			const cookies = document.cookie.split(';');
+			let cookieLang = defaultLocale;
+			for (let cookie of cookies) {
+				const [name, value] = cookie.trim().split('=');
+				if (name === 'NEXT_LOCALE' && value) {
+					cookieLang = value;
+					break;
+				}
+			}
+			if (cookieLang !== langName) {
+				setLangName(cookieLang);
+				setLinkList(NavLinksList[`LINK_${cookieLang.toUpperCase()}`] || []);
+			}
+		}, 100);
+		
+		return () => clearInterval(checkCookieInterval);
 	}, [pathname, langName]);
 	
 
@@ -36,7 +63,7 @@ export default function Navbar() {
 				aria-label='landing page template'
 				className='flex items-center w-1/2 md:w-1/5'
 				title='landing page template'
-				href={`/${langName}`}
+				href="/"
 			>
 				<Image
 					width={200}
@@ -59,7 +86,7 @@ export default function Navbar() {
 								aria-label={link.name}
 								className='group relative'
 								title={link.name}
-								href={link.url === '/blog' ? '/blog' : `/${langName}${link.url}`}
+								href={link.url}
 							>
 								{link.name}
 								<div className='absolute left-[50%] group-hover:left-0 w-0 group-hover:w-full h-[3px] transition-all duration-300 bg-base-content/90'></div>
@@ -83,7 +110,7 @@ export default function Navbar() {
 									<a
 										aria-label={link.name}
 										title={link.name}
-										href={link.url === '/blog' ? '/blog' : `/${langName}${link.url}`}
+										href={link.url}
 									>
 										{link.name}
 									</a>

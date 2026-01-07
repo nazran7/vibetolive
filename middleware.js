@@ -1,7 +1,23 @@
 import { reportLanguage } from './lib/function/lang';
-import { locales } from './lib/i18n';
+import { locales, defaultLocale } from './lib/i18n';
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllSEOPageSlugs } from './lib/seoPagesData';
+
+// Helper function to get language from cookie
+function getLanguageFromCookie(request) {
+	const cookieHeader = request.headers.get('cookie');
+	if (!cookieHeader) return defaultLocale;
+	
+	const cookies = cookieHeader.split(';').reduce((acc, cookie) => {
+		const [name, value] = cookie.trim().split('=');
+		if (name && value) {
+			acc[name] = value;
+		}
+		return acc;
+	}, {});
+	
+	return cookies['NEXT_LOCALE'] || defaultLocale;
+}
 
 const rewritePaths = [
     { pattern: /^\/$/, destination: '/en/' },
@@ -41,12 +57,21 @@ export function middleware(request) {
 		}
 	}
 
-
-	if (isExit) return NextResponse.next();
-
 	// Reserved routes that should be handled by existing routes
-	const reservedRoutes = ['blog', 'auth', 'admin', 'about', 'services', 'case-studies', 'api'];
+	const reservedRoutes = ['blog', 'auth', 'admin', 'about', 'services', 'case-studies', 'api', '__seo__'];
 	const isReservedRoute = reservedRoutes.some(route => pathname === `/${route}` || pathname.startsWith(`/${route}/`));
+
+	// Note: Language-prefixed routes (e.g., /en/ai-prototype-to-production) are deprecated
+	// Language is now stored in cookies, not in the URL
+	// We still handle them for backward compatibility, but they're redirected to clean URLs
+	const segments = pathname.split('/').filter(Boolean);
+	if (segments.length === 2 && locales.includes(segments[0]) && seoPageSlugs.includes(segments[1])) {
+		// Redirect language-prefixed SEO routes to clean URLs (without language in URL)
+		const slug = segments[1];
+		console.log(`重定向语言前缀SEO路径到清洁URL: ${pathname} -> /${slug}`);
+		const response = NextResponse.redirect(new URL(`/${slug}`, request.url));
+		return response;
+	}
 
 	// Allow reserved routes to pass through without redirection
 	if (isReservedRoute || pathname.startsWith('/blog') || pathname.startsWith('/auth')) {
@@ -56,21 +81,23 @@ export function middleware(request) {
 
 	// Allow root-level SEO slugs (single segment paths like /ai-prototype-to-production)
 	// Exclude language codes, reserved routes, and API routes
-	const segments = pathname.split('/').filter(Boolean);
 	if (segments.length === 1 && !locales.includes(segments[0]) && !reservedRoutes.includes(segments[0])) {
 		// Check if this is a valid SEO page slug
-		// If it is, rewrite it internally to bypass [lang] route matching
-		// We rewrite to /__seo__/[slug] which the catch-all will handle
 		if (seoPageSlugs.includes(segments[0])) {
-			console.log(`重写SEO路径到catch-all: ${pathname} -> /__seo__/${segments[0]}`);  // 添加日志
-			request.nextUrl.pathname = `/__seo__/${segments[0]}`;
-			// Store original pathname in header for the page to use
+			// Get language from cookie instead of URL
+			const lang = getLanguageFromCookie(request);
+			console.log(`重写SEO路径到catch-all (语言从cookie读取: ${lang}): ${pathname} -> /__seo__/${lang}/${segments[0]}`);
+			request.nextUrl.pathname = `/__seo__/${lang}/${segments[0]}`;
+			// Store original pathname and language in headers
 			request.headers.set('x-original-pathname', pathname);
+			request.headers.set('x-language-directory', lang);
 			return NextResponse.rewrite(request.nextUrl);
 		}
-		console.log(`允许SEO路径通过: ${pathname}`);  // 添加日志
+		console.log(`允许SEO路径通过: ${pathname}`);
 		return NextResponse.next();
 	}
+
+	if (isExit) return NextResponse.next();
 
 	// 如果没有匹配的重写规则，重定向到根路径
 	console.log(`重定向到根路径: ${pathname} -> /`);  // 添加日志

@@ -1,36 +1,48 @@
 'use client';
 import { useParams, useRouter, usePathname } from 'next/navigation';
-import { defaultLocale, localeNames } from '@/lib/i18n';
+import { defaultLocale, localeNames, locales } from '@/lib/i18n';
+import { useEffect, useState } from 'react';
+
+// Helper function to get/set language from cookie
+function getLanguageFromCookie() {
+	if (typeof document === 'undefined') return defaultLocale;
+	const cookies = document.cookie.split(';');
+	for (let cookie of cookies) {
+		const [name, value] = cookie.trim().split('=');
+		if (name === 'NEXT_LOCALE') {
+			return value || defaultLocale;
+		}
+	}
+	return defaultLocale;
+}
+
+function setLanguageCookie(lang) {
+	if (typeof document === 'undefined') return;
+	// Set cookie to expire in 1 year
+	const maxAge = 365 * 24 * 60 * 60;
+	document.cookie = `NEXT_LOCALE=${lang}; path=/; max-age=${maxAge}; SameSite=Lax`;
+}
 
 export default function LangSwitch() {
-	const params = useParams();
-	const lang = params.lang;
 	const pathname = usePathname();
 	const router = useRouter();
+	const [langName, setLangName] = useState(defaultLocale);
+	
+	// Read language from cookie on mount and when pathname changes
+	useEffect(() => {
+		const lang = getLanguageFromCookie();
+		setLangName(lang);
+	}, [pathname]);
 
-	let langName = lang && lang !== 'index' ? lang : defaultLocale;
-
-	const handleSwitchLanguage = (value) => {
+	const handleSwitchLanguage = (newLang) => {
 		return () => {
-			let newPathname;
-			const pathParts = pathname.split('/').filter(Boolean);
-
-			if (pathParts.length === 0) {
-				// 处理根路径
-				newPathname = `/${value}`;
-			} else if (pathParts[0] === lang) {
-				// 当前路径已经包含语言代码
-				pathParts[0] = value;
-				newPathname = '/' + pathParts.join('/');
-			} else {
-				// 当前路径不包含语言代码
-				newPathname = `/${value}${pathname}`;
-			}
-
-			// 确保路径末尾有斜杠
-			newPathname = newPathname.endsWith('/') ? newPathname : newPathname + '/';
-
-			router.replace(newPathname);
+			// Save language preference to cookie
+			setLanguageCookie(newLang);
+			setLangName(newLang);
+			
+			// Reload the page to apply the new language from cookie
+			// Without changing the URL
+			window.location.reload();
 		};
 	};
 
@@ -41,7 +53,7 @@ export default function LangSwitch() {
 				role='button'
 				className='flex items-center justify-center md:bg-base-100 md:rounded-full w-15 md:w-[100px] h-5 text-sm md:h-8 md:shadow-sm md:hover:shadow-md transition-all'
 			>
-				{localeNames[langName]}
+				{localeNames[langName] || localeNames[defaultLocale]}
 			</div>
 			<ul
 				tabIndex={0}
@@ -55,7 +67,10 @@ export default function LangSwitch() {
 								href='#'
 								title={`switch to ${name}`}
 								className='cursor-pointer'
-								onClick={handleSwitchLanguage(key)}
+								onClick={(e) => {
+									e.preventDefault();
+									handleSwitchLanguage(key)();
+								}}
 							>
 								{name}
 							</a>
