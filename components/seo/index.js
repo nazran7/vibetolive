@@ -5,6 +5,7 @@ import Pricing from '@/components/home/pricing';
 import Testimonial from '@/components/home/testimonial';
 import Faq from '@/components/seo/faq';
 import Cta from '@/components/home/cta';
+import { FAQList } from '@/lib/faqsList';
 
 export default function SEOPageComponent({
 	seoData,
@@ -52,7 +53,10 @@ export default function SEOPageComponent({
 	};
 	
 	const faqLocale = dict?.Faq || {};
-	const faqList = seoData.faqList || null; // null means don't show FAQ
+	// Use SEO-specific FAQ if available, otherwise fall back to default FAQ from landing page
+	const seoFaqList = seoData.faqList && seoData.faqList.length > 0 ? seoData.faqList : null;
+	const defaultFaqList = FAQList[`FAQ_${langName.toUpperCase()}`] || [];
+	const faqList = seoFaqList || defaultFaqList; // Always have a FAQ list to show
 
 	return (
 		<div className='container mx-auto md:px-5'>
@@ -83,14 +87,12 @@ export default function SEOPageComponent({
 				langName={langName}
 			/>
 
-			{/* FAQ Section - Conditional (only if FAQ data exists) */}
-			{faqList && faqList.length > 0 && (
-				<Faq
-					locale={faqLocale}
-					langName={langName}
-					faqList={faqList}
-				/>
-			)}
+			{/* FAQ Section - Always shown (uses SEO FAQ or default FAQ) */}
+			<Faq
+				locale={faqLocale}
+				langName={langName}
+				faqList={faqList}
+			/>
 
 			{/* CTA Section - Dynamic */}
 			<Cta
