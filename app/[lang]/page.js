@@ -11,6 +11,7 @@ import Cta from '@/components/home/cta';
 // Valid locale codes (exclude empty string and variants)
 const validLocales = ['en', 'zh', 'ja', 'ar', 'es', 'ru', 'fr', 'en-US', 'zh-CN', 'zh-TW', 'zh-HK'];
 
+
 export default async function Home({ params }) {
 	const langName = params.lang || defaultLocale;
 	

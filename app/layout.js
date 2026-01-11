@@ -8,6 +8,8 @@ import Script from 'next/script';
 const jakarta = Plus_Jakarta_Sans({
 	weight: ['500', '800'],
 	subsets: ['latin'],
+	display: 'swap', // Optimize font loading - don't block render waiting for font
+	preload: true, // Preload font for better performance
 });
 
 export default function RootLayout({ children }) {
