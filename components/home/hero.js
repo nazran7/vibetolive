@@ -49,15 +49,10 @@ export default function Hero({ locale, CTALocale }) {
 				className='relative z-10 flex flex-col items-start md:items-center py-10 md:py-20 overflow-hidden'
 				style={{ perspective: '800px' }}
 			>
-				<motion.div
-					initial={{ opacity: 0, y: 50 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ delay: 0.4, type: 'spring', stiffness: 100, damping: 10 }}
-				>
-					<h1 className='font-bold text-5xl md:text-7xl bg-gradient-to-r from-base-content from-50% to-[#9c9c9c] text-center bg-clip-text text-transparent !leading-[1.25em] mb-5'>
-						{locale.h1}
-					</h1>
-				</motion.div>
+			{/* LCP element - render immediately without animation delay for better LCP score */}
+			<h1 className='font-bold text-5xl md:text-7xl bg-gradient-to-r from-base-content from-50% to-[#9c9c9c] text-center bg-clip-text text-transparent !leading-[1.25em] mb-5'>
+				{locale.h1}
+			</h1>
 
 				<motion.div
 					initial={{ opacity: 0 }}
