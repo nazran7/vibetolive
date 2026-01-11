@@ -16,14 +16,14 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="en" className={fontClass}>
 			<body>
-				{/* Google Analytics */}
+				{/* Google Analytics - Deferred loading for better performance */}
 				<Script
-					strategy="afterInteractive"
+					strategy="lazyOnload"
 					src="https://www.googletagmanager.com/gtag/js?id=G-916VTN5QG7"
 				/>
 				<Script
 					id="google-analytics"
-					strategy="afterInteractive"
+					strategy="lazyOnload"
 					dangerouslySetInnerHTML={{
 						__html: `
 							window.dataLayer = window.dataLayer || [];

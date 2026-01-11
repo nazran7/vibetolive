@@ -106,6 +106,8 @@ export default function Hero({ locale, CTALocale }) {
 						src={theme === 'corporate' ? '/img3.png' : '/img2.png'}
 						className='hidden md:flex w-full mt-5'
 						alt='app demo'
+						priority
+						fetchPriority="high"
 					/>
 				</motion.div>
 			</section>

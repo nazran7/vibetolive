@@ -1,0 +1,16 @@
+# Target modern browsers to reduce legacy JavaScript polyfills
+# This helps reduce the 12 KiB of legacy JS mentioned in PageSpeed
+
+# Modern browsers with good ES6+ support
+> 0.5%
+last 2 versions
+Firefox ESR
+not dead
+not IE 11
+
+# Focus on browsers with good modern JS support (reduces polyfills)
+Chrome >= 90
+Firefox >= 88
+Safari >= 14
+Edge >= 90
+

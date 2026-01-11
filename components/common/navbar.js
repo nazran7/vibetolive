@@ -66,11 +66,13 @@ export default function Navbar() {
 				href="/"
 			>
 				<Image
-					width={200}
-					height={200}
+					width={64}
+					height={64}
 					src={'/logo.gif'}
 					className='transition-all hover:scale-110 w-6 md:w-10 h-6 md:h-10'
 					alt='logo'
+					priority
+					sizes="(max-width: 768px) 24px, 40px"
 				></Image>
 				<h2 className='ml-3 font-bold leading-5'>VibeToLive.dev</h2>
 			</a>

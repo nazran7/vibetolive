@@ -5,18 +5,6 @@ import SEOPageComponent from '@/components/seo';
 import { PricingList } from '@/lib/pricingList';
 import { TestimonialsList } from '@/lib/testimonialsList';
 import { SiteConfig } from '@/lib/config/site';
-import { cookies } from 'next/headers';
-
-// Helper function to get language from cookie
-function getLanguageFromCookie() {
-	try {
-		const cookieStore = cookies();
-		const lang = cookieStore.get('NEXT_LOCALE');
-		return lang?.value || defaultLocale;
-	} catch (error) {
-		return defaultLocale;
-	}
-}
 
 // Reserved routes that should not be treated as SEO pages
 const RESERVED_ROUTES = [
@@ -73,21 +61,24 @@ export async function generateMetadata({ params }) {
 		
 		// Extract language and slug from rewritten path
 		// Patterns: /__seo__/[slug] or /__seo__/[lang]/[slug]
+		// Note: During static generation, we can't read cookies, so we rely on params
+		// The middleware rewrites paths to include language: /__seo__/[lang]/[slug]
 		let langName = defaultLocale;
 		let slug;
 		
 		if (slugArray.length === 3 && slugArray[0] === '__seo__' && validLocales.includes(slugArray[1])) {
-			// Pattern: /__seo__/[lang]/[slug] - language comes from middleware (cookie)
+			// Pattern: /__seo__/[lang]/[slug] - language comes from middleware (cookie) or static params
 			langName = slugArray[1];
 			slug = slugArray[2];
 		} else if (slugArray.length === 2 && slugArray[0] === '__seo__') {
-			// Pattern: /__seo__/[slug] - get language from cookie
-			langName = getLanguageFromCookie();
+			// Pattern: /__seo__/[slug] - during static gen, default to 'en'
+			// At request time, middleware should rewrite this to include language
+			langName = defaultLocale;
 			slug = slugArray[1];
 		} else if (slugArray.length === 1) {
 			// Direct access (shouldn't happen, but handle it)
 			slug = slugArray[0];
-			langName = getLanguageFromCookie();
+			langName = defaultLocale;
 		} else {
 			return {
 				title: SiteConfig[defaultLocale]?.name || 'Page',
@@ -155,17 +146,18 @@ export default async function SEOPage({ params }) {
 		let slug;
 		
 		if (slugArray.length === 3 && slugArray[0] === '__seo__' && validLocales.includes(slugArray[1])) {
-			// Pattern: /__seo__/[lang]/[slug] - language comes from middleware (cookie)
+			// Pattern: /__seo__/[lang]/[slug] - language comes from middleware (cookie) or static params
 			langName = slugArray[1];
 			slug = slugArray[2];
 		} else if (slugArray.length === 2 && slugArray[0] === '__seo__') {
-			// Pattern: /__seo__/[slug] - get language from cookie
-			langName = getLanguageFromCookie();
+			// Pattern: /__seo__/[slug] - middleware should rewrite this, but if not, default to 'en'
+			// This shouldn't happen at request time since middleware rewrites to include language
+			langName = defaultLocale;
 			slug = slugArray[1];
 		} else if (slugArray.length === 1) {
 			// Direct access (shouldn't happen, but handle it)
 			slug = slugArray[0];
-			langName = getLanguageFromCookie();
+			langName = defaultLocale;
 		} else {
 			notFound();
 		}

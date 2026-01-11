@@ -104,6 +104,8 @@ export default function SEOHero({ locale, CTALocale, seoData }) {
 						src={heroImage}
 						className='hidden md:flex w-full mt-5'
 						alt={h1}
+						priority
+						fetchPriority="high"
 					/>
 				</motion.div>
 			</section>

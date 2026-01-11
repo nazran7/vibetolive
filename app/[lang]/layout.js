@@ -59,7 +59,7 @@ export default function LangLayout({ children, params }) {
 
 	return (
 		<>
-			<Navbar lang={lang} />
+			<Navbar />
 			<div className='px-5 min-h-screen'>{children}</div>
 			<Footer lang={lang} />
 		</>
