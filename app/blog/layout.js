@@ -33,7 +33,7 @@ export default function BlogLayout({ children }) {
 	return (
 		<>
 			<Navbar />
-			<div className='px-5 min-h-screen'>{children}</div>
+			<main className='px-5 min-h-screen'>{children}</main>
 			<Footer lang={lang} />
 		</>
 	);

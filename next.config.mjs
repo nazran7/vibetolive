@@ -11,7 +11,10 @@ const nextConfig = {
 		],
 		formats: ['image/avif', 'image/webp'],
 		deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-		imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+		// Limit image sizes to prevent serving oversized images for small displays
+		imageSizes: [16, 32, 48, 64, 96, 128, 256],
+		// Optimize images more aggressively
+		minimumCacheTTL: 60,
 	},
 
 	eslint: {
@@ -20,7 +23,13 @@ const nextConfig = {
 
 	experimental: {
 		// Optimize package imports to reduce bundle size
-		optimizePackageImports: ['react-icons', 'framer-motion'],
+		optimizePackageImports: [
+			'react-icons',
+			'framer-motion',
+			'lucide-react',
+			'@tiptap/react',
+			'@tiptap/starter-kit',
+		],
 	},
 
 	// Target modern browsers to reduce legacy JS

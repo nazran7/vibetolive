@@ -22,7 +22,7 @@ export default function SEOLayout({ children, params }) {
 	return (
 		<>
 			<Navbar />
-			<div className='px-5 min-h-screen'>{children}</div>
+			<main className='px-5 min-h-screen'>{children}</main>
 			<Footer lang={lang} />
 		</>
 	);
