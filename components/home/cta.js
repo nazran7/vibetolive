@@ -19,16 +19,26 @@ export default function Cta({ locale, CTALocale }) {
 						{locale.h2}
 					</h2>
 
-					<h3 className='w-full md:w-10/12 mx-auto text-xl md:text-2xl text-base-content/80 md:text-center'>{locale.h3}</h3>
+					<h3 className='w-full md:w-10/12 mx-auto text-xl md:text-2xl text-base-content/80 md:text-center mb-8'>{locale.h3}</h3>
 
-					<a
-						title='get started with VibeToLive'
-						className='mt-10 btn btn-sm md:btn-md btn-base border-none hover:ring-1 ring-base-content text-base-100 hover:text-base-content bg-base-content hover:bg-base-100 rounded-full'
-						target='_blank'
-						href='https://tally.so/r/mVry2j'
-					>
-						{CTALocale.btn1}
-					</a>
+					<div className='flex flex-col md:flex-row gap-4 justify-center'>
+						<a
+							title='get started with VibeToLive'
+							className='btn btn-sm md:btn-md btn-base border-none hover:ring-1 ring-base-content text-base-100 hover:text-base-content bg-base-content hover:bg-base-100 rounded-full'
+							target='_blank'
+							href='https://tally.so/r/mVry2j'
+						>
+							{CTALocale.btn1}
+						</a>
+						<a
+							title='free 30-minute production review'
+							className='btn btn-sm md:btn-md btn-base rounded-full'
+							target='_blank'
+							href='https://tally.so/r/mVry2j'
+						>
+							{CTALocale.btn2}
+						</a>
+					</div>
 				</div>
 			</motion.div>
 

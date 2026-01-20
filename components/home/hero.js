@@ -1,8 +1,6 @@
 'use client';
-import HeroIcons from './icons';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { IoDocumentText } from 'react-icons/io5';
 
 import { useEffect, useState } from 'react';
 export default function Hero({ locale, CTALocale }) {
@@ -64,26 +62,22 @@ export default function Hero({ locale, CTALocale }) {
 				>
 					<h2 className='w-full md:w-10/12 mx-auto text-xl md:text-2xl text-base-content/80 md:text-center mb-5 md:mb-10'>{locale.h2}</h2>
 
-					<div className='w-full md:w-8/12 mx-auto flex flex-col md:flex-row md:items-center justify-between gap-y-5'>
-						<HeroIcons />
-
-						<div className='flex flex-col md:flex-row gap-2'>
-							<a
-								title='get started with VibeToLive'
-								className='btn btn-sm md:btn-md btn-base border-none hover:ring-1 ring-base-content text-base-100 hover:text-base-content bg-base-content hover:bg-base-100 rounded-full'
-								href='#pricing'
-							>
-								{CTALocale.btn1}
-							</a>
-							<a
-								title='schedule consultation'
-								className='btn btn-sm md:btn-md btn-base rounded-full'
-								target='_blank'
-								href='https://tally.so/r/mVry2j'
-							>
-								<IoDocumentText /> {CTALocale.btn2}
-							</a>
-						</div>
+					<div className='w-full md:w-8/12 mx-auto flex flex-col md:flex-row md:items-center justify-center gap-4'>
+						<a
+							title='fix my AI app'
+							className='btn btn-sm md:btn-md btn-base border-none hover:ring-1 ring-base-content text-base-100 hover:text-base-content bg-base-content hover:bg-base-100 rounded-full'
+							href='#pricing'
+						>
+							{CTALocale.btn1}
+						</a>
+						<a
+							title='free 30-minute production review'
+							className='btn btn-sm md:btn-md btn-base rounded-full'
+							target='_blank'
+							href='https://tally.so/r/mVry2j'
+						>
+							{CTALocale.btn2}
+						</a>
 					</div>
 				</motion.div>
 				<motion.div

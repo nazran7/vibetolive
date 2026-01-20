@@ -1,14 +1,64 @@
 {
 	"Hero": {
-		"h1": "Turn Your AI-Generated Prototype Into a Production-Grade Product",
-		"h2": "Prototype fast. Ship right. VibeToLive.dev is the launch ramp for solopreneurs, indie hackers, and lean teams who are vibecoding with AI tools—only to hit the wall when it's time to harden, secure, scale, and actually ship."
+		"h1": "Turn Your AI Prototype Into a Production-Ready App",
+		"h2": "Build your app with ChatGPT, Bolt, Lovable, or AI coding tools? We help founders fix AI-generated code, secure their stack, and deploy AI apps to production - without rewriting everything. Your app works locally. Production is different."
+	},
+	"IsThisYou": {
+		"heading": "\"Is This You?\"",
+		"subheading": "If you relate to any of these, you're in the right place:",
+		"items": [
+			{
+				"title": "Works in demos, feels unsafe to launch",
+				"subtitle": "You can show it off — but you don't trust it with real users."
+			},
+			{
+				"title": "Auth, secrets, and data security are unclear",
+				"subtitle": "You're not sure what's safe (or what will leak)."
+			},
+			{
+				"title": "Deployment is confusing or fragile",
+				"subtitle": "It runs locally, but prod feels like a minefield."
+			},
+			{
+				"title": "Performance drops with real users",
+				"subtitle": "Signups and traffic spikes make things slow or unstable."
+			},
+			{
+				"title": "You don't want to start over",
+				"subtitle": "You want to ship what you already built — safely."
+			}
+		],
+		"closing": "You're not failing. This is how AI prototypes behave by default."
 	},
 	"Feature": {
 		"h2": "Why You Need VibeToLive",
-		"h3": "From AI Prototype to Production Reality",
-		"description1": "AI coding assistants are fantastic for getting from zero to 'something that runs,'",
-		"description2": "but the resulting code is often less secure, harder to maintain, and full of inconsistencies.",
-		"description3": "We take your AI-written codebase and make it live in production—safely, reliably, and with a foundation you can grow on."
+		"h3": "From AI Prototype to Production-Ready Software",
+		"description1": "AI coding tools make it easy to go from an idea to a working demo in hours.",
+		"description2": "But most AI-generated code breaks down when real users arrive - exposing security gaps, performance issues, fragile deployments, and unmaintainable architecture.",
+		"description3": "VibeToLive bridges the gap between \"it works locally\" and \"it's safe, scalable, and ready for real customers.\" We take your AI-written prototype and transform it into a production-grade application you can confidently launch, grow, and maintain."
+	},
+	"Audience": {
+		"heading": "Who This Is For",
+		"subheading": "We work best with:",
+		"items": [
+			{
+				"title": "Indie hackers",
+				"subtitle": "launching AI SaaS products"
+			},
+			{
+				"title": "Solo founders",
+				"subtitle": "using AI to build fast"
+			},
+			{
+				"title": "Non-technical founders",
+				"subtitle": "with working MVPs"
+			},
+			{
+				"title": "Lean startup teams",
+				"subtitle": "preparing for real users"
+			}
+		],
+		"closing": "If your app already exists - we help you ship it safely."
 	},
 	"Pricing": {
 		"h2": "Our Services",
@@ -19,8 +69,8 @@
 		"h2": "Success Stories",
 		"h3": "From Prototype to Production",
 		"description1": "See how we've helped teams turn their AI-generated prototypes into production-ready applications.",
-		"description2": "Ready to share your story?",
-		"description3": "We'd love to feature your success with VibeToLive.dev."
+		"description2": "Ready to share your story? We'd love to feature your success with VibeToLive.dev.",
+		"description3": ""
 	},
 	"Faq": {
 		"h2": "FAQ",
@@ -29,11 +79,11 @@
 	},
 	"CTA": {
 		"h2": "Ready to Turn the Vibe Into a Live Product?",
-		"h3": "Let's chat. Share your repo, tech stack, and target launch window. We'll recommend the right track and lock in your start date."
+		"h3": "Share your repository, tech stack, and launch goal. We'll tell you exactly what's blocking production and how to fix it."
 	},
 	"CTAButton": {
-		"btn1": "Get Started",
-		"btn2": "Get FREE 30 mins consultation"
+		"btn1": "Fix My AI App",
+		"btn2": "Free 30-Minute Production Review"
 	},
 	"About": {
 		"h1": "About VibeToLive.dev",

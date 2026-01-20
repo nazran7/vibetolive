@@ -2,7 +2,9 @@ import { defaultLocale, getDictionary, locales } from '@/lib/i18n';
 import { notFound } from 'next/navigation';
 
 import Hero from '@/components/home/hero';
+import IsThisYou from '@/components/home/isThisYou';
 import Feature from '@/components/home/feature';
+import Audience from '@/components/home/audience';
 import Pricing from '@/components/home/pricing';
 import Testimonial from '@/components/home/testimonial';
 import Faq from '@/components/home/faq';
@@ -38,9 +40,15 @@ export default async function Home({ params }) {
 				locale={dict.Hero}
 				CTALocale={dict.CTAButton}
 			/>
+			<IsThisYou
+				locale={dict.IsThisYou}
+			/>
 			<Feature
 				locale={dict.Feature}
 				langName={langName}
+			/>
+			<Audience
+				locale={dict.Audience}
 			/>
 			<Pricing
 				locale={dict.Pricing}

@@ -1,14 +1,64 @@
 {
 	"Hero": {
-		"h1": "Crea Páginas de Destino Más Rápido",
-		"h2": "Esta es una plantilla de página de destino gratuita, de código abierto y poderosa para proyectos de SaaS, te ayudará a hacer que tu startup sea más rápida."
+		"h1": "Convierte tu prototipo con IA en una app lista para producción",
+		"h2": "¿Construiste tu app con ChatGPT, Bolt, Lovable o herramientas de código con IA? Ayudamos a founders a arreglar código generado por IA, asegurar su stack y desplegar apps de IA a producción — sin reescribirlo todo. Tu app funciona en local. Producción es diferente."
+	},
+	"IsThisYou": {
+		"heading": "“¿Eres tú?”",
+		"subheading": "Si te identificas con alguno de estos puntos, estás en el lugar correcto:",
+		"items": [
+			{
+				"title": "Funciona en demos, pero da miedo lanzarla",
+				"subtitle": "Puedes mostrarla, pero no confías en producción."
+			},
+			{
+				"title": "Auth, secretos y seguridad no están claros",
+				"subtitle": "No sabes qué es seguro (o qué se filtrará)."
+			},
+			{
+				"title": "El despliegue es confuso o frágil",
+				"subtitle": "En local va bien, en prod todo se rompe."
+			},
+			{
+				"title": "Rendimiento cae con usuarios reales",
+				"subtitle": "Registros y picos de tráfico vuelven todo lento."
+			},
+			{
+				"title": "No quieres empezar desde cero",
+				"subtitle": "Quieres shippear lo que ya construiste — seguro."
+			}
+		],
+		"closing": "No estás fallando. Así se comportan los prototipos con IA por defecto."
 	},
 	"Feature": {
-		"h2": "Nuestras Características",
-		"h3": "Características de la Plantilla de Página de Destino inWind",
-		"description1": "Increíble plantilla de página de destino.",
-		"description2": "Basada en Next.JS, DaisyUI, TailwindCSS y otras bibliotecas poderosas.",
-		"description3": "Completamente de código abierto y completamente gratuita."
+		"h2": "Por qué necesitas VibeToLive",
+		"h3": "De prototipo con IA a software listo para producción",
+		"description1": "Las herramientas de código con IA facilitan pasar de una idea a un demo funcional en horas.",
+		"description2": "Pero cuando llegan usuarios reales, la mayoría del código generado por IA se rompe: brechas de seguridad, problemas de rendimiento, despliegues frágiles y arquitectura difícil de mantener.",
+		"description3": "VibeToLive cierra la brecha entre “funciona en local” y “es seguro, escalable y listo para clientes reales”. Transformamos tu prototipo con IA en una aplicación de nivel producción que puedas lanzar, crecer y mantener con confianza."
+	},
+	"Audience": {
+		"heading": "Para quién es",
+		"subheading": "Trabajamos mejor con:",
+		"items": [
+			{
+				"title": "Indie hackers",
+				"subtitle": "lanzando productos AI SaaS"
+			},
+			{
+				"title": "Founders solo",
+				"subtitle": "que construyen rápido con IA"
+			},
+			{
+				"title": "Founders no técnicos",
+				"subtitle": "con un MVP funcional"
+			},
+			{
+				"title": "Equipos lean",
+				"subtitle": "preparándose para usuarios reales"
+			}
+		],
+		"closing": "Si tu app ya existe — te ayudamos a lanzarla de forma segura."
 	},
 	"Pricing": {
 		"h2": "Nuestros Precios",
@@ -18,11 +68,11 @@
 		"follow": "Sigue mi Twitter."
 	},
 	"Testimonial": {
-		"h2": "Testimonios",
-		"h3": "Muro del Amor",
-		"description1": "Si usas esta plantilla de página de destino y la recomiendas en tu Twitter,",
-		"description2": "por favor házmelo saber",
-		"description3": ",mostraré tu tweet y recomendación aquí."
+		"h2": "Historias de éxito",
+		"h3": "De prototipo a producción",
+		"description1": "Mira cómo ayudamos a equipos a convertir prototipos generados por IA en aplicaciones listas para producción.",
+		"description2": "¿Listo para compartir tu historia? Nos encantaría destacar tu éxito con VibeToLive.dev.",
+		"description3": ""
 	},
 	"Faq": {
 		"h2": "Preguntas Frecuentes",
@@ -30,12 +80,12 @@
 		"description": "Aquí están algunas de las preguntas más frecuentes."
 	},
 	"CTA": {
-		"h2": "Construye Tu Página de Destino Ahora",
-		"h3": "Construye tu página de destino, muestra tu producto y empieza a ganar!"
+		"h2": "¿Listo para convertir el Vibe en un producto Live?",
+		"h3": "Comparte tu repositorio, tu stack y tu objetivo de lanzamiento. Te diremos exactamente qué bloquea producción y cómo arreglarlo."
 	},
 	"CTAButton": {
-		"btn1": "Obtener Código Fuente",
-		"btn2": "Ver Documentos"
+		"btn1": "Arregla mi app de IA",
+		"btn2": "Revisión gratuita de producción (30 min)"
 	},
 	"About": {
 		"h1": "Sobre Nosotros",

@@ -1,14 +1,64 @@
 {
 	"Hero": {
-		"h1": "Créez rapidement votre page de renvoi",
-		"h2": "Voici un modèle de page de renvoi gratuit, open source et puissant pour les projets SaaS, qui vous aidera à lancer votre startup plus rapidement."
+		"h1": "Transformez votre prototype IA en application prête pour la production",
+		"h2": "Vous avez construit votre app avec ChatGPT, Bolt, Lovable ou des outils de code IA ? On aide les fondateurs à corriger le code généré par l’IA, sécuriser le stack et déployer en production — sans tout réécrire. Ça marche en local. La prod, c’est différent."
+	},
+	"IsThisYou": {
+		"heading": "« Est-ce vous ? »",
+		"subheading": "Si vous vous reconnaissez dans l’un de ces points, vous êtes au bon endroit :",
+		"items": [
+			{
+				"title": "Ça marche en démo, mais lancer fait peur",
+				"subtitle": "Vous pouvez la montrer, mais pas la confier à de vrais utilisateurs."
+			},
+			{
+				"title": "Auth, secrets et sécurité pas clairs",
+				"subtitle": "Vous ne savez pas ce qui est sûr (ou ce qui va fuiter)."
+			},
+			{
+				"title": "Déploiement confus ou fragile",
+				"subtitle": "En local OK, en prod ça casse."
+			},
+			{
+				"title": "Les perfs chutent avec de vrais utilisateurs",
+				"subtitle": "Inscriptions et pics de trafic rendent l’app lente/instable."
+			},
+			{
+				"title": "Vous ne voulez pas repartir de zéro",
+				"subtitle": "Vous voulez livrer ce que vous avez déjà construit — en sécurité."
+			}
+		],
+		"closing": "Vous n’échouez pas — c’est le comportement par défaut des prototypes IA."
 	},
 	"Feature": {
-		"h2": "Fonctionnalités",
-		"h3": "Caractéristiques du modèle de page de renvoi Chengfeng",
-		"description1": "Un excellent modèle de page de renvoi.",
-		"description2": "Basé sur Next.JS, DaisyUI, TailwindCSS et d'autres bibliothèques puissantes.",
-		"description3": "Entièrement open source et totalement gratuit."
+		"h2": "Pourquoi vous avez besoin de VibeToLive",
+		"h3": "Du prototype IA à un logiciel prêt pour la production",
+		"description1": "Les outils de code IA permettent de passer d’une idée à une démo qui tourne en quelques heures.",
+		"description2": "Mais quand les vrais utilisateurs arrivent, le code IA révèle souvent des failles de sécurité, des problèmes de perf, des déploiements fragiles et une architecture difficile à maintenir.",
+		"description3": "VibeToLive comble l’écart entre « ça marche en local » et « c’est sûr, scalable et prêt pour de vrais clients ». On transforme votre prototype IA en application de qualité production que vous pouvez lancer, faire grandir et maintenir en confiance."
+	},
+	"Audience": {
+		"heading": "Pour qui c’est fait",
+		"subheading": "On travaille mieux avec :",
+		"items": [
+			{
+				"title": "Indie hackers",
+				"subtitle": "qui lancent des produits AI SaaS"
+			},
+			{
+				"title": "Fondateurs solo",
+				"subtitle": "qui construisent vite avec l’IA"
+			},
+			{
+				"title": "Fondateurs non techniques",
+				"subtitle": "avec un MVP qui fonctionne"
+			},
+			{
+				"title": "Équipes lean",
+				"subtitle": "qui se préparent à de vrais utilisateurs"
+			}
+		],
+		"closing": "Si votre app existe déjà — on vous aide à la livrer en toute sécurité."
 	},
 	"Pricing": {
 		"h2": "Tarification",
@@ -18,11 +68,11 @@
 		"follow": "Suivez-moi sur Twitter."
 	},
 	"Testimonial": {
-		"h2": "Témoignages",
-		"h3": "Mur d'amour",
-		"description1": "Si vous utilisez ce modèle de page de renvoi et le recommandez sur votre Twitter,",
-		"description2": "faites-le moi savoir",
-		"description3": ", je présenterai votre tweet et votre recommandation ici."
+		"h2": "Success Stories",
+		"h3": "Du prototype à la production",
+		"description1": "Découvrez comment nous aidons des équipes à transformer des prototypes IA en applications prêtes pour la production.",
+		"description2": "Envie de partager votre histoire ? On serait ravis de mettre en avant votre succès sur VibeToLive.dev.",
+		"description3": ""
 	},
 	"Faq": {
 		"h2": "FAQ",
@@ -30,12 +80,12 @@
 		"description": "Voici quelques-unes des questions les plus courantes."
 	},
 	"CTA": {
-		"h2": "Construisez votre page de renvoi maintenant",
-		"h3": "Créez votre page de renvoi, présentez votre produit et commencez à gagner de l'argent !"
+		"h2": "Prêt à transformer le Vibe en produit Live ?",
+		"h3": "Partagez votre dépôt, votre stack et votre objectif de lancement. On vous dira exactement ce qui bloque la prod et comment le corriger."
 	},
 	"CTAButton": {
-		"btn1": "Obtenir le code source",
-		"btn2": "Voir la documentation"
+		"btn1": "Corriger mon app IA",
+		"btn2": "Revue production gratuite (30 min)"
 	},
 	"About": {
 		"h1": "À Propos de Nous",

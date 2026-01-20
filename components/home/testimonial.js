@@ -32,14 +32,18 @@ export default function Feature({ locale, langName = 'en' }) {
 
 					<h4 className='w-full md:w-10/12 mx-auto text-xl md:text-2xl text-base-content/80 md:text-center'>
 						{locale.description1}
-						<a
-							title='feedback'
-							className='text-primary'
-							href='#'
-						>
-							{locale.description2}
-						</a>
-						{locale.description3}
+						{locale.description2 && (
+							<>
+								{' '}
+								<a
+									title='share your story'
+									className='text-primary'
+									href='#'
+								>
+									{locale.description2}
+								</a>
+							</>
+						)}
 					</h4>
 				</div>
 			</motion.div>
