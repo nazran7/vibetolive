@@ -55,7 +55,7 @@ export default function IsThisYou({ locale }) {
 
 					<h2 className='font-bold text-3xl md:text-5xl text-base-content !leading-[1.25em]'>
 						{headingFirst ? `${headingFirst} ` : ''}
-						<span className='text-primary'>{headingLast}</span>
+						<span className='text-base-content/80'>{headingLast}</span>
 					</h2>
 
 					<p className='w-full md:w-10/12 mx-auto text-base md:text-lg text-base-content/70'>
@@ -76,9 +76,9 @@ export default function IsThisYou({ locale }) {
 									transition={{ delay: index * 0.05, duration: 0.35 }}
 									className='w-full'
 								>
-									<div className='w-full rounded-xl border border-base-content/10 bg-base-100/60 backdrop-blur p-5 md:p-6 hover:border-primary/40 transition-colors'>
+									<div className='w-full rounded-xl border border-base-content/10 bg-base-100/60 backdrop-blur p-5 md:p-6 hover:border-base-content/30 transition-colors'>
 										<div className='flex items-start gap-4 text-left'>
-											<div className='w-10 h-10 rounded-lg bg-primary/15 text-primary flex items-center justify-center flex-shrink-0'>
+											<div className='w-10 h-10 rounded-lg bg-base-content/10 text-base-content/80 flex items-center justify-center flex-shrink-0'>
 												<Icon className='text-xl' />
 											</div>
 											<div className='flex flex-col gap-1'>
