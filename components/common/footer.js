@@ -58,6 +58,9 @@ export default function Footer() {
 							);
 						})}
 					</div>
+					<p className='mt-4 max-w-md text-center md:text-left text-[#f7f7f7]/70'>
+						VibeToLive.dev provides AI prototype to production services, helping founders fix AI-generated code, deploy AI apps, and maintain production-ready systems.
+					</p>
 				</div>
 
 				<p>
@@ -69,7 +72,7 @@ export default function Footer() {
 					>
 						VibeToLive.dev
 					</a>{' '}
-					2024. Turn your AI prototype into production reality.
+					2024. Turn your AI prototype into production reality
 				</p>
 			</div>
 		</footer>

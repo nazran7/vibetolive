@@ -202,6 +202,11 @@ export default async function SEOPage({ params }) {
 			/>
 		);
 	} catch (error) {
+		// Next.js uses an exception to short-circuit rendering for notFound().
+		// In dev, catching and logging it is noisy (shows up as an "error" even though it's expected).
+		if (error?.digest === 'NEXT_NOT_FOUND') {
+			throw error;
+		}
 		console.error('Error in SEO page:', error);
 		notFound();
 	}
