@@ -6,64 +6,33 @@ import ThemeToggle from './themeToggle';
 import LangSwitch from './langSwitch';
 
 import { usePathname } from 'next/navigation';
-import { defaultLocale, locales } from '@/lib/i18n';
+import { defaultLocale } from '@/lib/i18n';
 import { NavLinksList } from '@/lib/navLinksList';
+import { getHrefForLocale, normalizeLocale } from '@/lib/seo/site';
 
-export default function Navbar() {
+export default function Navbar({ lang = defaultLocale }) {
 	const pathname = usePathname();
-	const [langName, setLangName] = useState(defaultLocale);
-	const [linkList, setLinkList] = useState([]);
+	const initialLang = normalizeLocale(lang);
+	const [langName, setLangName] = useState(initialLang);
+	const [linkList, setLinkList] = useState(NavLinksList[`LINK_${initialLang.toUpperCase()}`] || NavLinksList.LINK_EN);
 
 	useEffect(() => {
 		const fetchLinksList = async () => {
-			// Get language from cookie instead of URL
-			let detectedLang = defaultLocale;
-			
-			// Try to read from cookie
-			if (typeof document !== 'undefined') {
-				const cookies = document.cookie.split(';');
-				for (let cookie of cookies) {
-					const [name, value] = cookie.trim().split('=');
-					if (name === 'NEXT_LOCALE' && value) {
-						detectedLang = value;
-						break;
-					}
-				}
-			}
-			
+			const detectedLang = normalizeLocale(pathname.split('/').filter(Boolean)[0] || defaultLocale);
 			setLangName(detectedLang);
-			setLinkList(NavLinksList[`LINK_${detectedLang.toUpperCase()}`] || []);
+			setLinkList(NavLinksList[`LINK_${detectedLang.toUpperCase()}`] || NavLinksList.LINK_EN);
 		};
 		fetchLinksList();
-		
-		// Also listen for cookie changes (when language is switched)
-		const checkCookieInterval = setInterval(() => {
-			const cookies = document.cookie.split(';');
-			let cookieLang = defaultLocale;
-			for (let cookie of cookies) {
-				const [name, value] = cookie.trim().split('=');
-				if (name === 'NEXT_LOCALE' && value) {
-					cookieLang = value;
-					break;
-				}
-			}
-			if (cookieLang !== langName) {
-				setLangName(cookieLang);
-				setLinkList(NavLinksList[`LINK_${cookieLang.toUpperCase()}`] || []);
-			}
-		}, 100);
-		
-		return () => clearInterval(checkCookieInterval);
-	}, [pathname, langName]);
+	}, [pathname]);
 	
 
 	return (
 		<header className='w-full relative z-50 bg-base-100 p-5 pb-0 container mx-auto md:mb-5 flex justify-between items-center'>
 			<a
-				aria-label='landing page template'
+				aria-label='VibeToLive.dev home'
 				className='flex items-center w-1/2 md:w-1/5'
-				title='landing page template'
-				href="/"
+				title='VibeToLive.dev'
+				href={getHrefForLocale('/', langName)}
 			>
 				<Image
 					width={64}
@@ -84,15 +53,30 @@ export default function Navbar() {
 							key={index}
 							className='group py-3 text-center'
 						>
-							<a
-								aria-label={link.name}
-								className='group relative'
-								title={link.name}
-								href={link.url}
-							>
-								{link.name}
-								<div className='absolute left-[50%] group-hover:left-0 w-0 group-hover:w-full h-[3px] transition-all duration-300 bg-base-content/90'></div>
-							</a>
+							{link.children ? (
+								<details className='dropdown dropdown-hover'>
+									<summary className='cursor-pointer list-none'>{link.name}</summary>
+									<ul className='dropdown-content menu z-[100] mt-3 w-64 rounded-box bg-base-100 p-2 text-left shadow'>
+										{link.children.map((child) => (
+											<li key={child.url}>
+												<a href={getHrefForLocale(child.url, langName)} title={child.name}>
+													{child.name}
+												</a>
+											</li>
+										))}
+									</ul>
+								</details>
+							) : (
+								<a
+									aria-label={link.name}
+									className='group relative'
+									title={link.name}
+									href={getHrefForLocale(link.url, langName)}
+								>
+									{link.name}
+									<div className='absolute left-[50%] group-hover:left-0 w-0 group-hover:w-full h-[3px] transition-all duration-300 bg-base-content/90'></div>
+								</a>
+							)}
 						</li>
 					);
 				})}
@@ -109,13 +93,28 @@ export default function Navbar() {
 						{linkList.map((link, index) => {
 							return (
 								<li key={index}>
-									<a
-										aria-label={link.name}
-										title={link.name}
-										href={link.url}
-									>
-										{link.name}
-									</a>
+									{link.children ? (
+										<details>
+											<summary>{link.name}</summary>
+											<ul>
+												{link.children.map((child) => (
+													<li key={child.url}>
+														<a title={child.name} href={getHrefForLocale(child.url, langName)}>
+															{child.name}
+														</a>
+													</li>
+												))}
+											</ul>
+										</details>
+									) : (
+										<a
+											aria-label={link.name}
+											title={link.name}
+											href={getHrefForLocale(link.url, langName)}
+										>
+											{link.name}
+										</a>
+									)}
 								</li>
 							);
 						})}

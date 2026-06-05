@@ -1,7 +1,8 @@
 'use client';
-import { useParams, useRouter, usePathname } from 'next/navigation';
-import { defaultLocale, localeNames, locales } from '@/lib/i18n';
+import { useRouter, usePathname } from 'next/navigation';
+import { defaultLocale, localeNames } from '@/lib/i18n';
 import { useEffect, useState } from 'react';
+import { getHrefForLocale, normalizeLocale, stripLocaleFromPath } from '@/lib/seo/site';
 
 // Helper function to get/set language from cookie
 function getLanguageFromCookie() {
@@ -30,7 +31,8 @@ export default function LangSwitch() {
 	
 	// Read language from cookie on mount and when pathname changes
 	useEffect(() => {
-		const lang = getLanguageFromCookie();
+		const current = stripLocaleFromPath(pathname);
+		const lang = current.hadLocale ? current.locale : getLanguageFromCookie();
 		setLangName(lang);
 	}, [pathname]);
 
@@ -39,10 +41,10 @@ export default function LangSwitch() {
 			// Save language preference to cookie
 			setLanguageCookie(newLang);
 			setLangName(newLang);
-			
-			// Reload the page to apply the new language from cookie
-			// Without changing the URL
-			window.location.reload();
+
+			const current = stripLocaleFromPath(pathname);
+			const nextPath = getHrefForLocale(current.path, normalizeLocale(newLang));
+			router.push(nextPath);
 		};
 	};
 

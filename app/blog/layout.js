@@ -1,29 +1,12 @@
 import { defaultLocale } from '@/lib/i18n';
-import { SiteConfig } from '@/lib/config/site';
 import Navbar from '@/components/common/navbar';
 import Footer from '@/components/common/footer';
+import { buildPageMetadata } from '@/lib/seo/site';
 
 export async function generateMetadata() {
 	const langName = defaultLocale;
 
-	if (!SiteConfig[langName]) {
-		console.error(`未找到语言配置: ${langName}`);
-		return {
-			title: SiteConfig[defaultLocale].name,
-		};
-	}
-
-	return {
-		title: SiteConfig[langName].name,
-		description: SiteConfig[langName].description,
-		keywords: SiteConfig[langName].keywords,
-		authors: SiteConfig[langName].authors,
-		creator: SiteConfig[langName].creator,
-		icons: SiteConfig[langName].icons,
-		metadataBase: SiteConfig[langName].metadataBase,
-		openGraph: SiteConfig[langName].openGraph,
-		twitter: SiteConfig[langName].twitter,
-	};
+	return buildPageMetadata({ locale: langName, path: '/blog' });
 }
 
 export default function BlogLayout({ children }) {
@@ -32,10 +15,9 @@ export default function BlogLayout({ children }) {
 
 	return (
 		<>
-			<Navbar />
+			<Navbar lang={lang} />
 			<main className='px-5 min-h-screen'>{children}</main>
 			<Footer lang={lang} />
 		</>
 	);
 }
-

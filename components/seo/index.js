@@ -1,4 +1,3 @@
-'use client';
 import Hero from '@/components/seo/hero';
 import Feature from '@/components/seo/feature';
 import Pricing from '@/components/home/pricing';
@@ -6,11 +5,15 @@ import Testimonial from '@/components/home/testimonial';
 import Faq from '@/components/seo/faq';
 import Cta from '@/components/home/cta';
 import { FAQList } from '@/lib/faqsList';
+import RelatedGuides from '@/components/seo/relatedGuides';
+import JsonLd from '@/components/seo/jsonLd';
+import { breadcrumbSchema, compactJsonLd, faqSchema, serviceSchema } from '@/lib/seo/schema';
 
 export default function SEOPageComponent({
 	seoData,
 	dict,
 	langName,
+	slug,
 	pricingList,
 	testimonialsList,
 }) {
@@ -53,13 +56,32 @@ export default function SEOPageComponent({
 	};
 	
 	const faqLocale = dict?.Faq || {};
-	// Use SEO-specific FAQ if available, otherwise fall back to default FAQ from landing page
+	// Use SEO-specific FAQ if available, otherwise fall back to the service FAQ for this locale.
 	const seoFaqList = seoData.faqList && seoData.faqList.length > 0 ? seoData.faqList : null;
 	const defaultFaqList = FAQList[`FAQ_${langName.toUpperCase()}`] || [];
 	const faqList = seoFaqList || defaultFaqList; // Always have a FAQ list to show
+	const path = `/${slug}`;
+	const jsonLd = compactJsonLd([
+		serviceSchema({
+			name: seoData.metaTitle || seoData.heroTitle,
+			description: seoData.metaDescription || seoData.heroSubtitle,
+			path,
+			locale: langName,
+			image: seoData.featuredImage || '/og.png',
+		}),
+		faqSchema({ faqList, path, locale: langName }),
+		breadcrumbSchema({
+			locale: langName,
+			items: [
+				{ name: 'Home', path: '/' },
+				{ name: seoData.metaTitle || seoData.heroTitle, path },
+			],
+		}),
+	]);
 
 	return (
 		<div className='container mx-auto md:px-5'>
+			<JsonLd data={jsonLd} />
 	
 			{/* Hero Section - Dynamic */}
 			<Hero
@@ -94,6 +116,8 @@ export default function SEOPageComponent({
 				faqList={faqList}
 			/>
 
+			<RelatedGuides langName={langName} currentSlug={slug} limit={6} />
+
 			{/* CTA Section - Dynamic */}
 			<Cta
 				locale={ctaLocale}
@@ -102,4 +126,3 @@ export default function SEOPageComponent({
 		</div>
 	);
 }
-

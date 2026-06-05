@@ -2,13 +2,17 @@ import path from 'path';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	images: {
-		remotePatterns: [
-			{
-				protocol: 'https',
-				hostname: 'https://www.vibetolive.dev',
-			},
-		],
+		images: {
+			remotePatterns: [
+				{
+					protocol: 'https',
+					hostname: 'www.vibetolive.dev',
+				},
+				{
+					protocol: 'https',
+					hostname: 'vibetolive.dev',
+				},
+			],
 		formats: ['image/avif', 'image/webp'],
 		deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
 		// Limit image sizes to prevent serving oversized images for small displays
@@ -48,6 +52,22 @@ const nextConfig = {
 		}
 		
 		return config;
+	},
+
+	async redirects() {
+		return [
+			{
+				source: '/:path*',
+				has: [
+					{
+						type: 'host',
+						value: 'vibetolive.dev',
+					},
+				],
+				destination: 'https://www.vibetolive.dev/:path*',
+				permanent: true,
+			},
+		];
 	},
 };
 

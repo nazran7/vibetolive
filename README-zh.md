@@ -1,60 +1,32 @@
-![screenshot](https://mp-bca925c9-72bc-4e92-8c87-d596015241bf.cdn.bspapp.com/2024/06/29/48052030-56853423-SafariLight.png)
+# VibeToLive.dev
 
-# [inWind Landing Page Template](https://landingpage.huglemon.com/)
+VibeToLive.dev 帮助创始人、独立开发者和精益团队，把 AI 生成的原型升级为安全、可扩展、可上线的生产级应用。
 
-🌍 *[English](README.md) ∙ [简体中文](README-zh.md)*
+该网站基于 Next.js App Router 构建，包含多语言营销页面、SEO 专题页、canonical 元数据、hreflang 替代链接、结构化数据、robots、sitemap，以及 `llms.txt` 索引。
 
-### inWind Landing Page Template是什么
+## SEO 架构
 
-inWind Landing Page 是基于 Next.js 给出海SaaS项目开发的Landing Page模板，完全开源、免费，完美的SEO和多语言支持。
+- Canonical 域名：`https://www.vibetolive.dev`
+- 默认语言：英文，不使用 URL 前缀
+- 多语言前缀：`/zh`、`/ja`、`/ar`、`/es`、`/ru`、`/fr`
+- 旧语言别名会永久重定向到规范 URL
+- App Router metadata 生成 canonical、Open Graph、Twitter 和 hreflang 标签
+- `app/sitemap.js` 生成包含多语言替代链接的 XML sitemap
+- `app/robots.ts` 指向规范 sitemap
+- Service、FAQ、Breadcrumb、Organization 和 WebSite JSON-LD 在服务端渲染
 
-### 为什么开发inWind Landing Page
+## 开发
 
-1. 首先是受到了@weijunext 大佬的影响，决定也开源一个Landing Page方便大家选择；
-2. 其次是最近也在给传统工厂提供B2B的独立站开发，但我原本的uni-app开发属于SPA项目，对SEO非常不友好，所以重新啃完了Next.js的开发，这也算是练手之作；
-3. 最后也是希望借这个项目多认识一些出海的伙伴，如果对你有帮助或者你有什么其他需要帮助的，可以联系我交流~
+```bash
+npm install
+npm run dev
+```
 
-### 性能和SEO
+## 验证
 
-![Performance and SEO](https://mp-bca925c9-72bc-4e92-8c87-d596015241bf.cdn.bspapp.com/2024/06/29/50354654-99418765-SafariLight.png)
+```bash
+npm run lint
+npm run build
+```
 
-
-### 用到的三方库
-
-- [DaisyUI](https://daisyui.com/)：基于此实现了多主题切换和一些基础的样式（推荐从未接触过TailwindCSS的朋友可以尝试一下，可以少记很多类名）
-- [framer-motion](https://www.framer.com/motion/)：完成大部分动画效果
-- [react-icons](https://react-icons.github.io/react-icons/)：推荐React的开发者使用，非常方便和完善的图标库
-
-### 在线预览
-
-[landingpage.huglemon.com](https://landingpage.huglemon.com/)
-
-## Star 历史
-
-[![Star History Chart](https://api.star-history.com/svg?repos=huglemon/inwind-landing-page&type=Date)](https://star-history.com/#huglemon/inwind-landing-page&Date)
-
-
-### 感谢与支持
-
--   感谢[@weijunext](https://weijunext.com/)开源的landingpage项目，参考了很多内容
-
-### 贡献者
-
-<a href="https://github.com/huglemon/inwind-landing-page/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=huglemon/inwind-landing-page" />
-</a>
-
-### 交个朋友
-
--   QQ：123060128
--   WeChat：yflowerred
--   Twitter：[@huglemon520](x.com/huglemon520)
--   Email：[karma.zhao@gmail.com](mailto:karma.zhao@gmail.com)
--   博客：[https://huglemon.com](https://huglemon.com)
-
-### 赞助
-
-如果这个项目对你有帮助，可以请我喝一罐红牛
-
-[![buymeacoffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png "buymeacoffee")](https://buymeacoffee.com/huglemon "buymeacoffee")
-![pay qrcode](https://mp-bca925c9-72bc-4e92-8c87-d596015241bf.cdn.bspapp.com/2024/06/29/48706370-14858221-WechatIMG135.jpg)
+生产构建应生成多语言 SEO 页面、`/sitemap.xml` 和 `/robots.txt`。

@@ -1,30 +1,22 @@
-import { defaultLocale, locales } from '@/lib/i18n';
 import Navbar from '@/components/common/navbar';
 import Footer from '@/components/common/footer';
-
-// Valid locale codes
-const validLocales = ['en', 'zh', 'ja', 'ar', 'es', 'ru', 'fr'];
+import { DEFAULT_LOCALE, isSupportedLocale } from '@/lib/seo/site';
 
 export default function SEOLayout({ children, params }) {
-	// Extract language from params.slug array
-	// Patterns: /__seo__/[slug] or /__seo__/[lang]/[slug]
 	const slugArray = params?.slug || [];
-	let lang = defaultLocale;
+	let lang = DEFAULT_LOCALE;
 	
-	if (slugArray.length === 3 && slugArray[0] === '__seo__' && validLocales.includes(slugArray[1])) {
-		// Pattern: /__seo__/[lang]/[slug]
+	if (slugArray.length === 3 && slugArray[0] === '__seo__' && isSupportedLocale(slugArray[1])) {
 		lang = slugArray[1];
-	} else if (slugArray.length === 2 && slugArray[0] === '__seo__') {
-		// Pattern: /__seo__/[slug] (default to 'en')
-		lang = defaultLocale;
+	} else if (slugArray.length === 2 && isSupportedLocale(slugArray[0])) {
+		lang = slugArray[0];
 	}
 
 	return (
 		<>
-			<Navbar />
+			<Navbar lang={lang} />
 			<main className='px-5 min-h-screen'>{children}</main>
 			<Footer lang={lang} />
 		</>
 	);
 }
-

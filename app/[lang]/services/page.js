@@ -1,226 +1,152 @@
-'use client';
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { BsShieldFillCheck, BsRocketTakeoff } from 'react-icons/bs';
-import { RiStackFill, RiSettings3Fill } from 'react-icons/ri';
+import { BsRocketTakeoff, BsShieldFillCheck } from 'react-icons/bs';
+import { RiSettings3Fill, RiStackFill } from 'react-icons/ri';
 
 import Cta from '@/components/home/cta';
-import { defaultLocale, getDictionary } from '@/lib/i18n';
+import JsonLd from '@/components/seo/jsonLd';
+import { getDictionary } from '@/lib/i18n';
+import { buildPageMetadata, isSupportedLocale, normalizeLocale } from '@/lib/seo/site';
+import { breadcrumbSchema, compactJsonLd, serviceSchema } from '@/lib/seo/schema';
+import { notFound } from 'next/navigation';
 
-export default function Page({ params }) {
-    const [dict, setDict] = useState({
-        Service: {},
-        CTA: {},
-        CTAButton: {}
-    });
+const serviceCards = [
+	{
+		title: 'Prototype Hardening & Audit',
+		icon: BsShieldFillCheck,
+		image: '/image/services_1.png',
+		alt: 'Prototype hardening and AI code audit',
+		items: ['Codebase and dependency review', 'Data validation and model safety check', 'Infrastructure optimization', 'Security patching'],
+		outcome: 'A stable, ready-to-scale foundation for your AI product.',
+	},
+	{
+		title: 'Secure AI App Deployment',
+		icon: BsRocketTakeoff,
+		image: '/image/services_2.png',
+		alt: 'Secure AI app deployment',
+		items: ['Containerized deployment', 'CI/CD pipelines', 'SSL, access control, and token management', 'Data encryption and compliance readiness'],
+		outcome: 'A production-ready app that is as safe as it is useful.',
+	},
+	{
+		title: 'Scaling & Performance Optimization',
+		icon: RiStackFill,
+		image: '/image/services_3.png',
+		alt: 'Scaling and performance optimization',
+		items: ['Load testing and API optimization', 'Model serving and caching setup', 'Cost optimization for inference workloads', 'Auto-scaling infrastructure configuration'],
+		outcome: 'Speed, stability, and efficiency at every scale.',
+	},
+	{
+		title: 'Maintenance & Production Support',
+		icon: RiSettings3Fill,
+		image: '/image/services_4.png',
+		alt: 'Maintenance and production support',
+		items: ['Performance monitoring', 'Dependency updates', 'Bug fixing and incident response', 'Product enhancement cycles'],
+		outcome: 'A continuously improving AI product that grows with your users.',
+	},
+];
 
-    const [langName, setLangName] = useState(params.lang || defaultLocale);
+export async function generateMetadata({ params }) {
+	const langName = normalizeLocale(params.lang);
+	const dict = await getDictionary(langName);
 
-    useEffect(() => {
-        const fetchDictionary = async () => {
-            const d = await getDictionary(langName);
-            setDict(d);
-        };
-        fetchDictionary();
-    }, [langName]);
+	return buildPageMetadata({
+		locale: langName,
+		path: '/services',
+		title: `${dict.Service?.h1 || 'AI Prototype to Production Services'} | VibeToLive.dev`,
+		description:
+			dict.Service?.intro ||
+			'Production hardening, secure deployment, scaling, and maintenance services for AI-generated applications.',
+	});
+}
 
-    // Optional: update langName if pathname changes (like About page)
-    // useEffect(() => {
-    // 	const pathname = window.location.pathname;
-    // 	if (pathname === '/') setLangName(defaultLocale);
-    // 	else setLangName(pathname.split('/')[1]);
-    // }, []);
+export default async function Page({ params }) {
+	if (!isSupportedLocale(params.lang)) {
+		notFound();
+	}
 
-    return (
-        <main className='container mx-auto px-5'>
-            {/* Hero Section */}
-            <section className='relative z-10 flex flex-col items-start md:items-center pt-10 mb-10 overflow-hidden'>
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2, type: 'spring', stiffness: 100, damping: 10 }}
-                >
-                    <h1 className='font-bold text-5xl md:text-7xl bg-gradient-to-r from-base-content from-50% to-primary text-center bg-clip-text text-transparent !leading-[1.25em] mb-5'>
-                        {dict.Service.h1 || 'AI Prototype to Production Services'}
-                    </h1>
-                </motion.div>
+	const langName = normalizeLocale(params.lang);
+	const dict = await getDictionary(langName);
+	const jsonLd = compactJsonLd([
+		serviceSchema({
+			name: dict.Service?.h1 || 'AI Prototype to Production Services',
+			description:
+				dict.Service?.intro ||
+				'Production hardening, secure deployment, scaling, and maintenance services for AI-generated applications.',
+			path: '/services',
+			locale: langName,
+		}),
+		breadcrumbSchema({
+			locale: langName,
+			items: [
+				{ name: 'Home', path: '/' },
+				{ name: 'Services', path: '/services' },
+			],
+		}),
+	]);
 
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.4, duration: 1 }}
-                >
-                    <p className='w-full md:w-10/12 mx-auto text-xl md:text-2xl text-base-content/80 md:text-center mb-5 md:mb-10'>
-                        {dict.Service.intro ||
-                            'Your AI prototype deserves more than just a demo. We transform AI-generated prototypes into secure, scalable production applications.'}
-                    </p>
-                </motion.div>
-            </section>
+	return (
+		<main className='container mx-auto px-5'>
+			<JsonLd data={jsonLd} />
+			<section className='relative z-10 flex flex-col items-start md:items-center pt-10 mb-10 overflow-hidden'>
+				<h1 className='font-bold text-5xl md:text-7xl bg-gradient-to-r from-base-content from-50% to-primary text-center bg-clip-text text-transparent !leading-[1.25em] mb-5'>
+					{dict.Service?.h1 || 'AI Prototype to Production Services'}
+				</h1>
+				<p className='w-full md:w-10/12 mx-auto text-xl md:text-2xl text-base-content/80 md:text-center mb-5 md:mb-10'>
+					{dict.Service?.intro ||
+						'Your AI prototype deserves more than a demo. We transform AI-generated prototypes into secure, scalable production applications.'}
+				</p>
+			</section>
 
-            {/* Core Services */}
-            <section className='flex flex-col gap-y-16 mb-32'>
-                {/* Service 1: Prototype Hardening & Audit */}
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <div className='flex flex-col md:flex-row items-stretch justify-between gap-10'>
-                        <div className='w-full md:w-3/5 relative rounded-2xl overflow-hidden shadow-xl'>
-                            <Image
-                                src={'/image/services_1.png'}
-                                layout='fill'
-                                objectFit='cover'
-                                className='hover:scale-105 transition-all'
-                                alt='Prototype Hardening'
-                            />
-                        </div>
-                        <div className='w-full md:w-2/5 ring-2 ring-base-content/10 py-5 px-10 rounded-2xl bg-base-200 shadow-xl'>
-                            <div className='flex items-center justify-between py-5'>
-                                <h2 className='text-3xl font-bold'>Prototype Hardening & Audit</h2>
-                                <BsShieldFillCheck size={48} />
-                            </div>
-                            <ul className='list-disc ml-5 mb-3 text-lg'>
-                                <li>Codebase & dependency review</li>
-                                <li>Data validation and model safety check</li>
-                                <li>Infrastructure optimization</li>
-                                <li>Security patching</li>
-                            </ul>
-                            <p className='text-lg font-medium'>
-                                Outcome: A stable, ready-to-scale foundation for your AI product.
-                            </p>
-                        </div>
-                    </div>
-                </motion.div>
+			<section className='flex flex-col gap-y-16 mb-32'>
+				{serviceCards.map((service, index) => {
+					const Icon = service.icon;
+					const reverse = index % 2 === 1;
 
-                {/* Service 2: Secure AI App Deployment */}
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <div className='flex flex-col md:flex-row items-stretch justify-between gap-10'>
-                        <div className='w-full md:w-2/5 ring-2 ring-base-content/10 py-5 px-10 rounded-2xl bg-base-200 shadow-xl'>
-                            <div className='flex items-center justify-between py-5'>
-                                <BsRocketTakeoff size={48} />
-                                <h2 className='text-3xl font-bold'>Secure AI App Deployment</h2>
-                            </div>
-                            <ul className='list-disc ml-5 mb-3 text-lg'>
-                                <li>Containerized deployment (Docker / Kubernetes)</li>
-                                <li>CI/CD pipelines</li>
-                                <li>SSL, access control, token management</li>
-                                <li>Data encryption & compliance (GDPR-ready)</li>
-                            </ul>
-                            <p className='text-lg font-medium'>
-                                Outcome: A production-ready app that’s as safe as it is smart.
-                            </p>
-                        </div>
-                        <div className='w-full md:w-3/5 relative rounded-2xl overflow-hidden shadow-xl'>
-                            <Image
-                                src={'/image/services_2.png'}
-                                layout='fill'
-                                objectFit='cover'
-                                className='hover:scale-105 transition-all'
-                                alt='Secure Deployment'
-                            />
-                        </div>
-                    </div>
-                </motion.div>
+					return (
+						<article key={service.title} className={`flex flex-col md:flex-row items-stretch justify-between gap-10 ${reverse ? 'md:flex-row-reverse' : ''}`}>
+							<div className='w-full md:w-3/5 relative min-h-[260px] rounded-lg overflow-hidden shadow-xl'>
+								<Image
+									src={service.image}
+									fill
+									sizes='(max-width: 768px) 100vw, 60vw'
+									className='object-cover hover:scale-105 transition-all'
+									alt={service.alt}
+								/>
+							</div>
+							<div className='w-full md:w-2/5 ring-2 ring-base-content/10 py-5 px-10 rounded-lg bg-base-200 shadow-xl'>
+								<div className='flex items-center justify-between gap-5 py-5'>
+									<h2 className='text-3xl font-bold'>{service.title}</h2>
+									<Icon size={48} />
+								</div>
+								<ul className='list-disc ml-5 mb-3 text-lg'>
+									{service.items.map((item) => (
+										<li key={item}>{item}</li>
+									))}
+								</ul>
+								<p className='text-lg font-medium'>Outcome: {service.outcome}</p>
+							</div>
+						</article>
+					);
+				})}
+			</section>
 
-                {/* Service 3: Scaling & Performance Optimization */}
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <div className='flex flex-col md:flex-row items-stretch justify-between gap-10'>
-                        <div className='w-full md:w-3/5 relative rounded-2xl overflow-hidden shadow-xl'>
-                            <Image
-                                src={'/image/services_3.png'}
-                                layout='fill'
-                                objectFit='cover'
-                                className='hover:scale-105 transition-all'
-                                alt='Scaling Optimization'
-                            />
-                        </div>
-                        <div className='w-full md:w-2/5 ring-2 ring-base-content/10 py-5 px-10 rounded-2xl bg-base-200 shadow-xl'>
-                            <div className='flex items-center justify-between py-5'>
-                                <RiStackFill size={48} />
-                                <h2 className='text-3xl font-bold'>Scaling & Performance Optimization</h2>
-                            </div>
-                            <ul className='list-disc ml-5 mb-3 text-lg'>
-                                <li>Load testing & API optimization</li>
-                                <li>Model serving & caching setup</li>
-                                <li>Cost optimization for inference workloads</li>
-                                <li>Auto-scaling infrastructure configuration</li>
-                            </ul>
-                            <p className='text-lg font-medium'>
-                                Outcome: Speed, stability, and efficiency at every scale.
-                            </p>
-                        </div>
-                    </div>
-                </motion.div>
+			<section className='mb-32'>
+				<h2 className='text-4xl md:text-5xl font-bold mb-5 text-center'>Our Tech Stack</h2>
+				<p className='text-lg md:text-xl text-center mb-10'>
+					React, Next.js, Node.js, FastAPI, LangChain, OpenAI, Hugging Face, AWS, Docker, Vercel, Sentry, and production observability tools.
+				</p>
+			</section>
 
-                {/* Service 4: Maintenance & Production Support */}
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <div className='flex flex-col md:flex-row items-stretch justify-between gap-10'>
-                        <div className='w-full md:w-2/5 ring-2 ring-base-content/10 py-5 px-10 rounded-2xl bg-base-200 shadow-xl'>
-                            <div className='flex items-center justify-between py-5'>
-                                <RiSettings3Fill size={48} />
-                                <h2 className='text-3xl font-bold'>Maintenance & Production Support</h2>
-                            </div>
-                            <ul className='list-disc ml-5 mb-3 text-lg'>
-                                <li>24/7 performance monitoring</li>
-                                <li>Model retraining pipeline setup</li>
-                                <li>Bug fixing & dependency updates</li>
-                                <li>Product enhancement cycles</li>
-                            </ul>
-                            <p className='text-lg font-medium'>
-                                Outcome: A continuously improving AI product that grows with you.
-                            </p>
-                        </div>
-                        <div className='w-full md:w-3/5 relative rounded-2xl overflow-hidden shadow-xl'>
-                            <Image
-                                src={'/image/services_4.png'}
-                                layout='fill'
-                                objectFit='cover'
-                                className='hover:scale-105 transition-all'
-                                alt='Maintenance Support'
-                            />
-                        </div>
-                    </div>
-                </motion.div>
-            </section>
+			<section className='mb-32'>
+				<h2 className='text-4xl md:text-5xl font-bold mb-5 text-center'>Why Choose VibeToLive.dev</h2>
+				<ul className='grid grid-cols-1 md:grid-cols-4 gap-5 text-lg text-base-content/80 text-center'>
+					<li className='rounded-lg bg-base-200 p-5'>Deep expertise in AI and full-stack deployment</li>
+					<li className='rounded-lg bg-base-200 p-5'>Focused on indie hackers and lean startups</li>
+					<li className='rounded-lg bg-base-200 p-5'>Transparent pricing and fixed-scope delivery</li>
+					<li className='rounded-lg bg-base-200 p-5'>Fast turnaround from prototype to production</li>
+				</ul>
+			</section>
 
-            {/* Tech Stack */}
-            <section className='mb-32'>
-                <h2 className='text-4xl md:text-5xl font-bold mb-5 text-center'>Our Tech Stack</h2>
-                <p className='text-lg md:text-xl text-center mb-10'>
-                    React, Next.js, Node.js, FastAPI, LangChain, OpenAI, Hugging Face, AWS, Docker, Vercel, Sentry, LogRocket
-                </p>
-            </section>
-
-            {/* Why Choose Us */}
-            <section className='mb-32'>
-                <h2 className='text-4xl md:text-5xl font-bold mb-5 text-center'>Why Choose VibeToLive.dev</h2>
-                <ul className='flex flex-col md:flex-row justify-center gap-10 text-lg md:text-xl text-base-content/80 text-center'>
-                    <li>✅ Deep expertise in AI & full-stack deployment</li>
-                    <li>✅ Focused on indie hackers and lean startups</li>
-                    <li>✅ Transparent pricing and flexible timelines</li>
-                    <li>✅ Fast turnaround — prototype to production in weeks</li>
-                </ul>
-            </section>
-
-            {/* CTA Section */}
-            <Cta
-                locale={dict.CTA}
-                CTALocale={dict.CTAButton}
-            />
-        </main>
-    );
+			<Cta locale={dict.CTA} CTALocale={dict.CTAButton} />
+		</main>
+	);
 }

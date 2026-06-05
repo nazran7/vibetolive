@@ -1,0 +1,39 @@
+# VibeToLive.dev
+
+> VibeToLive.dev turns AI-generated prototypes and vibe-coded apps into secure, scalable, production-ready software for founders, indie hackers, and lean teams.
+
+VibeToLive.dev helps teams that used tools like Lovable, V0, Bolt, Cursor, Replit, ChatGPT, Claude, Windsurf, and Base44 but now need production hardening, security cleanup, deployment, observability, and maintenance.
+
+Core offers:
+- Vibe to Live: fixed-scope production hardening and deployment for AI-generated prototypes.
+- Add Some Spice: scoped feature, performance, and technical debt work.
+- Keep It Alive: ongoing production maintenance, dependency updates, monitoring, and small fixes.
+
+## Core Pages
+- [Homepage](https://www.vibetolive.dev): AI prototype to production service overview.
+- [Services](https://www.vibetolive.dev/services): Production hardening, secure deployment, scaling, and maintenance services.
+- [Case Studies](https://www.vibetolive.dev/case-studies): Examples of AI prototypes moved toward production readiness.
+- [Blog](https://www.vibetolive.dev/blog): Articles and updates about AI-generated apps, production readiness, and deployment.
+
+## Production Guides
+- [AI Prototype to Production](https://www.vibetolive.dev/ai-prototype-to-production): Main guide and service hub for turning AI prototypes into production-ready apps.
+- [Lovable to Production](https://www.vibetolive.dev/from-lovable-to-production): How to prepare Lovable-built apps for production.
+- [V0 to Production](https://www.vibetolive.dev/from-v0-to-production): How to take V0-generated apps beyond UI prototypes.
+- [Bolt to Production](https://www.vibetolive.dev/from-bolt-to-production): How to move Bolt-built apps from sandbox to production infrastructure.
+- [Cursor to Production](https://www.vibetolive.dev/from-cursor-to-production): How to review and ship Cursor-built applications safely.
+- [Replit to Production](https://www.vibetolive.dev/from-replit-to-production): How to harden Replit apps for real users.
+- [ChatGPT to Production](https://www.vibetolive.dev/from-chatgpt-to-production): How to turn ChatGPT-generated code into maintainable production software.
+- [Claude to Production](https://www.vibetolive.dev/from-claude-to-production): How to review and deploy Claude-generated applications.
+- [Windsurf to Production](https://www.vibetolive.dev/from-windsurf-to-production): How to move Windsurf-built apps into production.
+- [Base44 to Production](https://www.vibetolive.dev/from-base44-to-production): How to make Base44 prototypes production-ready.
+
+## Reference Guides
+- [Production Readiness Checklist](https://www.vibetolive.dev/production-readiness-checklist): Practical checklist for launch readiness.
+- [Security Risks in AI-Generated Code](https://www.vibetolive.dev/security-risks-ai-generated-code): Common security risks in AI-built applications.
+- [Why AI Prototypes Break in Production](https://www.vibetolive.dev/why-ai-prototypes-break-in-production): Failure modes that appear after real users arrive.
+- [Should You Rewrite AI Code?](https://www.vibetolive.dev/should-you-rewrite-ai-code): Decision guide for refactor, repair, or rewrite.
+- [Monitoring for AI Apps](https://www.vibetolive.dev/monitoring-for-ai-apps): Observability and maintenance guidance for AI-built applications.
+
+## Optional
+- [Sitemap](https://www.vibetolive.dev/sitemap.xml): Complete canonical URL list for search engines.
+- [Robots](https://www.vibetolive.dev/robots.txt): Search crawler access policy.
