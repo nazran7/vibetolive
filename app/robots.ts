@@ -1,13 +1,12 @@
 import { MetadataRoute } from 'next'
+import { SITE_URL } from '@/lib/seo/site'
 
 export default function robots(): MetadataRoute.Robots {
-    const baseUrl = 'https://www.vibetolive.dev'
-
     return {
         rules: {
             userAgent: '*',
             allow: '/',
         },
-        sitemap: `${baseUrl}/sitemap.xml`,
+        sitemap: `${SITE_URL}/sitemap.xml`,
     }
 }

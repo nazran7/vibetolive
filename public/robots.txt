@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://www.vibetolive.dev
-
-# Sitemaps
-Sitemap: https://www.vibetolive.dev/sitemap.xml

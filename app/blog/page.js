@@ -1,24 +1,21 @@
 import { IoMdHome } from "react-icons/io";
 import BlogCard from "@/components/blog/card";
 import { defaultLocale, getDictionary } from "@/lib/i18n";
-import { SiteConfig } from "@/lib/config/site";
 import { getPaginatedPosts } from "@/api-gateways/post";
 import Link from "next/link";
+import { buildPageMetadata } from "@/lib/seo/site";
 
 export async function generateMetadata() {
 	const langName = defaultLocale;
 	const dict = await getDictionary(langName);
 
 	return {
-		title: dict["Blog"]["title"] + " - " + SiteConfig[langName].name,
-		description: dict["Blog"]["description"],
-		keywords: SiteConfig[langName].keywords,
-		authors: SiteConfig[langName].authors,
-		creator: SiteConfig[langName].creator,
-		icons: SiteConfig[langName].icons,
-		metadataBase: SiteConfig[langName].metadataBase,
-		openGraph: SiteConfig[langName].openGraph,
-		twitter: SiteConfig[langName].twitter,
+		...buildPageMetadata({
+			locale: langName,
+			path: '/blog',
+			title: `${dict["Blog"]["title"]} | VibeToLive.dev`,
+			description: dict["Blog"]["description"],
+		}),
 	};
 }
 

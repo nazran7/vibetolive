@@ -5,8 +5,8 @@ import ReadOnlyTipTap from '@/components/blog/ReadOnlyTipTap';
 import Sidebar from '@/components/blog/sidebar';
 import { getProduct } from '@/api-gateways/post';
 import { notFound } from 'next/navigation';
-import { SiteConfig } from '@/lib/config/site';
 import { url } from '@/config';
+import { buildPageMetadata } from '@/lib/seo/site';
 
 export async function generateMetadata({ params }) {
 	const langName = defaultLocale;
@@ -14,25 +14,17 @@ export async function generateMetadata({ params }) {
 
 	if (!item) notFound();
 
-	const siteConfig = SiteConfig[langName];
 	const keywords = item.tags || [];
 
-	return {
-		title: `${item.metaTitle} - ${siteConfig.name}`,
-		description: item.metaDescription,
-		keywords: keywords,
-		metadataBase: siteConfig.metadataBase,
-		openGraph: {
-			...siteConfig.openGraph,
-			title: item.metaTitle,
-			description: item.metaDescription,
-		},
-		twitter: {
-			...siteConfig.twitter,
-			title: item.metaTitle,
-			description: item.metaDescription,
-		},
-	};
+	return buildPageMetadata({
+		locale: langName,
+		path: `/blog/${params?.name}`,
+		title: `${item.metaTitle || item.title} | VibeToLive.dev`,
+		description: item.metaDescription || item.excerpt,
+		keywords,
+		image: item.featuredImage?.startsWith('http') ? item.featuredImage : '/og.png',
+		type: 'article',
+	});
 }
 
 export default async function Page({ params }) {
