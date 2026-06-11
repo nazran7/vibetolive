@@ -6,6 +6,7 @@ import {
 	getLocalizedPath,
 	isSupportedLocale,
 	normalizeLocale,
+	normalizePath,
 	stripLocaleFromPath,
 } from './lib/seo/site';
 
@@ -30,6 +31,20 @@ function nextWithLocale(request, locale) {
 	return NextResponse.next({ request: { headers: requestHeaders } });
 }
 
+function isAdminPath(path) {
+	const normalized = normalizePath(path);
+	return normalized === '/admin' || normalized.startsWith('/admin/');
+}
+
+function rewriteToLangAdmin(request, locale, adminPath) {
+	const url = request.nextUrl.clone();
+	const normalizedLocale = normalizeLocale(locale);
+	url.pathname = `/${normalizedLocale}${adminPath}`;
+	const requestHeaders = new Headers(request.headers);
+	requestHeaders.set('x-vibetolive-locale', normalizedLocale);
+	return NextResponse.rewrite(url, { request: { headers: requestHeaders } });
+}
+
 export function middleware(request) {
 	const url = request.nextUrl.clone();
 	const { pathname, hostname } = url;
@@ -40,6 +55,17 @@ export function middleware(request) {
 	}
 
 	const route = stripLocaleFromPath(pathname);
+
+	if (isAdminPath(route.path)) {
+		if (route.hadLocale && route.locale === DEFAULT_LOCALE) {
+			url.pathname = route.path;
+			return NextResponse.redirect(url, 308);
+		}
+		if (!route.hadLocale) {
+			return rewriteToLangAdmin(request, DEFAULT_LOCALE, route.path);
+		}
+		return nextWithLocale(request, route.locale);
+	}
 
 	if (route.hadLocale && (route.locale === DEFAULT_LOCALE || route.wasAlias)) {
 		url.pathname = getLocalizedPath(route.path, route.locale);

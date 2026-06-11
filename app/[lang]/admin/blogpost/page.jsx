@@ -2,7 +2,8 @@
 
 import { createBlogPost, getProduct, updateBlogPost, uploadImage } from "@/api-gateways/post";
 import { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter, useParams } from "next/navigation";
+import { getLocalizedPath } from "@/lib/seo/site";
 import { toast } from "react-toastify";
 import TipTapEditor from "@/components/blog/TipTapEditor";
 import { url } from "@/config";
@@ -10,6 +11,7 @@ import { url } from "@/config";
 export default function NewPostPage() {
     const searchParams = useSearchParams();
     const router = useRouter();
+    const { lang } = useParams();
     const editId = searchParams.get("id");
 
     const [postData, setPostData] = useState({
@@ -240,7 +242,7 @@ export default function NewPostPage() {
                     formData,
                     (data) => {
                         toast.success(data?.message || "Post updated successfully");
-                        router.push('/en/admin/bloglist');
+                        router.push(getLocalizedPath('/admin/bloglist', lang));
                     },
                     (err) => toast.error(err?.message || "Update failed")
                 );
@@ -249,7 +251,7 @@ export default function NewPostPage() {
                     formData,
                     (data) => {
                         toast.success(data?.message || "Post created successfully");
-                        router.push('/en/admin/bloglist');
+                        router.push(getLocalizedPath('/admin/bloglist', lang));
                     },
                     (err) => toast.error(err?.message || "Create failed")
                 );

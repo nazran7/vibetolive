@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 
 import { getUser } from '@/api-gateways/user';
 import LoadingUI from '@/components/common/LoadingUi';
+import { getLocalizedPath } from '@/lib/seo/site';
 
 
 const links = [
@@ -52,7 +53,7 @@ export default function AdminLayout({ children }) {
               {links.map(({ href, label }) => (
                 <Link
                   key={href}
-                  href={`/${lang}${href}`}
+                  href={getLocalizedPath(href, lang)}
                   className="block px-3 py-2 rounded-lg transition text-base-content hover:bg-primary hover:text-primary-content"
 
                 >

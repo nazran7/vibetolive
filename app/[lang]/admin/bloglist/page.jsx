@@ -2,12 +2,15 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
+import { getLocalizedPath } from "@/lib/seo/site";
 import Image from "next/image";
 import { getPaginatedPosts, deleteBlogPost } from "@/api-gateways/post";
 import { toast } from "react-toastify";
 import { url } from "@/config";
 
 export default function BlogListPage() {
+  const { lang } = useParams();
   const [data, setData] = useState({ posts: [], page: 1, pages: 1 });
   const [loading, setLoading] = useState(true);
 
@@ -76,7 +79,7 @@ export default function BlogListPage() {
           </p>
         </div>
         <Link
-          href="/en/admin/blogpost"
+          href={getLocalizedPath('/admin/blogpost', lang)}
           className="px-6 py-3 bg-primary text-primary-content rounded-xl font-semibold hover:bg-primary/90 transition"
         >
           + New Post
@@ -125,7 +128,7 @@ export default function BlogListPage() {
               {/* Actions */}
               <div className="flex gap-2 pt-4 border-t border-base-300">
                 <Link
-                  href={`/en/admin/blogpost?id=${post.slug}`}
+                  href={`${getLocalizedPath('/admin/blogpost', lang)}?id=${post.slug}`}
                   className="flex-1 text-center px-4 py-2 bg-primary text-primary-content rounded-lg hover:bg-primary/90 transition"
                 >
                   Edit
