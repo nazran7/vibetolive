@@ -14,8 +14,19 @@ import FromBoltToProductionPage from './fromBoltToProduction';
 import FromV0ToProductionPage from './fromV0ToProduction';
 import FromReplitToProductionPage from './fromReplitToProduction';
 import FromCursorToProductionPage from './fromCursorToProduction';
+import AiAppSecurityAuditPage from './aiAppSecurityAudit';
+import FreelancerToFinishVibeCodedAppPage from './freelancerToFinishVibeCodedApp';
+import AiAppCicdSetupPage from './aiAppCicdSetup';
+import AiAppBuilderWithBackendPage from './aiAppBuilderWithBackend';
+import ProductionReadinessChecklistPage from './productionReadinessChecklist';
+import MigrateFromBoltToAwsPage from './migrateFromBoltToAws';
 
-// Long-form SEO pages: use <SeoPricing /> from @/components/seo/pricing for the canonical pricing block.
+// Long-form SEO pages: use <SeoPricing /> from @/components/seo/pricing for deployment pricing.
+// Security audit pages: use <AuditPricing /> from @/components/seo/auditPricing.
+// Finish pages: use <FinishPricing /> from @/components/seo/finishPricing.
+// CI/CD pages: use <CicdPricing /> from @/components/seo/cicdPricing.
+// Backend pages: use <BackendPricing /> from @/components/seo/backendPricing.
+// AWS migration pages: use <MigrationPricing /> from @/components/seo/migrationPricing.
 
 export default function SEOPageComponent({
 	seoData,
@@ -141,6 +152,60 @@ export default function SEOPageComponent({
 			<div className='container mx-auto md:px-5'>
 				<JsonLd data={jsonLd} />
 				<FromCursorToProductionPage langName={langName} />
+			</div>
+		);
+	}
+
+	if (slug === 'ai-app-security-audit') {
+		return (
+			<div className='container mx-auto md:px-5'>
+				<JsonLd data={jsonLd} />
+				<AiAppSecurityAuditPage langName={langName} />
+			</div>
+		);
+	}
+
+	if (slug === 'freelancer-to-finish-vibe-coded-app') {
+		return (
+			<div className='container mx-auto md:px-5'>
+				<JsonLd data={jsonLd} />
+				<FreelancerToFinishVibeCodedAppPage langName={langName} />
+			</div>
+		);
+	}
+
+	if (slug === 'ai-app-cicd-setup') {
+		return (
+			<div className='container mx-auto md:px-5'>
+				<JsonLd data={jsonLd} />
+				<AiAppCicdSetupPage langName={langName} />
+			</div>
+		);
+	}
+
+	if (slug === 'ai-app-builder-with-backend') {
+		return (
+			<div className='container mx-auto md:px-5'>
+				<JsonLd data={jsonLd} />
+				<AiAppBuilderWithBackendPage langName={langName} />
+			</div>
+		);
+	}
+
+	if (slug === 'production-readiness-checklist') {
+		return (
+			<div className='container mx-auto md:px-5'>
+				<JsonLd data={jsonLd} />
+				<ProductionReadinessChecklistPage langName={langName} />
+			</div>
+		);
+	}
+
+	if (slug === 'migrate-from-bolt-to-aws') {
+		return (
+			<div className='container mx-auto md:px-5'>
+				<JsonLd data={jsonLd} />
+				<MigrateFromBoltToAwsPage langName={langName} />
 			</div>
 		);
 	}

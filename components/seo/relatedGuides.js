@@ -7,8 +7,13 @@ const prioritySlugs = [
 	'from-lovable-to-production',
 	'from-v0-to-production',
 	'from-bolt-to-production',
+	'migrate-from-bolt-to-aws',
 	'from-cursor-to-production',
 	'from-replit-to-production',
+	'ai-app-security-audit',
+	'freelancer-to-finish-vibe-coded-app',
+	'ai-app-cicd-setup',
+	'ai-app-builder-with-backend',
 	'security-risks-ai-generated-code',
 	'production-readiness-checklist',
 ];
