@@ -1,6 +1,6 @@
 import Hero from '@/components/seo/hero';
 import Feature from '@/components/seo/feature';
-import Pricing from '@/components/home/pricing';
+import SeoPricing from '@/components/seo/pricing';
 import Testimonial from '@/components/home/testimonial';
 import Faq from '@/components/seo/faq';
 import Cta from '@/components/home/cta';
@@ -8,6 +8,12 @@ import { FAQList } from '@/lib/faqsList';
 import RelatedGuides from '@/components/seo/relatedGuides';
 import JsonLd from '@/components/seo/jsonLd';
 import { breadcrumbSchema, compactJsonLd, faqSchema, serviceSchema } from '@/lib/seo/schema';
+import AiPrototypeToProductionPage from './aiPrototypeToProduction';
+import FromLovableToProductionPage from './fromLovableToProduction';
+import FromBoltToProductionPage from './fromBoltToProduction';
+import FromV0ToProductionPage from './fromV0ToProduction';
+
+// Long-form SEO pages: use <SeoPricing /> from @/components/seo/pricing for the canonical pricing block.
 
 export default function SEOPageComponent({
 	seoData,
@@ -79,6 +85,46 @@ export default function SEOPageComponent({
 		}),
 	]);
 
+	if (slug === 'ai-prototype-to-production') {
+		return (
+			<div className='container mx-auto md:px-5'>
+				<JsonLd data={jsonLd} />
+				<AiPrototypeToProductionPage
+					seoData={seoData}
+					dict={dict}
+					langName={langName}
+				/>
+			</div>
+		);
+	}
+
+	if (slug === 'from-lovable-to-production') {
+		return (
+			<div className='container mx-auto md:px-5'>
+				<JsonLd data={jsonLd} />
+				<FromLovableToProductionPage langName={langName} />
+			</div>
+		);
+	}
+
+	if (slug === 'from-bolt-to-production') {
+		return (
+			<div className='container mx-auto md:px-5'>
+				<JsonLd data={jsonLd} />
+				<FromBoltToProductionPage langName={langName} />
+			</div>
+		);
+	}
+
+	if (slug === 'from-v0-to-production') {
+		return (
+			<div className='container mx-auto md:px-5'>
+				<JsonLd data={jsonLd} />
+				<FromV0ToProductionPage langName={langName} />
+			</div>
+		);
+	}
+
 	return (
 		<div className='container mx-auto md:px-5'>
 			<JsonLd data={jsonLd} />
@@ -97,11 +143,7 @@ export default function SEOPageComponent({
 				seoData={seoData}
 			/>
 
-			{/* Pricing Section - Static (always shown) */}
-			<Pricing
-				locale={dict.Pricing}
-				langName={langName}
-			/>
+			<SeoPricing />
 
 			{/* Testimonial Section - Static (always shown) */}
 			<Testimonial
