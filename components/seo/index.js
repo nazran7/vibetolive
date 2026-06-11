@@ -12,6 +12,7 @@ import AiPrototypeToProductionPage from './aiPrototypeToProduction';
 import FromLovableToProductionPage from './fromLovableToProduction';
 import FromBoltToProductionPage from './fromBoltToProduction';
 import FromV0ToProductionPage from './fromV0ToProduction';
+import FromReplitToProductionPage from './fromReplitToProduction';
 
 // Long-form SEO pages: use <SeoPricing /> from @/components/seo/pricing for the canonical pricing block.
 
@@ -121,6 +122,15 @@ export default function SEOPageComponent({
 			<div className='container mx-auto md:px-5'>
 				<JsonLd data={jsonLd} />
 				<FromV0ToProductionPage langName={langName} />
+			</div>
+		);
+	}
+
+	if (slug === 'from-replit-to-production') {
+		return (
+			<div className='container mx-auto md:px-5'>
+				<JsonLd data={jsonLd} />
+				<FromReplitToProductionPage langName={langName} />
 			</div>
 		);
 	}
