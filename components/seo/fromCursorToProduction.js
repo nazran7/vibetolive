@@ -25,7 +25,7 @@ import {
 	MdHelpCenter,
 	MdOutlineFeaturedPlayList,
 } from 'react-icons/md';
-import { getHrefForLocale } from '@/lib/seo/site';
+import { getHrefForLocale, TALLY_FORM_URL } from '@/lib/seo/site';
 import SeoPricing from '@/components/seo/pricing';
 
 const CURSOR_STACK = [
@@ -453,13 +453,13 @@ export default function FromCursorToProductionPage({ langName = 'en' }) {
 
 					<div className='flex flex-col sm:flex-row gap-4 justify-center items-center mb-16'>
 						<a
-							href='mailto:hello@vibetolive.dev?subject=Launch%20My%20Cursor-Built%20App'
+							href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 							className='btn btn-wide btn-primary rounded-full hover:scale-105 transition-all text-primary-content font-bold shadow-lg shadow-primary/20'
 						>
 							Launch My Cursor-Built App
 						</a>
 						<a
-							href='mailto:hello@vibetolive.dev?subject=Request%20Cursor%20App%20Review'
+							href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 							className='btn btn-wide btn-outline rounded-full hover:bg-base-content hover:text-base-100 transition-all font-semibold'
 						>
 							Request a Cursor App Review
@@ -930,13 +930,13 @@ export default function FromCursorToProductionPage({ langName = 'en' }) {
 					</p>
 					<div className='flex flex-col sm:flex-row gap-4 justify-center items-center mb-6'>
 						<a
-							href='mailto:hello@vibetolive.dev?subject=Launch%20My%20Cursor-Built%20App'
+							href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 							className='btn btn-wide btn-primary rounded-full hover:scale-105 transition-all font-bold shadow-lg'
 						>
 							Launch My Cursor-Built App
 						</a>
 						<a
-							href='mailto:hello@vibetolive.dev?subject=Request%20Cursor%20App%20Review'
+							href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 							className='btn btn-wide btn-outline rounded-full font-semibold hover:bg-base-content hover:text-base-100'
 						>
 							Request a Cursor App Review

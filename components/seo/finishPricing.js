@@ -1,5 +1,6 @@
 import { FaCheck } from 'react-icons/fa';
 import { MdPriceCheck } from 'react-icons/md';
+import { TALLY_FORM_URL } from '@/lib/seo/site';
 
 const FINISH_REVIEW_FEATURES = [
 	'App and blocker review',
@@ -81,7 +82,7 @@ export default function FinishPricing() {
 						<PlanFeatures items={FINISH_REVIEW_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Finish%20Review'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-outline btn-sm rounded-full w-full font-semibold'
 					>
 						Request Review
@@ -104,7 +105,7 @@ export default function FinishPricing() {
 						<PlanFeatures items={FINISH_SPRINT_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Finish%20Sprint'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-primary btn-sm rounded-full w-full font-bold'
 					>
 						Start Sprint
@@ -124,7 +125,7 @@ export default function FinishPricing() {
 						<PlanFeatures items={LAUNCH_READY_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Launch-Ready%20Finish'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-outline btn-sm rounded-full w-full font-semibold'
 					>
 						Go Launch-Ready
@@ -144,7 +145,7 @@ export default function FinishPricing() {
 						<PlanFeatures items={ONGOING_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Ongoing%20Product%20Support'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-outline btn-sm rounded-full w-full font-semibold'
 					>
 						Get Support

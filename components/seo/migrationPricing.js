@@ -1,5 +1,6 @@
 import { FaCheck } from 'react-icons/fa';
 import { MdPriceCheck } from 'react-icons/md';
+import { TALLY_FORM_URL } from '@/lib/seo/site';
 
 const REVIEW_FEATURES = [
 	'Bolt app and AWS fit review',
@@ -85,7 +86,7 @@ export default function MigrationPricing() {
 						<PlanFeatures items={REVIEW_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=AWS%20Migration%20Review'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-outline btn-sm rounded-full w-full font-semibold'
 					>
 						Request Review
@@ -109,7 +110,7 @@ export default function MigrationPricing() {
 						<PlanFeatures items={SPRINT_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Bolt%20to%20AWS%20Migration%20Sprint'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-primary btn-sm rounded-full w-full font-bold'
 					>
 						Start Migration
@@ -131,7 +132,7 @@ export default function MigrationPricing() {
 						<PlanFeatures items={PRODUCTION_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=AWS%20Production%20Migration'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-outline btn-sm rounded-full w-full font-semibold'
 					>
 						Full Migration
@@ -152,7 +153,7 @@ export default function MigrationPricing() {
 						<PlanFeatures items={ONGOING_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Ongoing%20AWS%20Support'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-outline btn-sm rounded-full w-full font-semibold'
 					>
 						Get Support

@@ -1,5 +1,6 @@
 import { FaCheck } from 'react-icons/fa';
 import { MdPriceCheck } from 'react-icons/md';
+import { TALLY_FORM_URL } from '@/lib/seo/site';
 
 const REVIEW_FEATURES = [
 	'Deployment process review',
@@ -80,7 +81,7 @@ export default function CicdPricing() {
 						<PlanFeatures items={REVIEW_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=CI%2FCD%20Review'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-outline btn-sm rounded-full w-full font-semibold'
 					>
 						Request Review
@@ -103,7 +104,7 @@ export default function CicdPricing() {
 						<PlanFeatures items={PIPELINE_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Pipeline%20Setup'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-primary btn-sm rounded-full w-full font-bold'
 					>
 						Set Up Pipeline
@@ -123,7 +124,7 @@ export default function CicdPricing() {
 						<PlanFeatures items={GUARDRAILS_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Production%20Release%20Guardrails'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-outline btn-sm rounded-full w-full font-semibold'
 					>
 						Add Guardrails
@@ -143,7 +144,7 @@ export default function CicdPricing() {
 						<PlanFeatures items={ONGOING_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Ongoing%20Release%20Support'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-outline btn-sm rounded-full w-full font-semibold'
 					>
 						Get Support

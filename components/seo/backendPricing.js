@@ -1,5 +1,6 @@
 import { FaCheck } from 'react-icons/fa';
 import { MdPriceCheck } from 'react-icons/md';
+import { TALLY_FORM_URL } from '@/lib/seo/site';
 
 const REVIEW_FEATURES = [
 	'UI flow and data needs review',
@@ -81,7 +82,7 @@ export default function BackendPricing() {
 						<PlanFeatures items={REVIEW_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Backend%20Review'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-outline btn-sm rounded-full w-full font-semibold'
 					>
 						Request Review
@@ -104,7 +105,7 @@ export default function BackendPricing() {
 						<PlanFeatures items={BUILD_SPRINT_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Backend%20Build%20Sprint'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-primary btn-sm rounded-full w-full font-bold'
 					>
 						Start Build Sprint
@@ -124,7 +125,7 @@ export default function BackendPricing() {
 						<PlanFeatures items={PAYMENTS_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Backend%20%2B%20Payments'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-outline btn-sm rounded-full w-full font-semibold'
 					>
 						Backend + Payments
@@ -144,7 +145,7 @@ export default function BackendPricing() {
 						<PlanFeatures items={ONGOING_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Ongoing%20Backend%20Support'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-outline btn-sm rounded-full w-full font-semibold'
 					>
 						Get Support

@@ -22,7 +22,7 @@ import {
 	MdHelpCenter,
 	MdOutlineFeaturedPlayList,
 } from 'react-icons/md';
-import { getHrefForLocale } from '@/lib/seo/site';
+import { getHrefForLocale, TALLY_FORM_URL } from '@/lib/seo/site';
 import CicdPricing from '@/components/seo/cicdPricing';
 
 const AI_BUILDERS = [
@@ -277,10 +277,10 @@ export default function AiAppCicdSetupPage({ langName = 'en' }) {
 						Base44, and custom AI-assisted codebases.
 					</p>
 					<div className='flex flex-col sm:flex-row gap-4 justify-center items-center mb-16'>
-						<a href='mailto:hello@vibetolive.dev?subject=Set%20Up%20CI%2FCD' className='btn btn-wide btn-primary rounded-full hover:scale-105 transition-all text-primary-content font-bold shadow-lg shadow-primary/20'>
+						<a href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer' className='btn btn-wide btn-primary rounded-full hover:scale-105 transition-all text-primary-content font-bold shadow-lg shadow-primary/20'>
 							Set Up CI/CD
 						</a>
-						<a href='mailto:hello@vibetolive.dev?subject=Request%20Deployment%20Review' className='btn btn-wide btn-outline rounded-full hover:bg-base-content hover:text-base-100 transition-all font-semibold'>
+						<a href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer' className='btn btn-wide btn-outline rounded-full hover:bg-base-content hover:text-base-100 transition-all font-semibold'>
 							Request a Deployment Review
 						</a>
 					</div>
@@ -607,8 +607,8 @@ export default function AiAppCicdSetupPage({ langName = 'en' }) {
 						set up the right checks, and help you deploy with more confidence.
 					</p>
 					<div className='flex flex-col sm:flex-row gap-4 justify-center items-center mb-6'>
-						<a href='mailto:hello@vibetolive.dev?subject=Set%20Up%20CI%2FCD' className='btn btn-wide btn-primary rounded-full hover:scale-105 transition-all font-bold shadow-lg'>Set Up CI/CD</a>
-						<a href='mailto:hello@vibetolive.dev?subject=Request%20Deployment%20Review' className='btn btn-wide btn-outline rounded-full font-semibold hover:bg-base-content hover:text-base-100'>Request a Deployment Review</a>
+						<a href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer' className='btn btn-wide btn-primary rounded-full hover:scale-105 transition-all font-bold shadow-lg'>Set Up CI/CD</a>
+						<a href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer' className='btn btn-wide btn-outline rounded-full font-semibold hover:bg-base-content hover:text-base-100'>Request a Deployment Review</a>
 					</div>
 					<p className='text-xs text-base-content/50'>
 						Built with Lovable, Bolt.new, V0, Cursor, Replit, ChatGPT, Claude, Windsurf, or Base44? We can add safer CI/CD before you launch.

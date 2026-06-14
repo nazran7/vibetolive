@@ -19,7 +19,7 @@ import {
 	MdHelpCenter,
 	MdSecurity,
 } from 'react-icons/md';
-import { getHrefForLocale } from '@/lib/seo/site';
+import { getHrefForLocale, TALLY_FORM_URL } from '@/lib/seo/site';
 import AuditPricing from '@/components/seo/auditPricing';
 
 const AI_BUILDERS = [
@@ -389,13 +389,13 @@ export default function AiAppSecurityAuditPage({ langName = 'en' }) {
 
 					<div className='flex flex-col sm:flex-row gap-4 justify-center items-center mb-16'>
 						<a
-							href='mailto:hello@vibetolive.dev?subject=Request%20AI%20App%20Security%20Audit'
+							href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 							className='btn btn-wide btn-primary text-primary-content rounded-full hover:scale-105 transition-all font-bold shadow-lg shadow-primary/20'
 						>
 							Request a Security Audit
 						</a>
 						<a
-							href='mailto:hello@vibetolive.dev?subject=Review%20My%20AI%20App%20Before%20Launch'
+							href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 							className='btn btn-wide btn-outline rounded-full hover:bg-base-content hover:text-base-100 transition-all font-semibold'
 						>
 							Review My AI App Before Launch
@@ -875,13 +875,13 @@ export default function AiAppSecurityAuditPage({ langName = 'en' }) {
 					</p>
 					<div className='flex flex-col sm:flex-row gap-4 justify-center items-center mb-6'>
 						<a
-							href='mailto:hello@vibetolive.dev?subject=Request%20AI%20App%20Security%20Audit'
+							href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 							className='btn btn-wide btn-primary text-primary-content rounded-full hover:scale-105 transition-all font-bold shadow-lg'
 						>
 							Request a Security Audit
 						</a>
 						<a
-							href='mailto:hello@vibetolive.dev?subject=Review%20My%20AI%20App%20Before%20Launch'
+							href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 							className='btn btn-wide btn-outline rounded-full font-semibold hover:bg-base-content hover:text-base-100'
 						>
 							Review My AI App Before Launch

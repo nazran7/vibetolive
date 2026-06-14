@@ -11,7 +11,7 @@ import {
 	MdWarning,
 	MdHelpCenter,
 } from 'react-icons/md';
-import { getHrefForLocale } from '@/lib/seo/site';
+import { getHrefForLocale, TALLY_FORM_URL } from '@/lib/seo/site';
 
 const AI_BUILDERS = [
 	'Lovable',
@@ -524,10 +524,10 @@ export default function ProductionReadinessChecklistPage({ langName = 'en' }) {
 						Windsurf, Base44, or another AI-assisted workflow.
 					</p>
 					<div className='flex flex-col sm:flex-row gap-4 justify-center items-center mb-16'>
-						<a href='mailto:hello@vibetolive.dev?subject=Check%20My%20App%20Readiness' className='btn btn-wide btn-primary rounded-full hover:scale-105 transition-all text-primary-content font-bold shadow-lg shadow-primary/20'>
+						<a href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer' className='btn btn-wide btn-primary rounded-full hover:scale-105 transition-all text-primary-content font-bold shadow-lg shadow-primary/20'>
 							Check My App Readiness
 						</a>
-						<a href='mailto:hello@vibetolive.dev?subject=Request%20Production%20Review' className='btn btn-wide btn-outline rounded-full hover:bg-base-content hover:text-base-100 transition-all font-semibold'>
+						<a href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer' className='btn btn-wide btn-outline rounded-full hover:bg-base-content hover:text-base-100 transition-all font-semibold'>
 							Request a Production Review
 						</a>
 					</div>
@@ -767,10 +767,10 @@ export default function ProductionReadinessChecklistPage({ langName = 'en' }) {
 						help you decide what needs to be fixed before real users arrive.
 					</p>
 					<div className='flex flex-col sm:flex-row gap-4 justify-center items-center mb-6'>
-						<a href='mailto:hello@vibetolive.dev?subject=Check%20My%20App%20Readiness' className='btn btn-wide btn-primary rounded-full hover:scale-105 transition-all font-bold shadow-lg'>
+						<a href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer' className='btn btn-wide btn-primary rounded-full hover:scale-105 transition-all font-bold shadow-lg'>
 							Check My App Readiness
 						</a>
-						<a href='mailto:hello@vibetolive.dev?subject=Request%20Production%20Review' className='btn btn-wide btn-outline rounded-full font-semibold hover:bg-base-content hover:text-base-100'>
+						<a href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer' className='btn btn-wide btn-outline rounded-full font-semibold hover:bg-base-content hover:text-base-100'>
 							Request a Production Review
 						</a>
 					</div>

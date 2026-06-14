@@ -1,5 +1,6 @@
 import { FaCheck } from 'react-icons/fa';
 import { MdSecurity } from 'react-icons/md';
+import { TALLY_FORM_URL } from '@/lib/seo/site';
 
 const SNAPSHOT_FEATURES = [
 	'Targeted auth review',
@@ -78,7 +79,7 @@ export default function AuditPricing() {
 						<PlanFeatures items={SNAPSHOT_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Security%20Snapshot%20Audit'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-outline rounded-full w-full font-semibold hover:bg-base-content hover:text-base-100'
 					>
 						Request Snapshot
@@ -101,7 +102,7 @@ export default function AuditPricing() {
 						<PlanFeatures items={LAUNCH_AUDIT_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Launch%20Security%20Audit'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-primary rounded-full w-full font-bold'
 					>
 						Request Audit
@@ -121,7 +122,7 @@ export default function AuditPricing() {
 						<PlanFeatures items={FIX_SUPPORT_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Audit%20%2B%20Fix%20Support'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-outline rounded-full w-full font-semibold hover:bg-base-content hover:text-base-100'
 					>
 						Audit + Fix

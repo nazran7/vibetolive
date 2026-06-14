@@ -22,7 +22,7 @@ import {
 	MdHelpCenter,
 	MdOutlineFeaturedPlayList,
 } from 'react-icons/md';
-import { getHrefForLocale } from '@/lib/seo/site';
+import { getHrefForLocale, TALLY_FORM_URL } from '@/lib/seo/site';
 import BackendPricing from '@/components/seo/backendPricing';
 
 const AI_BUILDERS = [
@@ -293,10 +293,10 @@ export default function AiAppBuilderWithBackendPage({ langName = 'en' }) {
 						into a real app with a working backend.
 					</p>
 					<div className='flex flex-col sm:flex-row gap-4 justify-center items-center mb-16'>
-						<a href='mailto:hello@vibetolive.dev?subject=Add%20Backend%20to%20My%20AI%20App' className='btn btn-wide btn-primary rounded-full hover:scale-105 transition-all text-primary-content font-bold shadow-lg shadow-primary/20'>
+						<a href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer' className='btn btn-wide btn-primary rounded-full hover:scale-105 transition-all text-primary-content font-bold shadow-lg shadow-primary/20'>
 							Add Backend to My AI App
 						</a>
-						<a href='mailto:hello@vibetolive.dev?subject=Request%20Backend%20Review' className='btn btn-wide btn-outline rounded-full hover:bg-base-content hover:text-base-100 transition-all font-semibold'>
+						<a href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer' className='btn btn-wide btn-outline rounded-full hover:bg-base-content hover:text-base-100 transition-all font-semibold'>
 							Request a Backend Review
 						</a>
 					</div>
@@ -627,8 +627,8 @@ export default function AiAppBuilderWithBackendPage({ langName = 'en' }) {
 						help connect the app to real users, data, payments, and production workflows.
 					</p>
 					<div className='flex flex-col sm:flex-row gap-4 justify-center items-center mb-6'>
-						<a href='mailto:hello@vibetolive.dev?subject=Add%20Backend%20to%20My%20AI%20App' className='btn btn-wide btn-primary rounded-full hover:scale-105 transition-all font-bold shadow-lg'>Add Backend to My AI App</a>
-						<a href='mailto:hello@vibetolive.dev?subject=Request%20Backend%20Review' className='btn btn-wide btn-outline rounded-full font-semibold hover:bg-base-content hover:text-base-100'>Request a Backend Review</a>
+						<a href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer' className='btn btn-wide btn-primary rounded-full hover:scale-105 transition-all font-bold shadow-lg'>Add Backend to My AI App</a>
+						<a href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer' className='btn btn-wide btn-outline rounded-full font-semibold hover:bg-base-content hover:text-base-100'>Request a Backend Review</a>
 					</div>
 					<p className='text-xs text-base-content/50'>
 						Built with Lovable, Bolt.new, V0, Cursor, Replit, ChatGPT, Claude, Windsurf, or Base44? We can add the backend layer your app needs.

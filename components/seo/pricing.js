@@ -1,5 +1,6 @@
 import { FaCheck } from 'react-icons/fa';
 import { MdPriceCheck } from 'react-icons/md';
+import { TALLY_FORM_URL } from '@/lib/seo/site';
 
 const VIBE_TO_LIVE_FEATURES = [
 	'Codebase intake + light audit',
@@ -80,7 +81,7 @@ export default function SeoPricing() {
 						<PlanFeatures items={VIBE_TO_LIVE_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Order%20Vibe%20to%20Live'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-primary rounded-full w-full font-bold'
 					>
 						Choose Plan
@@ -100,7 +101,7 @@ export default function SeoPricing() {
 						<PlanFeatures items={ADD_SOME_SPICE_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Order%20Add%20Some%20Spice'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-outline rounded-full w-full font-semibold hover:bg-base-content hover:text-base-100'
 					>
 						Choose Plan
@@ -120,7 +121,7 @@ export default function SeoPricing() {
 						<PlanFeatures items={KEEP_IT_ALIVE_FEATURES} />
 					</div>
 					<a
-						href='mailto:hello@vibetolive.dev?subject=Order%20Keep%20It%20Alive'
+						href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 						className='btn btn-outline rounded-full w-full font-semibold hover:bg-base-content hover:text-base-100'
 					>
 						Choose Plan

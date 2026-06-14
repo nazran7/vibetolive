@@ -36,6 +36,7 @@ import {
 	MdHelpCenter
 } from 'react-icons/md';
 import SeoPricing from '@/components/seo/pricing';
+import { TALLY_FORM_URL } from '@/lib/seo/site';
 
 // Tech Logos list helper
 const TECH_PARTNERS = [
@@ -146,15 +147,15 @@ export default function AiPrototypeToProductionPage({ seoData, dict, langName })
 					{/* Action Buttons */}
 					<div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
 						<a
-							href="mailto:hello@vibetolive.dev?subject=Get%20Production%20Help"
+							href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 							className="btn btn-wide btn-primary rounded-full hover:scale-105 transition-all text-primary-content font-bold shadow-lg shadow-primary/20"
 						>
 							Get Production Help
 						</a>
 						<a
-							href="https://tally.so/r/mVry2j"
-							target="_blank"
-							rel="noopener noreferrer"
+							href={TALLY_FORM_URL}
+							target='_blank'
+							rel='noopener noreferrer'
 							className="btn btn-wide btn-outline rounded-full hover:bg-base-content hover:text-base-100 transition-all font-semibold"
 						>
 							Request an App Review
@@ -827,13 +828,13 @@ export default function AiPrototypeToProductionPage({ seoData, dict, langName })
 					{/* CTAs */}
 					<div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
 						<a
-							href="mailto:hello@vibetolive.dev?subject=Get%20Production%20Help"
+							href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 							className="btn btn-wide btn-primary rounded-full hover:scale-105 transition-all text-primary-content font-bold shadow-lg"
 						>
 							Get Production Help
 						</a>
 						<a
-							href="mailto:hello@vibetolive.dev?subject=Request%20App%20Review"
+							href={TALLY_FORM_URL} target='_blank' rel='noopener noreferrer'
 							className="btn btn-wide btn-outline rounded-full font-semibold hover:bg-base-content hover:text-base-100"
 						>
 							Request an App Review
