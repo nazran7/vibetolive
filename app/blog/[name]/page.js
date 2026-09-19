@@ -1,16 +1,20 @@
-import { IoMdHome } from 'react-icons/io';
-import { defaultLocale, getDictionary } from '@/lib/i18n';
-import pubfn from '@/lib/function';
-import ReadOnlyTipTap from '@/components/blog/ReadOnlyTipTap';
-import Sidebar from '@/components/blog/sidebar';
-import { getProduct } from '@/api-gateways/post';
+import { defaultLocale } from '@/lib/i18n';
 import { notFound } from 'next/navigation';
-import { url } from '@/config';
 import { buildPageMetadata } from '@/lib/seo/site';
+import { getAllPosts, getPostBySlug } from '@/lib/blog';
+import { formatPostDate } from '@/lib/formatPostDate';
+
+// Posts are plain files in content/blog, so every page is prerendered at build time.
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+	return getAllPosts().map((post) => ({ name: post.slug }));
+}
 
 export async function generateMetadata({ params }) {
 	const langName = defaultLocale;
-	const item = await getProduct(params?.name);
+	const item = getPostBySlug(params?.name);
 
 	if (!item) notFound();
 
@@ -22,15 +26,13 @@ export async function generateMetadata({ params }) {
 		title: `${item.metaTitle || item.title} | VibeToLive.dev`,
 		description: item.metaDescription || item.excerpt,
 		keywords,
-		image: item.featuredImage?.startsWith('http') ? item.featuredImage : '/og.png',
+		image: item.coverImage || '/og.png',
 		type: 'article',
 	});
 }
 
-export default async function Page({ params }) {
-	const langName = defaultLocale;
-	const dict = await getDictionary(langName);
-	const item = await getProduct(params?.name);
+export default function Page({ params }) {
+	const item = getPostBySlug(params?.name);
 
 	if (!item) notFound();
 
@@ -54,12 +56,12 @@ export default async function Page({ params }) {
 				<div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[400px] md:min-h-[500px] lg:min-h-[600px]">
 						{/* Left Side - Featured Image */}
-						{item.featuredImage && (
+						{item.coverImage && (
 							<div className="relative lg:pr-8 flex items-center justify-center lg:justify-start py-8 lg:py-12">
 								<div className="relative w-full lg:w-auto lg:max-w-md z-10">
 									<div className="rounded-2xl overflow-hidden shadow-2xl bg-base-100">
 										<img
-											src={item.featuredImage.startsWith('http') ? item.featuredImage : `${url}/uploads/${item.featuredImage}`}
+											src={item.coverImage}
 											alt={item?.title}
 											className="w-full h-auto object-cover"
 										/>
@@ -98,7 +100,7 @@ export default async function Page({ params }) {
 
 							{/* Meta Info - No Author */}
 							<div className="flex flex-wrap items-center gap-4 text-sm text-base-content/60">
-								<span>{pubfn.timeFormat(item.createdAt, 'MMMM dd, yyyy')}</span>
+								<span>{formatPostDate(item.publishedAt)}</span>
 								{item.tags && item.tags.length > 0 && (
 									<div className="flex flex-wrap gap-2">
 										{item.tags.map((tag, i) => (
@@ -119,87 +121,84 @@ export default async function Page({ params }) {
 
 			{/* Content Section */}
 			<article className="container mx-auto px-4 md:px-8 py-8 max-w-5xl">
-				{/* Render sections if available, otherwise fallback to legacy content */}
-				{item.sections && item.sections.length > 0 ? (
-					<div className="space-y-12">
-						{item.sections.map((section, sectionIndex) => (
-							<section key={sectionIndex} className="space-y-6">
-								{/* Sub Section Title */}
-								{section.subsectionTitle && (
-									<h2 className="text-3xl md:text-4xl font-bold text-base-content">
-										{section.subsectionTitle}
-									</h2>
-								)}
+				<div className="space-y-12">
+					{item.sections.map((section, sectionIndex) => (
+						<section key={sectionIndex} className="space-y-6">
+							{/* Sub Section Title */}
+							{section.heading && (
+								<h2 className="text-3xl md:text-4xl font-bold text-base-content">
+									{section.heading}
+								</h2>
+							)}
 
-								{/* Description/Content */}
-								{section.description && (
-									<div className="prose prose-lg max-w-none">
-										<ReadOnlyTipTap value={section.description} />
+							{/* Body HTML */}
+							{section.html && (
+								<div className="prose prose-lg max-w-none">
+									<div className="post-body text-base-content">
+										<div
+											className="post-content prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none text-base-content"
+											dangerouslySetInnerHTML={{ __html: section.html }}
+										/>
 									</div>
-								)}
+								</div>
+							)}
 
-								{/* Images */}
-								{section.images && section.images.length > 0 && (
-									<div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-										{section.images.map((imageUrl, imageIndex) => (
-											<div key={imageIndex} className="relative rounded-xl overflow-hidden shadow-lg">
-												<img
-													src={imageUrl}
-													alt={section.subsectionTitle || `Section ${sectionIndex + 1} Image ${imageIndex + 1}`}
-													className="w-full h-auto object-cover"
+							{/* Images */}
+							{section.images && section.images.length > 0 && (
+								<div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+									{section.images.map((imageUrl, imageIndex) => (
+										<div key={imageIndex} className="relative rounded-xl overflow-hidden shadow-lg">
+											<img
+												src={imageUrl}
+												alt={section.heading || `Section ${sectionIndex + 1} Image ${imageIndex + 1}`}
+												className="w-full h-auto object-cover"
+											/>
+										</div>
+									))}
+								</div>
+							)}
+
+							{/* YouTube Videos */}
+							{section.videos && section.videos.length > 0 && (
+								<div className="space-y-6 my-8">
+									{section.videos.map((videoUrl, videoIndex) => {
+										// Extract iframe src from embed code or use URL directly
+										let iframeSrc = videoUrl;
+										if (videoUrl.includes('<iframe')) {
+											const srcMatch = videoUrl.match(/src=["']([^"']+)["']/);
+											if (srcMatch) {
+												iframeSrc = srcMatch[1];
+											}
+										} else if (videoUrl.includes('youtube.com/watch') || videoUrl.includes('youtu.be/')) {
+											// Convert YouTube URL to embed URL
+											const videoId = videoUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/)?.[1];
+											if (videoId) {
+												iframeSrc = `https://www.youtube.com/embed/${videoId}`;
+											}
+										}
+
+										return (
+											<div key={videoIndex} className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg bg-base-200">
+												<iframe
+													src={iframeSrc}
+													title={`Section ${sectionIndex + 1} Video ${videoIndex + 1}`}
+													className="absolute inset-0 w-full h-full"
+													allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+													allowFullScreen
 												/>
 											</div>
-										))}
-									</div>
-								)}
+										);
+									})}
+								</div>
+							)}
 
-								{/* YouTube Videos */}
-								{section.videos && section.videos.length > 0 && (
-									<div className="space-y-6 my-8">
-										{section.videos.map((videoUrl, videoIndex) => {
-											// Extract iframe src from embed code or use URL directly
-											let iframeSrc = videoUrl;
-											if (videoUrl.includes('<iframe')) {
-												const srcMatch = videoUrl.match(/src=["']([^"']+)["']/);
-												if (srcMatch) {
-													iframeSrc = srcMatch[1];
-												}
-											} else if (videoUrl.includes('youtube.com/watch') || videoUrl.includes('youtu.be/')) {
-												// Convert YouTube URL to embed URL
-												const videoId = videoUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/)?.[1];
-												if (videoId) {
-													iframeSrc = `https://www.youtube.com/embed/${videoId}`;
-												}
-											}
-
-											return (
-												<div key={videoIndex} className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg bg-base-200">
-													<iframe
-														src={iframeSrc}
-														title={`Section ${sectionIndex + 1} Video ${videoIndex + 1}`}
-														className="absolute inset-0 w-full h-full"
-														allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-														allowFullScreen
-													/>
-												</div>
-											);
-										})}
-									</div>
-								)}
-
-								{/* Divider between sections (except last) */}
-								{sectionIndex < item.sections.length - 1 && (
-									<div className="border-t border-base-300 my-8"></div>
-								)}
-							</section>
-						))}
-					</div>
-				) : (
-					/* Fallback to legacy content */
-					<div className="prose prose-lg max-w-none">
-						<ReadOnlyTipTap value={item.content || ''} />
-					</div>
-				)}
+							{/* Divider between sections (except last) */}
+							{sectionIndex < item.sections.length - 1 && (
+								<div className="border-t border-base-300 my-8"></div>
+							)}
+						</section>
+					))}
+				</div>
 			</article>
 		</main>
 	);

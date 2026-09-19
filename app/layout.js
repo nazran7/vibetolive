@@ -1,6 +1,4 @@
 import './globals.css';
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import ThemeScript from '@/components/common/themeScript';
 import Script from 'next/script';
@@ -89,18 +87,6 @@ export default function RootLayout({ children }) {
 				<ThemeScript />
 				<div className='w-full min-h-svh text-base-content bg-base-100'>
 					{children}
-					<ToastContainer
-						position="top-center"
-						autoClose={3000}
-						hideProgressBar={false}
-						newestOnTop={false}
-						closeOnClick
-						rtl={false}
-						pauseOnFocusLoss
-						draggable
-						pauseOnHover
-						theme="light"
-					/>
 				</div>
 			</body>
 		</html>

@@ -1,7 +1,6 @@
-import { IoMdHome } from "react-icons/io";
 import BlogCard from "@/components/blog/card";
 import { defaultLocale, getDictionary } from "@/lib/i18n";
-import { getPaginatedPosts } from "@/api-gateways/post";
+import { getPaginatedPosts } from "@/lib/blog";
 import Link from "next/link";
 import { buildPageMetadata } from "@/lib/seo/site";
 
@@ -26,10 +25,7 @@ export default async function Page({ searchParams }) {
 
 	const page = Number(searchParams?.page) || 1;
 	const limit = 6; // how many posts per page
-	const paginated = await getPaginatedPosts(page, limit);
-
-	const posts = paginated?.posts ?? [];
-	const totalPages = paginated?.pages ?? 1;
+	const { posts, pages: totalPages } = getPaginatedPosts(page, limit);
 
 	return (
 		<main className="container mx-auto px-4 md:px-8 py-12">
@@ -45,8 +41,12 @@ export default async function Page({ searchParams }) {
 
 			{/* Blog Grid - Dribbble style */}
 			<section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-				{posts.map((item) => (
-					<BlogCard key={item._id} lang={langName} item={item} />
+				{posts.map(({ slug, title, excerpt, coverImage, categories, tags, publishedAt }) => (
+					<BlogCard
+						key={slug}
+						lang={langName}
+						item={{ slug, title, excerpt, coverImage, categories, tags, publishedAt }}
+					/>
 				))}
 			</section>
 

@@ -1,4 +1,5 @@
 import { getAllSEOPageSlugs } from '@/lib/seoPagesData';
+import { getAllPosts } from '@/lib/blog';
 import {
 	DEFAULT_LOCALE,
 	SUPPORTED_LOCALES,
@@ -32,6 +33,13 @@ export default function sitemap() {
 		SUPPORTED_LOCALES.map((locale) => localizedEntry(`/${slug}`, locale, 0.85, 'weekly'))
 	);
 
+	const blogPostEntries = getAllPosts().map((post) => ({
+		url: getAbsoluteUrl(`/blog/${post.slug}`, DEFAULT_LOCALE),
+		lastModified: new Date(post.updatedAt || post.publishedAt),
+		changeFrequency: 'monthly',
+		priority: 0.6,
+	}));
+
 	return [
 		...localizedStaticEntries,
 		{
@@ -40,6 +48,7 @@ export default function sitemap() {
 			changeFrequency: 'weekly',
 			priority: 0.7,
 		},
+		...blogPostEntries,
 		...seoEntries,
 	];
 }

@@ -30,9 +30,6 @@ const nextConfig = {
 		optimizePackageImports: [
 			'react-icons',
 			'framer-motion',
-			'lucide-react',
-			'@tiptap/react',
-			'@tiptap/starter-kit',
 		],
 	},
 
@@ -65,6 +62,12 @@ const nextConfig = {
 					},
 				],
 				destination: 'https://www.vibetolive.dev/:path*',
+				permanent: true,
+			},
+			{
+				// Removed duplicate of from-prototype-to-product (its old CMS slug had a leading space).
+				source: '/blog/%20from-prototype-to-product',
+				destination: '/blog/from-prototype-to-product',
 				permanent: true,
 			},
 		];
