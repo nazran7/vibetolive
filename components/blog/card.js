@@ -1,14 +1,11 @@
 'use client';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import pubfn from '@/lib/function';
 import Link from 'next/link';
-import { url } from '@/config';
+import { formatPostDate } from '@/lib/formatPostDate';
 
 export default function BlogCard({ lang = 'en', item }) {
-	const imageUrl = item.featuredImage 
-		? (item.featuredImage.startsWith('http') ? item.featuredImage : `${url}/uploads/${item.featuredImage}`)
-		: '/placeholder.jpg';
+	const imageUrl = item.coverImage || '/og.png';
 
 	return (
 		<motion.div
@@ -65,7 +62,7 @@ export default function BlogCard({ lang = 'en', item }) {
 						{/* Footer */}
 						<div className="flex items-center justify-between pt-4 border-t border-base-300">
 							<span className="text-xs text-base-content/50">
-								{pubfn.timeFormat(item.createdAt, 'MMM dd, yyyy')}
+								{formatPostDate(item.publishedAt, 'short')}
 							</span>
 							{item.tags && item.tags.length > 0 && (
 								<div className="flex gap-1">
