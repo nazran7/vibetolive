@@ -8,6 +8,7 @@ import { FAQList } from '@/lib/faqsList';
 import RelatedGuides from '@/components/seo/relatedGuides';
 import JsonLd from '@/components/seo/jsonLd';
 import { breadcrumbSchema, compactJsonLd, faqSchema, serviceSchema } from '@/lib/seo/schema';
+import { DEFAULT_LOCALE } from '@/lib/seo/site';
 import AiPrototypeToProductionPage from './aiPrototypeToProduction';
 import FromLovableToProductionPage from './fromLovableToProduction';
 import FromBoltToProductionPage from './fromBoltToProduction';
@@ -98,7 +99,7 @@ export default function SEOPageComponent({
 		}),
 	]);
 
-	if (slug === 'ai-prototype-to-production') {
+	if (slug === 'ai-prototype-to-production' && langName === DEFAULT_LOCALE) {
 		return (
 			<div className='container mx-auto md:px-5'>
 				<JsonLd data={jsonLd} />
@@ -107,105 +108,117 @@ export default function SEOPageComponent({
 					dict={dict}
 					langName={langName}
 				/>
+				<RelatedGuides langName={langName} currentSlug={slug} limit={6} />
 			</div>
 		);
 	}
 
-	if (slug === 'from-lovable-to-production') {
+	if (slug === 'from-lovable-to-production' && langName === DEFAULT_LOCALE) {
 		return (
 			<div className='container mx-auto md:px-5'>
 				<JsonLd data={jsonLd} />
-				<FromLovableToProductionPage langName={langName} />
+				<FromLovableToProductionPage langName={langName} seoData={seoData} />
+				<RelatedGuides langName={langName} currentSlug={slug} limit={6} />
 			</div>
 		);
 	}
 
-	if (slug === 'from-bolt-to-production') {
+	if (slug === 'from-bolt-to-production' && langName === DEFAULT_LOCALE) {
 		return (
 			<div className='container mx-auto md:px-5'>
 				<JsonLd data={jsonLd} />
-				<FromBoltToProductionPage langName={langName} />
+				<FromBoltToProductionPage langName={langName} seoData={seoData} />
+				<RelatedGuides langName={langName} currentSlug={slug} limit={6} />
 			</div>
 		);
 	}
 
-	if (slug === 'from-v0-to-production') {
+	if (slug === 'from-v0-to-production' && langName === DEFAULT_LOCALE) {
 		return (
 			<div className='container mx-auto md:px-5'>
 				<JsonLd data={jsonLd} />
-				<FromV0ToProductionPage langName={langName} />
+				<FromV0ToProductionPage langName={langName} seoData={seoData} />
+				<RelatedGuides langName={langName} currentSlug={slug} limit={6} />
 			</div>
 		);
 	}
 
-	if (slug === 'from-replit-to-production') {
+	if (slug === 'from-replit-to-production' && langName === DEFAULT_LOCALE) {
 		return (
 			<div className='container mx-auto md:px-5'>
 				<JsonLd data={jsonLd} />
-				<FromReplitToProductionPage langName={langName} />
+				<FromReplitToProductionPage langName={langName} seoData={seoData} />
+				<RelatedGuides langName={langName} currentSlug={slug} limit={6} />
 			</div>
 		);
 	}
 
-	if (slug === 'from-cursor-to-production') {
+	if (slug === 'from-cursor-to-production' && langName === DEFAULT_LOCALE) {
 		return (
 			<div className='container mx-auto md:px-5'>
 				<JsonLd data={jsonLd} />
-				<FromCursorToProductionPage langName={langName} />
+				<FromCursorToProductionPage langName={langName} seoData={seoData} />
+				<RelatedGuides langName={langName} currentSlug={slug} limit={6} />
 			</div>
 		);
 	}
 
-	if (slug === 'ai-app-security-audit') {
+	if (slug === 'ai-app-security-audit' && langName === DEFAULT_LOCALE) {
 		return (
 			<div className='container mx-auto md:px-5'>
 				<JsonLd data={jsonLd} />
-				<AiAppSecurityAuditPage langName={langName} />
+				<AiAppSecurityAuditPage langName={langName} seoData={seoData} />
+				<RelatedGuides langName={langName} currentSlug={slug} limit={6} />
 			</div>
 		);
 	}
 
-	if (slug === 'freelancer-to-finish-vibe-coded-app') {
+	if (slug === 'freelancer-to-finish-vibe-coded-app' && langName === DEFAULT_LOCALE) {
 		return (
 			<div className='container mx-auto md:px-5'>
 				<JsonLd data={jsonLd} />
-				<FreelancerToFinishVibeCodedAppPage langName={langName} />
+				<FreelancerToFinishVibeCodedAppPage langName={langName} seoData={seoData} />
+				<RelatedGuides langName={langName} currentSlug={slug} limit={6} />
 			</div>
 		);
 	}
 
-	if (slug === 'ai-app-cicd-setup') {
+	if (slug === 'ai-app-cicd-setup' && langName === DEFAULT_LOCALE) {
 		return (
 			<div className='container mx-auto md:px-5'>
 				<JsonLd data={jsonLd} />
-				<AiAppCicdSetupPage langName={langName} />
+				<AiAppCicdSetupPage langName={langName} seoData={seoData} />
+				<RelatedGuides langName={langName} currentSlug={slug} limit={6} />
 			</div>
 		);
 	}
 
-	if (slug === 'ai-app-builder-with-backend') {
+	if (slug === 'ai-app-builder-with-backend' && langName === DEFAULT_LOCALE) {
 		return (
 			<div className='container mx-auto md:px-5'>
 				<JsonLd data={jsonLd} />
-				<AiAppBuilderWithBackendPage langName={langName} />
+				<AiAppBuilderWithBackendPage langName={langName} seoData={seoData} />
+				<RelatedGuides langName={langName} currentSlug={slug} limit={6} />
 			</div>
 		);
 	}
 
-	if (slug === 'production-readiness-checklist') {
+	if (slug === 'production-readiness-checklist' && langName === DEFAULT_LOCALE) {
 		return (
 			<div className='container mx-auto md:px-5'>
 				<JsonLd data={jsonLd} />
-				<ProductionReadinessChecklistPage langName={langName} />
+				<ProductionReadinessChecklistPage langName={langName} seoData={seoData} />
+				<RelatedGuides langName={langName} currentSlug={slug} limit={6} />
 			</div>
 		);
 	}
 
-	if (slug === 'migrate-from-bolt-to-aws') {
+	if (slug === 'migrate-from-bolt-to-aws' && langName === DEFAULT_LOCALE) {
 		return (
 			<div className='container mx-auto md:px-5'>
 				<JsonLd data={jsonLd} />
-				<MigrateFromBoltToAwsPage langName={langName} />
+				<MigrateFromBoltToAwsPage langName={langName} seoData={seoData} />
+				<RelatedGuides langName={langName} currentSlug={slug} limit={6} />
 			</div>
 		);
 	}

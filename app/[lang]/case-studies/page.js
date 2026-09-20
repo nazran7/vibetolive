@@ -1,4 +1,5 @@
 import Cta from '@/components/home/cta';
+import RelatedGuides from '@/components/seo/relatedGuides';
 import { getDictionary } from '@/lib/i18n';
 import { buildPageMetadata, isSupportedLocale, normalizeLocale } from '@/lib/seo/site';
 import { notFound } from 'next/navigation';
@@ -89,6 +90,8 @@ export default async function CaseStudiesPage({ params }) {
 					</article>
 				))}
 			</section>
+
+			<RelatedGuides langName={langName} limit={6} />
 
 			<Cta locale={dict.CTA} CTALocale={dict.CTAButton} />
 		</main>

@@ -68,14 +68,15 @@ const RELATED_GUIDES = [
 	},
 ];
 
-export default function FromLovableToProductionPage({ langName = 'en' }) {
+export default function FromLovableToProductionPage({ langName = 'en', seoData }) {
 	const [activeFaq, setActiveFaq] = useState(null);
 
 	const toggleFaq = (index) => {
 		setActiveFaq(activeFaq === index ? null : index);
 	};
 
-	const faqItems = [
+	// seoData.faqList is the source of truth (it is what the FAQ schema is built from).
+	const faqItems = seoData?.faqList?.length ? seoData.faqList : [
 		{
 			question: 'Can a Lovable app be used in production?',
 			answer:
@@ -846,16 +847,16 @@ export default function FromLovableToProductionPage({ langName = 'en' }) {
 									}`}
 								/>
 							</button>
-							{activeFaq === idx && (
-								<motion.div
-									initial={{ height: 0, opacity: 0 }}
-									animate={{ height: 'auto', opacity: 1 }}
-									transition={{ duration: 0.2 }}
-									className='border-t border-base-content/5 px-5 py-4 text-xs md:text-sm text-base-content/85 leading-relaxed bg-base-200/10'
-								>
-									{item.answer}
-								</motion.div>
-							)}
+							<div
+									className={`grid transition-all duration-200 ease-out ${
+										activeFaq === idx ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+									}`}
+									aria-hidden={activeFaq !== idx}
+							>
+									<div className='overflow-hidden'>
+										<div className='border-t border-base-content/5 px-5 py-4 text-xs md:text-sm text-base-content/85 leading-relaxed bg-base-200/10'>{item.answer}</div>
+									</div>
+							</div>
 						</div>
 					))}
 				</div>

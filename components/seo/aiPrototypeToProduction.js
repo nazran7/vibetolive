@@ -59,7 +59,8 @@ export default function AiPrototypeToProductionPage({ seoData, dict, langName })
 	};
 
 	// 10 FAQs provided in request
-	const faqItems = [
+	// seoData.faqList is the source of truth (it is what the FAQ schema is built from).
+	const faqItems = seoData?.faqList?.length ? seoData.faqList : [
 		{
 			question: 'Can an AI-generated app really be used in production?',
 			answer: 'Yes. An AI-generated app can be used in production if the backend, authentication, database permissions, deployment, payments, monitoring, and user flows are reviewed before launch. The issue is not that the app was built with AI. The risk is launching a prototype before the production layer is finished.'
@@ -212,6 +213,15 @@ export default function AiPrototypeToProductionPage({ seoData, dict, langName })
 						))}
 					</div>
 				</div>
+			</section>
+
+			{/* ================= DISAMBIGUATION ================= */}
+			<section className="relative z-10 max-w-4xl mx-auto px-4">
+				<p className="rounded-xl border border-base-content/10 bg-base-200/60 p-5 text-base md:text-lg text-base-content/80 leading-relaxed">
+					Looking to deploy a trained machine learning model? This isn&apos;t that. This page is for founders who built a
+					working app with Lovable, Bolt.new, V0, Cursor, Replit, ChatGPT, Claude, Windsurf, or Base44 and need it
+					hardened, secured, and deployed safely for real users.
+				</p>
 			</section>
 
 			{/* Subtle separator */}
@@ -798,16 +808,16 @@ export default function AiPrototypeToProductionPage({ seoData, dict, langName })
 									}`}
 								/>
 							</button>
-							{activeFaq === idx && (
-								<motion.div
-									initial={{ height: 0, opacity: 0 }}
-									animate={{ height: 'auto', opacity: 1 }}
-									transition={{ duration: 0.2 }}
-									className="border-t border-base-content/5 px-5 py-4 text-xs md:text-sm text-base-content/85 leading-relaxed bg-base-200/10"
-								>
-									{item.answer}
-								</motion.div>
-							)}
+							<div
+									className={`grid transition-all duration-200 ease-out ${
+										activeFaq === idx ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+									}`}
+									aria-hidden={activeFaq !== idx}
+							>
+									<div className="overflow-hidden">
+										<div className="border-t border-base-content/5 px-5 py-4 text-xs md:text-sm text-base-content/85 leading-relaxed bg-base-200/10">{item.answer}</div>
+									</div>
+							</div>
 						</div>
 					))}
 				</div>
