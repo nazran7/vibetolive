@@ -4,13 +4,17 @@ import { getHrefForLocale, normalizeLocale } from '@/lib/seo/site';
 
 const prioritySlugs = [
 	'ai-prototype-to-production',
+	'is-lovable-production-ready',
 	'from-lovable-to-production',
+	'from-chatgpt-to-production',
 	'from-v0-to-production',
 	'from-bolt-to-production',
 	'migrate-from-bolt-to-aws',
 	'from-cursor-to-production',
 	'from-replit-to-production',
 	'ai-app-security-audit',
+	'monitoring-for-ai-apps',
+	'prototype-deployment-service',
 	'freelancer-to-finish-vibe-coded-app',
 	'ai-app-cicd-setup',
 	'ai-app-builder-with-backend',

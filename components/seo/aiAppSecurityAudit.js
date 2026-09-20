@@ -88,14 +88,15 @@ const RELATED_GUIDES = [
 	},
 ];
 
-export default function AiAppSecurityAuditPage({ langName = 'en' }) {
+export default function AiAppSecurityAuditPage({ langName = 'en', seoData }) {
 	const [activeFaq, setActiveFaq] = useState(null);
 
 	const toggleFaq = (index) => {
 		setActiveFaq(activeFaq === index ? null : index);
 	};
 
-	const faqItems = [
+	// seoData.faqList is the source of truth (it is what the FAQ schema is built from).
+	const faqItems = seoData?.faqList?.length ? seoData.faqList : [
 		{
 			question: 'What is an AI app security audit?',
 			answer:
@@ -464,6 +465,23 @@ export default function AiAppSecurityAuditPage({ langName = 'en' }) {
 						</div>
 					</div>
 				</div>
+			</section>
+
+			<div className='border-t border-base-content/10 my-10 max-w-6xl mx-auto' />
+
+			<section className='relative z-10 py-10 max-w-4xl mx-auto text-center'>
+				<h2 className='text-3xl md:text-5xl font-bold bg-gradient-to-r from-base-content from-50% to-[#9c9c9c] bg-clip-text text-transparent mb-6'>
+					What Is an AI Security Audit?
+				</h2>
+				<p className='text-lg text-base-content/75 leading-relaxed mb-4'>
+					An AI security audit is a focused review of an AI-generated app before it goes live — checking authentication,
+					database permissions, exposed secrets, API routes, payment webhooks, admin access, and deployment configuration
+					for the risks that AI coding tools commonly leave behind.
+				</p>
+				<p className='text-lg text-base-content/75 leading-relaxed'>
+					VibeToLive runs an AI security audit on apps built with Lovable, Bolt.new, V0, Cursor, Replit, ChatGPT, Claude,
+					Windsurf, and Base44 &mdash; so you know exactly what&apos;s safe to launch and what needs fixing first.
+				</p>
 			</section>
 
 			<div className='border-t border-base-content/10 my-10 max-w-6xl mx-auto' />
@@ -848,16 +866,16 @@ export default function AiAppSecurityAuditPage({ langName = 'en' }) {
 									}`}
 								/>
 							</button>
-							{activeFaq === idx && (
-								<motion.div
-									initial={{ height: 0, opacity: 0 }}
-									animate={{ height: 'auto', opacity: 1 }}
-									transition={{ duration: 0.2 }}
-									className='border-t border-base-content/5 px-5 py-4 text-xs md:text-sm text-base-content/85 leading-relaxed bg-base-200/10'
-								>
-									{item.answer}
-								</motion.div>
-							)}
+							<div
+									className={`grid transition-all duration-200 ease-out ${
+										activeFaq === idx ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+									}`}
+									aria-hidden={activeFaq !== idx}
+							>
+									<div className='overflow-hidden'>
+										<div className='border-t border-base-content/5 px-5 py-4 text-xs md:text-sm text-base-content/85 leading-relaxed bg-base-200/10'>{item.answer}</div>
+									</div>
+							</div>
 						</div>
 					))}
 				</div>
